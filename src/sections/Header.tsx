@@ -13,26 +13,6 @@ export const Header = () => {
       <div className="py-4 px-2">
         <div className="container ">
           <div className="flex justify-between items-center ">
-            {/* <Image 
-    src={Logo} 
-    alt="Logo" 
-    width={80}
-    height={80}
-    className="object-contain logo-image"
-  /> */}
-
-            {/* <div className="rounded-full bg-[#cbddf3] px-4 py-2 flex items-center justify-center gap-2">
-              <Image
-                src={"/assets/SolvoLabLogo_cropped.svg"}
-                alt="Logo"
-                width={36}
-                height={36}
-                className="object-contain logo-image"
-              />{" "}
-              <span className={`text-2xl font-bold ${baumans.className}`}>
-              SolvoLab.
-              </span>
-            </div> */}
             <SolvoLabLogo />
             <MenuIcon className="w-6 h-6 md:hidden" />
             <nav className="hidden md:block">
