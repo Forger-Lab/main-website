@@ -26,7 +26,7 @@ export const Hero = () => {
             {/* <div className="tag">
               Version 2.0 is here
             </div> */}
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] bg-clip-text text-transparent mt-6">
+            <h1 className="text-5xl md:min-h-[224px] md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] bg-clip-text text-transparent mt-6">
               Your Idea.<br />
               Our Solution.
               <br />

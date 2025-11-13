@@ -36,11 +36,11 @@
   }
 }
 .logo-image {
-
+  transform-origin: center;
 }
 
-.logo-image:hover {
-  animation: spin 3s ease-out forwards;
+.logo-image-spinning {
+  animation: spin 2s ease-out forwards;
 }
 
 @keyframes spin {
