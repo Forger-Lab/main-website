@@ -35,3 +35,19 @@
     @apply p-10 border border-[#f1f1f1] rounded-3xl shadow-[0px_7px_14px_#EAEAEA] max-w-xs w-full
   }
 }
+.logo-image {
+
+}
+
+.logo-image:hover {
+  animation: spin 3s ease-out forwards;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(1440deg);  /* 4 full rotations */
+  }
+}

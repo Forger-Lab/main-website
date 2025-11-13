@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
-import { DM_Sans } from "next/font/google";
+import { DM_Sans, Baumans } from "next/font/google";
 import clsx from "clsx";
 import "./globals.css";
 
 const dmSans = DM_Sans({ subsets: ["latin"] });
+const baumans = Baumans({ subsets: ["latin"], weight: "400" });
 
 export const metadata: Metadata = {
   title: "Light Saas Landing Page",
@@ -17,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative">
-      <body className={clsx(dmSans.className, "antialiased bg-[#EAEEFE]")}>
+      <body className={clsx(dmSans.className, baumans.className, "antialiased bg-[#EAEEFE]")}>
         {children}
       </body>
     </html>
