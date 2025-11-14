@@ -18,8 +18,8 @@ export const Header = () => {
             <nav className="hidden md:block">
               <ul className="flex items-center gap-4">
                 <li>Features</li>
-                <li>Pricing</li>
-                <li>Resources</li>
+                {/* <li>Pricing</li> */}
+                {/* <li>Resources</li> */}
                 <li>About</li>
                 <button className="btn btn-primary">Get started </button>
               </ul>
