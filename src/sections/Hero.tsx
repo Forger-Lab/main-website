@@ -1,6 +1,5 @@
 'use client'
 import ArrowRight from "@/assets/arrow-right.svg";
-import Image from "next/image";
 import cogImage from "@/assets/cog.png";
 import cylinderImage from "@/assets/cylinder.png";
 import noodleImage from "@/assets/noodle.png";
@@ -23,15 +22,18 @@ export const Hero = () => {
       <div className="container ">
         <div className="md:flex items-center ">
           <div className="md:w-[478px]">
-            <div className="tag">
+            {/* <div className="tag">
               Version 2.0 is here
-            </div>
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] bg-clip-text text-transparent mt-6">
-              Pathway to productivity
+            </div> */}
+            <h1 className="text-5xl md:min-h-[224px] md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] bg-clip-text text-transparent mt-6">
+              Your Idea.<br />
+              Our Solution.
+              <br />
+              Real AI
+              agents.
             </h1>
             <p className="text-xl text-[#010d3e] tracking-tight mt-6">
-              Celebrate the joy of accomplishment with an app designed to track
-          your progress, motivate your efforts, and celebrate your success
+              Automate, optimize, and accelerate your business — so you can do what humans do best: create, think, and lead.
             </p>
             <div className="mt-[30px] flex gap-1 items-center ">
               <button className="btn btn-primary">Get for free</button>
