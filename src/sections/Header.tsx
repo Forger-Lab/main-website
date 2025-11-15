@@ -1,6 +1,7 @@
 import ArrowRight from "@/assets/arrow-right.svg";
 import MenuIcon from "@/assets/menu.svg";
 import { SolvoLabLogo } from "@/components/SolvoLabLogo";
+import Link from "next/link";
 export const Header = () => {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-sm">
@@ -17,11 +18,15 @@ export const Header = () => {
             <MenuIcon className="w-6 h-6 md:hidden" />
             <nav className="hidden md:block">
               <ul className="flex items-center gap-4">
-                <li>Features</li>
+                <li>
+                  <Link href="#whatWeDo">
+                  Features
+                  </Link>
+                  </li>
                 {/* <li>Pricing</li> */}
                 {/* <li>Resources</li> */}
                 <li>About</li>
-                <button className="btn btn-primary">Get started </button>
+                <button className="btn btn-primary">Get In Touch</button>
               </ul>
             </nav>
           </div>

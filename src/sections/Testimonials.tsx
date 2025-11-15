@@ -113,7 +113,7 @@ function TesimonialColumn(props: {testimonials: typeof testimonials, classname?:
 
 export const Testimonials = () => {
   return (
-    <section className="bg-white">
+    <section className="bg-white pt-24">
       <div className="container">
         <div className="section-heading">
         <div className='flex justify-center'>
