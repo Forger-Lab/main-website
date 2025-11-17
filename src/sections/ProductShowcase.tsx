@@ -1,9 +1,5 @@
 "use client";
-// import screenshot from "@/assets/Capture.png";
-// import Image from "next/image";
 import DemoInput from "@/components/DemoInput";
-import pyramidImage from "@/assets/pyramid.png";
-import tubeImage from "@/assets/tube.png";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -34,10 +30,9 @@ export const ProductShowcase = () => {
         </div>
         <div className="relative flex justify-center">
           <DemoInput />
-          {/* <Image src={screenshot} alt="screenshot" className="mt-10" /> */}
           <motion.img
             style={{ translateY: translateY }}
-            src={pyramidImage.src}
+            src={'/assets/pyramid.png'}
             height={262}
             width={262}
             alt="pyramid"
@@ -45,7 +40,7 @@ export const ProductShowcase = () => {
           />
           <motion.img
             style={{ translateY: translateY }}
-            src={tubeImage.src}
+            src={'/assets/tube.png'}
             height={248}
             width={248}
             alt="tube"

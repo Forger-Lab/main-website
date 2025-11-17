@@ -53,7 +53,6 @@ async function verifyRecaptcha(token: string): Promise<{ success: boolean; error
 function checkRateLimit(identifier: string): boolean {
   const now = Date.now();
   const oneHourAgo = now - 3600000;
-  const fiveSecondsAgo = now - 5000;
   
   let userData = rateLimitMap.get(identifier);
   

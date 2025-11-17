@@ -18,7 +18,6 @@ function HowItWorks() {
           </p>
         </div>
           <WhatWeDo />
-        
       </div>
     </section>
   );
