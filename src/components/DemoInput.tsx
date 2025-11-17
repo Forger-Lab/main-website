@@ -199,7 +199,7 @@ function DemoInput() {
         className="demo-success"
       >
         <div className="demo-success-content">
-        <span className="demo-success-text">We'll get back to you in a jiffy!</span>
+        <span className="demo-success-text">We&aposll get back to you in a jiffy!</span>
         </div>
         <span className="demo-success-close">😎</span>
       </motion.div>
