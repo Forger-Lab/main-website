@@ -1,4 +1,3 @@
-"use client";
 import LazyLottie from "./LazyLottie";
 
 function WhatWeDo() {

@@ -6,8 +6,8 @@ import dynamic from "next/dynamic";
 const Lottie = dynamic(() => import("lottie-react"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-full flex items-center justify-center min-h-[470px] animate-pulse">
-      <div className="animate-pulse w-full h-full bg-white/50 rounded-xl backdrop-blur-sm" />
+    <div className="w-full h-full flex items-center justify-center min-h-[470px]">
+      <div className="animate-pulse w-full h-full bg-white/50 rounded-xl backdrop-blur-sm min-h-[470px]" />
     </div>
   ),
 });
@@ -60,7 +60,7 @@ export default function LazyLottie({
           // Wait 1 second before showing the animation
           setTimeout(() => {
             setShowAnimation(true);
-          }, 1000);
+          }, 500);
         })
         .catch((error) => {
           console.error("Failed to load animation:", error);
@@ -75,7 +75,7 @@ export default function LazyLottie({
           <Lottie animationData={animationData} loop={loop} />
         </div>
       ) : (
-        <div className="w-full h-full flex items-center justify-center min-h-[250px]">
+        <div className="w-full h-full flex items-center justify-center min-h-[470px]">
           <div className="animate-pulse w-full h-full bg-white/50 rounded-xl backdrop-blur-sm" />
         </div>
       )}
