@@ -6,10 +6,10 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 backdrop-blur-sm">
       <div className="flex items-center justify-center bg-black text-white">
-        <div className="inline-flex items-center gap-1">
+        {/* <div className="inline-flex items-center gap-1">
           <p>Get started for free</p>
           <ArrowRight className="w-4 h-4 inline-flex justify-center items-center " />
-        </div>
+        </div> */}
       </div>
       <div className="py-4 px-2">
         <div className="container ">
@@ -25,8 +25,8 @@ export const Header = () => {
                   </li>
                 {/* <li>Pricing</li> */}
                 {/* <li>Resources</li> */}
-                <li>About</li>
-                <button className="btn btn-primary">Get In Touch</button>
+                
+                <Link href='#DemoSection' className="btn btn-primary">Get In Touch</Link>
               </ul>
             </nav>
           </div>

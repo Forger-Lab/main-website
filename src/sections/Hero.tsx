@@ -17,8 +17,8 @@ export const Hero = () => {
   });
   return (
     // <section className="pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#183EC2,#EAEFEF_100%)] from-[#001e80] to-[#000000]">
-    <section ref={ref} className="pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#735AB7,#EAEFEF_100%)] md:overflow-x-clip">
-      <div className="container ">
+    <section ref={ref} className="pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#735AB7,#EAEFEF_100%)] md:overflow-x-clip]">
+      <div className="container">
         <div className="md:flex items-center ">
           <div className="md:w-[478px]">
             <div className="tag">

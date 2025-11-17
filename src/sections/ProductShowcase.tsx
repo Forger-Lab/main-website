@@ -17,7 +17,8 @@ export const ProductShowcase = () => {
   return (
     <section
       ref={ref}
-      className="bg-gradient-to-b from-[#ffffff] to-[#d2dcff] py-24 overflow-x-clip"
+      id='DemoSection'
+      className="bg-gradient-to-b from-[#ffffff] to-[#d2dcff] py-24 overflow-x-clip  lg:min-h-[700px]"
     >
       <div className="container">
         <div className="section-heading mb-10">
@@ -31,8 +32,9 @@ export const ProductShowcase = () => {
             handle all your questions on the spot.
           </p>
         </div>
-        <div className="relative">
-          <Image src={screenshot} alt="screenshot" className="mt-10" />
+        <div className="relative flex justify-center">
+          <DemoInput />
+          {/* <Image src={screenshot} alt="screenshot" className="mt-10" /> */}
           <motion.img
             style={{ translateY: translateY }}
             src={pyramidImage.src}

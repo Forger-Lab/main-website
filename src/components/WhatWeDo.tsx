@@ -5,7 +5,7 @@ import Tools from "@/assets/lottie/Tools.json";
 import scale from "@/assets/lottie/scale.json";
 function WhatWeDo() {
   return (
-    <div className="py-16 px-6 max-w-7xl mx-auto">
+    <div className="py-16 px-6 max-w-7xl mx-auto]">
       {/* Three Feature Rows */}
       <div className="space-y-16">
         {/* Row 1: Understand context */}
@@ -23,7 +23,7 @@ function WhatWeDo() {
               business needs.
             </p>
           </div>
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-12">
+          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-4">
             <Lottie animationData={Integration} loop={true} />
           </div>
         </div>
@@ -31,7 +31,7 @@ function WhatWeDo() {
         {/* Row 2: Take action in your tools */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Image/Lottie first on desktop, text second */}
-          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-12">
+          <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4">
             <Lottie animationData={Tools} loop={true} />
           </div>
           <div className="space-y-4">
@@ -63,7 +63,7 @@ function WhatWeDo() {
               business demands.
             </p>
           </div>
-          <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-2xl p-12 min-h-[300px] flex items-center justify-center">
+          <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-2xl p-4 min-h-[300px] flex items-center justify-center">
             <Lottie animationData={scale} loop={true} />
           </div>
         </div>

@@ -16,6 +16,40 @@ setInterval(() => {
   }
 }, 3600000);
 
+// Verify reCAPTCHA v2 token
+async function verifyRecaptcha(token: string): Promise<{ success: boolean; error?: string }> {
+  if (!token) {
+    return { success: false, error: 'No reCAPTCHA token provided' };
+  }
+
+  const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secretKey) {
+    console.error('RECAPTCHA_SECRET_KEY not configured');
+    return { success: false, error: 'reCAPTCHA not configured' };
+  }
+
+  try {
+    const response = await fetch('https://www.google.com/recaptcha/api/siteverify', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${secretKey}&response=${token}`,
+    });
+
+    const data = await response.json();
+
+    if (!data.success) {
+      console.error('reCAPTCHA v2 verification failed:', data['error-codes']);
+      return { success: false, error: 'Please complete the reCAPTCHA verification' };
+    }
+
+    console.log('reCAPTCHA v2 verified successfully');
+    return { success: true };
+  } catch (error) {
+    console.error('reCAPTCHA verification error:', error);
+    return { success: false, error: 'Verification failed' };
+  }
+}
+
 function checkRateLimit(identifier: string): boolean {
   const now = Date.now();
   const oneHourAgo = now - 3600000;
@@ -52,7 +86,7 @@ function checkRateLimit(identifier: string): boolean {
 export async function POST(request: NextRequest) {
   try {
     const body = await request.json();
-    const { email, timestamp, first_name, last_name, context } = body;
+    const { email, timestamp, first_name, last_name, context, recaptchaToken } = body;
     
     // Get identifier for rate limiting (IP address)
     const ip = 
@@ -99,7 +133,22 @@ export async function POST(request: NextRequest) {
       );
     }
     
-    // 4. Email validation + disposable domain check
+    // 4. reCAPTCHA v2 verification
+    if (recaptchaToken) {
+      const recaptchaResult = await verifyRecaptcha(recaptchaToken);
+      if (!recaptchaResult.success) {
+        console.log(`reCAPTCHA v2 failed: ${recaptchaResult.error}`);
+        return NextResponse.json(
+          { error: recaptchaResult.error || 'Security verification failed' },
+          { status: 403 }
+        );
+      }
+      console.log('reCAPTCHA v2 verification passed');
+    } else {
+      console.warn('No reCAPTCHA token provided');
+    }
+    
+    // 5. Email validation + disposable domain check
     const validation = validateEmail(email);
     if (!validation.valid) {
       return NextResponse.json(
@@ -119,16 +168,15 @@ export async function POST(request: NextRequest) {
     };
     
     // Call the ForgerLab webhook
-    const webhookResponse = await fetch(
-      'https://ai.forgerlab.com/webhook/ba8a7f64-f34e-4dde-a151-22cfc8938a6f',
-      {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(webhookData),
-      }
-    );
+    if (!process.env.N8N_END_POINT) {
+      throw new Error("N8N_END_POINT is missing");
+    }
+    
+    const webhookResponse = await fetch(process.env.N8N_END_POINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(webhookData),
+    });
     
     if (!webhookResponse.ok) {
       const errorText = await webhookResponse.text();

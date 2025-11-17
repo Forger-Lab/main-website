@@ -15,6 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative">
+      <head>
+        <script
+          src="https://www.google.com/recaptcha/api.js"
+          async
+          defer
+        />
+      </head>
       <body className={clsx(dmSans.className, "antialiased bg-[#EAEEFE]")}>
         {children}
       </body>

@@ -179,3 +179,22 @@
   border-top-left-radius: 0px;
   border-bottom-left-radius: 0px;
 }
+
+@media (max-width: 600px) {
+  .demo-input {
+    min-width: 100%;
+    width: 100%;               /* fill screen */
+    padding-right: 100px;      /* less room for button */
+    font-size: 14px;
+  }
+
+  .demo-input-button {
+    width: 90px;               /* smaller button */
+    font-size: 24px;
+  }
+
+  .demo-success {
+    min-width: 100%;
+    width: 100%;
+  }
+}
