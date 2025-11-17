@@ -1,8 +1,9 @@
 "use client";
-import screenshot from "@/assets/Capture.png";
+// import screenshot from "@/assets/Capture.png";
+// import Image from "next/image";
+import DemoInput from "@/components/DemoInput";
 import pyramidImage from "@/assets/pyramid.png";
 import tubeImage from "@/assets/tube.png";
-import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
@@ -16,25 +17,24 @@ export const ProductShowcase = () => {
   return (
     <section
       ref={ref}
-      className="bg-gradient-to-b from-[#ffffff] to-[#d2dcff] py-24 overflow-x-clip"
+      id='DemoSection'
+      className="bg-gradient-to-b from-[#ffffff] to-[#d2dcff] py-24 overflow-x-clip  lg:min-h-[700px]"
     >
       <div className="container">
-        <div className="section-heading">
+        <div className="section-heading mb-10">
           <div className="flex justify-center">
-            <div className="tag">Boost your Productivity</div>
+            <div className="tag">Get a Demo</div>
           </div>
-          <h2 className="section-title mt-5">Autonomous Productivity Layer</h2>
+          <h2 className="section-title mt-5">See the AI Workforce in Action</h2>
           <p className="text-center text-[22px] leading-[30px] tracking-tighter text-[#010d3e] mt-5">
             {" "}
-            <span className="font-bold">SolvoLab</span> builds and operates{" "}
-            <span className="font-bold">AI workers</span> inside your business.
-            They <span className="font-bold">integrate everywhere</span> your
-            work happens — and{" "}
-            <span className="font-bold">execute autonomously</span> .
+            Share your email, let our AI sales agent reach out immediately, and
+            handle all your questions on the spot.
           </p>
         </div>
-        <div className="relative">
-          <Image src={screenshot} alt="screenshot" className="mt-10" />
+        <div className="relative flex justify-center">
+          <DemoInput />
+          {/* <Image src={screenshot} alt="screenshot" className="mt-10" /> */}
           <motion.img
             style={{ translateY: translateY }}
             src={pyramidImage.src}

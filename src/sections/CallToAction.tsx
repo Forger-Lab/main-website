@@ -5,6 +5,7 @@ import springImage from '@/assets/spring.png'
 import Image from 'next/image'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { useRef } from 'react'
+import Link from 'next/link'
 
 export const CallToAction = () => {
   const ref = useRef(null)
@@ -23,12 +24,7 @@ export const CallToAction = () => {
           <motion.img src={springImage.src} style={{translateY}} width={360} alt="spring" className="absolute -top-[19px] -right-[331px]" />
         </div>
           <div className="flex gap-2 mt-10 justify-center">
-            <button className="btn btn-primary">Join the Fam</button>
-            {/* <button className="btn btn-text gap-1"><span>
-              Learn more
-              </span>
-              <ArrowRight className="w-4 h-4" />
-              </button> */}
+            <Link href='#DemoSection' className="btn btn-primary">Get in Touch</Link>
           </div>
       </div>
     </section>

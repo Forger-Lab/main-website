@@ -4,8 +4,8 @@ import clsx from "clsx";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Light Saas Landing Page",
-  description: "Template created by Frontend Tribe",
+  title: "SolvoLab",
+  description: "SolvoLab is a platform that helps you build and operate AI workers inside your business.",
 };
 
 export default function RootLayout({
@@ -15,6 +15,13 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="relative">
+      <head>
+        <script
+          src="https://www.google.com/recaptcha/api.js"
+          async
+          defer
+        />
+      </head>
       <body className={clsx(dmSans.className, "antialiased bg-[#EAEEFE]")}>
         {children}
       </body>
