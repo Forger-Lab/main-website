@@ -1,8 +1,5 @@
-"use client";
-import Lottie from "lottie-react";
-import Integration from "@/assets/lottie/Integration.json";
-import Tools from "@/assets/lottie/Tools.json";
-import scale from "@/assets/lottie/scale.json";
+import LazyLottie from "./LazyLottie";
+
 function WhatWeDo() {
   return (
     <div className="py-16 px-6 max-w-7xl mx-auto]">
@@ -24,7 +21,7 @@ function WhatWeDo() {
             </p>
           </div>
           <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-4">
-            <Lottie animationData={Integration} loop={true} />
+            <LazyLottie animationPath="Integration" />
           </div>
         </div>
 
@@ -32,7 +29,7 @@ function WhatWeDo() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
           {/* Image/Lottie first on desktop, text second */}
           <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-2xl p-4">
-            <Lottie animationData={Tools} loop={true} />
+            <LazyLottie animationPath="Tools" />
           </div>
           <div className="space-y-4">
             <div className="tag">
@@ -64,7 +61,7 @@ function WhatWeDo() {
             </p>
           </div>
           <div className="bg-gradient-to-br from-pink-50 to-orange-50 rounded-2xl p-4 min-h-[300px] flex items-center justify-center">
-            <Lottie animationData={scale} loop={true} />
+            <LazyLottie animationPath="scale" />
           </div>
         </div>
       </div>

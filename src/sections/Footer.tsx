@@ -1,10 +1,6 @@
-// import logo from '@/assets/logosaas.png'
-// import SocialInstagram from "@/assets/social-insta.svg";
-// import SocialPin from "@/assets/social-pin.svg";
-// import SocialX from "@/assets/social-x.svg";
-// import SocialYoutube from "@/assets/social-youtube.svg";
 import SocialLinkedin from "@/assets/social-linkedin.svg";
 import Image from "next/image";
+import Link from "next/link";
 
 export const Footer = () => {
   return (
@@ -18,23 +14,19 @@ export const Footer = () => {
               alt="Logo"
               width={36}
               height={36}
+              priority
               className={`object-contain`}
             />
           </div>
         </div>
         <nav className="flex flex-col md:flex-row md:justify-center gap-6 mt-6">
-          {/* <a href="#">About</a> */}
           <a href="#whatWeDo">Features</a>
-          {/* <a href="#">Customers</a>
-          <a href="#">Pricing</a> */}
           <a href="#DemoSection">Contact</a>
         </nav>
-        <div className="flex justify-center gap-6 mt-6">
-          {/* <SocialInstagram /> */}
-          {/* <SocialPin /> */}
-          <SocialLinkedin />
-          {/* <SocialX /> */}
-          {/* <SocialYoutube /> */}
+        <div className="flex justify-center gap-6 mt-6 hidden">
+          <Link href=''>
+          <SocialLinkedin/>
+          </Link>
         </div>
         <p className=" mt-6">© 2024 Progress Tracker. All rights reserved.</p>
       </div>
