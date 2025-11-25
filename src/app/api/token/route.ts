@@ -6,7 +6,7 @@ import { Redis } from '@upstash/redis';
 // 1. Initialize Rate Limiter (10 requests per 24 hours per IP)
 const ratelimit = new Ratelimit({
   redis: Redis.fromEnv(),
-  limiter: Ratelimit.slidingWindow(10, '24 h'),
+  limiter: Ratelimit.slidingWindow(5, '24 h'),
 });
 
 // Verify reCAPTCHA token
@@ -46,7 +46,7 @@ async function verifyRecaptcha(token: string): Promise<{ success: boolean; error
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, captchaToken } = body;
+    const { name, email, timezone, captchaToken } = body;
     const ip = request.headers.get('x-forwarded-for')?.split(',')[0] || 
                request.headers.get('x-real-ip') || 
                '127.0.0.1';
@@ -75,8 +75,8 @@ export async function POST(request: Request) {
       {
         identity: participantIdentity,
         name: name || 'Guest',
-        // Pass email and name securely in metadata for the Python Agent to read
-        metadata: JSON.stringify({ email, name: name || 'Guest' }), 
+        // Pass email, name, and timezone securely in metadata for the Python Agent to read
+        metadata: JSON.stringify({ email, name: name || 'Guest', timezone }), 
       }
     );
 

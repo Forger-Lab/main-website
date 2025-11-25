@@ -11,7 +11,7 @@ export default function AgentWidget() {
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   
   const roomRef = useRef<Room | null>(null);
-  const audioElementRef = useRef<HTMLAudioElement>(null);
+  const audioContainerRef = useRef<HTMLDivElement>(null);
   const transcriptContainerRef = useRef<HTMLDivElement>(null);
 
   // Auto-scroll transcripts
@@ -24,6 +24,7 @@ export default function AgentWidget() {
   const connectToAgent = async (formData: FormData) => {
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
     if (!captchaToken) {
       alert('Please complete the captcha');
@@ -37,7 +38,7 @@ export default function AgentWidget() {
       const resp = await fetch('/api/token', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, captchaToken }),
+        body: JSON.stringify({ name, email, timezone, captchaToken }),
       });
 
       const data = await resp.json();
@@ -54,27 +55,20 @@ export default function AgentWidget() {
       // 3. Handle Audio - Set up listener for new tracks
       room.on(RoomEvent.TrackSubscribed, (track, pub, participant) => {
         if (track.kind === Track.Kind.Audio && !participant.isLocal) {
-          // Only attach remote audio tracks (agent's voice)
-          if (audioElementRef.current) {
-            track.attach(audioElementRef.current);
-            // Ensure audio plays
-            audioElementRef.current.play().catch(err => {
-              console.error('Error playing audio:', err);
-            });
-          }
+          const audioElement = track.attach();
+          audioElement.style.display = 'none'; // Hide the element
+          audioContainerRef.current?.appendChild(audioElement);
         }
       });
 
       // Also check for already-subscribed tracks (in case agent joined first)
       room.remoteParticipants.forEach((participant) => {
         participant.trackPublications.forEach((trackPublication) => {
-          if (trackPublication.track && 
-              trackPublication.kind === Track.Kind.Audio && 
-              audioElementRef.current) {
-            trackPublication.track.attach(audioElementRef.current);
-            audioElementRef.current.play().catch(err => {
-              console.error('Error playing audio:', err);
-            });
+          if (trackPublication.track && trackPublication.kind === Track.Kind.Audio) {
+            console.log('Attaching existing track:', trackPublication.track.sid);
+            const audioElement = trackPublication.track.attach();
+            audioElement.style.display = 'none';
+            audioContainerRef.current?.appendChild(audioElement);
           }
         });
       });
@@ -154,13 +148,8 @@ export default function AgentWidget() {
           ))}
         </div>
 
-        {/* Audio Element for Agent Voice */}
-        <audio 
-          ref={audioElementRef} 
-          autoPlay 
-          playsInline
-          style={{ display: 'none' }}
-        />
+        {/* Hidden Audio Container */}
+        <div ref={audioContainerRef} />
 
         <button 
           onClick={disconnect}
