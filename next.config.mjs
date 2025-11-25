@@ -28,7 +28,14 @@ const nextConfig = {
     return config;
   },
 
-  // ...other config
+  async rewrites() {
+    return [
+      {
+        source: '/api/widget.js',
+        destination: '/api/widget',
+      },
+    ];
+  },
 };
 
 export default nextConfig;

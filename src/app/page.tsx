@@ -1,6 +1,7 @@
 import { Header } from "@/sections/Header";
 import { Hero } from "@/sections/Hero";
-import { ProductShowcase } from "@/sections/ProductShowcase";
+import { Services } from "@/sections/Services";
+import { Demos } from "@/sections/Demos";
 import { CallToAction } from "@/sections/CallToAction";
 import { Footer } from "@/sections/Footer";
 import HowItWorks from "@/sections/HowItWorks";
@@ -9,8 +10,9 @@ export default function Home() {
     <>
       <Header />
       <Hero />
+      <Services />
       <HowItWorks />
-      <ProductShowcase />
+      <Demos />
       <CallToAction />
       <Footer />
     </>
