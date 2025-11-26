@@ -8,6 +8,7 @@ export default function AgentWidget() {
   const [connected, setConnected] = useState(false);
   const [transcripts, setTranscripts] = useState<any[]>([]);
   const [status, setStatus] = useState('Disconnected');
+  const [isConnecting, setIsConnecting] = useState(false);
   const [captchaToken, setCaptchaToken] = useState<string | null>(null);
   
   const roomRef = useRef<Room | null>(null);
@@ -21,7 +22,9 @@ export default function AgentWidget() {
     }
   }, [transcripts]);
 
-  const connectToAgent = async (formData: FormData) => {
+  const connectToAgent = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
     const name = formData.get('name') as string;
     const email = formData.get('email') as string;
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -31,6 +34,8 @@ export default function AgentWidget() {
       return;
     }
 
+    if (isConnecting) return;
+    setIsConnecting(true);
     setStatus('Connecting...');
 
     try {
@@ -115,6 +120,7 @@ export default function AgentWidget() {
       console.error(err);
       alert(`Connection failed: ${err.message}`);
       setStatus('Error');
+      setIsConnecting(false);
     }
   };
 
@@ -122,6 +128,7 @@ export default function AgentWidget() {
     if (roomRef.current) await roomRef.current.disconnect();
     setConnected(false);
     setStatus('Disconnected');
+    setIsConnecting(false);
     setTranscripts([]);
   };
 
@@ -162,7 +169,7 @@ export default function AgentWidget() {
   }
 
   return (
-    <form action={connectToAgent} className="w-full max-w-sm mx-auto p-6 bg-white rounded shadow space-y-4">
+    <form onSubmit={connectToAgent} className="w-full max-w-sm mx-auto p-6 bg-white rounded shadow space-y-4">
       <h2 className="text-xl font-bold text-center">Chat with AI</h2>
       
       <input name="name" placeholder="Your Name" className="w-full p-2 border rounded" required />
@@ -177,10 +184,10 @@ export default function AgentWidget() {
 
       <button 
         type="submit"
-        disabled={!captchaToken}
-        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400"
+        disabled={!captchaToken || isConnecting}
+        className="w-full py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:bg-gray-400 disabled:cursor-not-allowed"
       >
-        Start Conversation
+        {isConnecting ? 'Connecting...' : 'Start Conversation'}
       </button>
     </form>
   );

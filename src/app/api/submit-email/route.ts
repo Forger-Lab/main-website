@@ -1,20 +1,14 @@
 // src/app/api/submit-email/route.ts
 import { NextRequest, NextResponse } from 'next/server';
 import { validateEmail } from '@/utils/emailValidation';
+import { Ratelimit } from '@upstash/ratelimit';
+import { Redis } from '@upstash/redis';
 
-// In-memory rate limiting (use Redis in production for multiple servers)
-const rateLimitMap = new Map<string, { count: number; timestamps: number[] }>();
-
-// Clean up old entries every hour
-setInterval(() => {
-  const oneHourAgo = Date.now() - 3600000;
-  for (const [key, value] of Array.from(rateLimitMap.entries())) {
-    value.timestamps = value.timestamps.filter(ts => ts > oneHourAgo);
-    if (value.timestamps.length === 0) {
-      rateLimitMap.delete(key);
-    }
-  }
-}, 3600000);
+const ratelimit = new Ratelimit({
+  redis: Redis.fromEnv(),
+  limiter: Ratelimit.slidingWindow(5, '1 h'),
+  prefix: 'ratelimit_email_submit',
+});
 
 // Verify reCAPTCHA v2 token
 async function verifyRecaptcha(token: string): Promise<{ success: boolean; error?: string }> {
@@ -50,37 +44,6 @@ async function verifyRecaptcha(token: string): Promise<{ success: boolean; error
   }
 }
 
-function checkRateLimit(identifier: string): boolean {
-  const now = Date.now();
-  const oneHourAgo = now - 3600000;
-  
-  let userData = rateLimitMap.get(identifier);
-  
-  if (!userData) {
-    userData = { count: 0, timestamps: [] };
-    rateLimitMap.set(identifier, userData);
-  }
-  
-  // Remove timestamps older than 1 hour
-  userData.timestamps = userData.timestamps.filter(ts => ts > oneHourAgo);
-  
-  // Check if last submission was less than 5 seconds ago
-  const lastSubmission = userData.timestamps[userData.timestamps.length - 1];
-  if (lastSubmission && now - lastSubmission < 5000) {
-    return false; // Too fast
-  }
-  
-  // Check if more than 5 submissions in the last hour
-  if (userData.timestamps.length >= 5) {
-    return false; // Too many requests
-  }
-  
-  // Add current timestamp
-  userData.timestamps.push(now);
-  userData.count++;
-  
-  return true;
-}
 
 export async function POST(request: NextRequest) {
   try {
@@ -124,7 +87,8 @@ export async function POST(request: NextRequest) {
     }
     
     // 3. Rate limiting
-    if (!checkRateLimit(ip)) {
+    const { success } = await ratelimit.limit(ip);
+    if (!success) {
       console.log(`Rate limit exceeded for IP: ${ip}`);
       return NextResponse.json(
         { error: 'Too many requests. Please try again later.' },
