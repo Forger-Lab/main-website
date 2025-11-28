@@ -36,7 +36,7 @@ export const ProductShowcase = () => {
             height={262}
             width={262}
             alt="pyramid"
-            className="hidden md:block absolute -right-36 -top-32"
+            className="hidden md:block absolute right-36 top-32"
           />
           <motion.img
             style={{ translateY: translateY }}
@@ -44,7 +44,7 @@ export const ProductShowcase = () => {
             height={248}
             width={248}
             alt="tube"
-            className="hidden md:block absolute -left-36 bottom-24"
+            className="hidden md:block absolute left-36 bottom-24"
           />
         </div>
       </div>

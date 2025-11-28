@@ -1,3 +1,4 @@
+import Image from "next/image";
 import LazyLottie from "./LazyLottie";
 
 function WhatWeDo() {
@@ -6,7 +7,7 @@ function WhatWeDo() {
       {/* Three Feature Rows */}
       <div className="space-y-16">
         {/* Row 1: Understand context */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center bg-gradient-to-br from-blue-50 to-purple-50 p-24 shadow-md rounded-lg">
           <div className="space-y-4">
             <div className="tag">
               Autonomous Actions
@@ -20,8 +21,9 @@ function WhatWeDo() {
               business needs.
             </p>
           </div>
-          <div className="bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-4">
-            <LazyLottie animationPath="Integration" />
+          <div className=" rounded-2xl p-4">
+            {/* <LazyLottie animationPath="Integration" /> */}
+            <Image src='/Images/understand.png' alt="understaing image" width={500} height={500} />
           </div>
         </div>
 

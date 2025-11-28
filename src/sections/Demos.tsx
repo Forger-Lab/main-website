@@ -148,7 +148,7 @@ export const Demos = () => {
           height={262}
           width={262}
           alt="pyramid"
-          className="hidden md:block absolute -right-36 -top-32 pointer-events-none"
+          className="hidden md:block absolute right-56 top-40 pointer-events-none z-10"
         />
         <motion.img
           src={'/assets/tube.png'}
@@ -156,7 +156,7 @@ export const Demos = () => {
           height={248}
           width={248}
           alt="tube"
-          className="hidden md:block absolute -left-36 bottom-24 pointer-events-none"
+          className="hidden md:block absolute left-56 bottom-24 pointer-events-none z-10"
         />
       </div>
     </section>

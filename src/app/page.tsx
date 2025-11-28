@@ -5,11 +5,13 @@ import { Demos } from "@/sections/Demos";
 import { CallToAction } from "@/sections/CallToAction";
 import { Footer } from "@/sections/Footer";
 import HowItWorks from "@/sections/HowItWorks";
+import { PainPoints } from "@/sections/PainPoints";
 export default function Home() {
   return (
     <>
       <Header />
       <Hero />
+      <PainPoints/>
       <Services />
       <HowItWorks />
       <Demos />

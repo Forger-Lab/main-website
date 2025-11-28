@@ -21,21 +21,25 @@ export const Hero = () => {
    <section ref={ref} className="pt-8 pb-20 md:pt-5 md:pb-10 bg-[radial-gradient(ellipse_200%_100%_at_bottom_left,#735AB7,#EAEFEF_100%)] md:overflow-x-clip]">
       <div className="container">
         <div className="md:flex items-center ">
-          <div className="md:w-[478px]">
+          <div className="md:w-[560px]">
             <div className="tag">
             ⚡ Live in days — not months.
             </div>
             <h1 className="text-5xl md:text-7xl font-bold tracking-tighter bg-gradient-to-b from-black to-[#001e80] bg-clip-text text-transparent mt-6">
-              Unleash Your AI Workforce
+            Scale Your Revenue, Not Your Headcount
             </h1>
             <p className="text-xl text-[#010d3e] tracking-tight mt-6">
-            Deploy autonomous <span className="font-bold">AI workers</span> that <span className="font-bold">communicate</span>, <span className="font-bold">coordinate</span>, and <span className="font-bold">complete real business tasks</span>.
-            Scale operations without scaling headcount.
+            Custom AI systems that turn leads into customers and run the work that slows your team down — so you grow without the growing pains.
             </p>
-            <div className="mt-[30px] flex gap-1 items-center ">
-              <Link href='#DemoSection' className="btn btn-primary">Book a Demo</Link>
+            <div className="mt-[30px] flex gap-4">
+            <div className="flex gap-1 items-center transition hover:shadow-md hover:scale-105">
+              <Link href='#DemoSection' className="btn btn-primary">Try Free Demo</Link>
+            </div>
+            <div className="flex gap-1 items-center transition hover:shadow-md hover:scale-105">
+              <Link href='#DemoSection' className="btn btn-primary">See Live AI In Action</Link>
             </div>
           </div>
+            </div>
           <div className="mt-20 md:mt-0 md:h-[648px] md:flex-1 relative ">
             <motion.img 
               initial={{ opacity: 0 }}
