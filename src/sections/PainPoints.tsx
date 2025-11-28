@@ -1,7 +1,7 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  
+
   ClockAlert,
   ClockArrowDown,
   MessageSquare,
@@ -120,12 +120,12 @@ export const PainPoints = () => {
         "Combine the speed and precision of automation software with the critical thinking and nuanced judgment of a human expert.",
     },
     {
-      title: "Actionable Insights",
-      subtitle: "Strategic decisions driven by real-time data",
+      title: "Actionable Intelligence",
+      subtitle: "Analytics that trigger action — not just dashboards",
       icon: <BarChart3 className="w-14 h-14 text-white" />,
       gradient: "from-red-500 to-rose-600",
       description:
-        "Gain deep visibility into performance metrics and customer interactions, empowering you to refine strategies based on hard data rather than intuition.",
+        "Gain instant insights from calls, messages, and data to refine strategies based on hard evidence.",
     },
   ];
 
@@ -199,13 +199,12 @@ export const PainPoints = () => {
                 key={index}
                 variants={itemVariants}
                 className={`
-            ${
-              item.size === "wide"
-                ? "lg:col-span-3"
-                : item.size === "normal"
-                ? "lg:col-span-2"
-                : "lg:col-span-1"
-            } 
+            ${item.size === "wide"
+                    ? "lg:col-span-3"
+                    : item.size === "normal"
+                      ? "lg:col-span-2"
+                      : "lg:col-span-1"
+                  } 
             group relative overflow-hidden bg-white rounded-2xl p-8 
             border border-gray-100 shadow-sm hover:shadow-lg transition-shadow duration-300
           `}
@@ -246,9 +245,8 @@ export const PainPoints = () => {
                       {[...Array(item.size === "wide" ? 12 : 6)].map((_, i) => (
                         <div
                           key={i}
-                          className={`h-1.5 rounded-full bg-gray-900 ${
-                            i % 2 === 0 ? "w-2" : "w-4"
-                          }`}
+                          className={`h-1.5 rounded-full bg-gray-900 ${i % 2 === 0 ? "w-2" : "w-4"
+                            }`}
                         />
                       ))}
                     </div>
@@ -284,11 +282,10 @@ export const PainPoints = () => {
                 }}
                 className={`
         card bg-white p-4 transition-all duration-300 border border-[#f1f1f1] my-2 group rounded-xl
-        ${
-          service.title.includes("Predictable")
-            ? "md:col-span-1"
-            : "md:col-span-1"
-        }
+        ${service.title.includes("Predictable")
+                    ? "md:col-span-1"
+                    : "md:col-span-1"
+                  }
       `}
               >
                 <div
@@ -316,7 +313,7 @@ export const PainPoints = () => {
         <div className="mt-[30px] flex justify-center gap-4">
           <div className="flex gap-1 items-center transition hover:shadow-md hover:scale-105 ">
             <Link href="#DemoSection" className="btn btn-primary ">
-            See Exactly How This Works
+              See Exactly How This Works
             </Link>
           </div>
         </div>
