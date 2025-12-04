@@ -343,7 +343,7 @@ export const Services = () => {
         </div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-24">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-0 mb-24">
           {services.map((service, index) => (
             <motion.div
               key={service.title}
@@ -369,257 +369,24 @@ export const Services = () => {
               </p>
             </motion.div>
           ))}
-        </div>
+        </div> */}
 
-        {/* Industries Section */}
-        <div className="bg-gradient-to-br from-[#EAEEFE] to-[#d2dcff] rounded-3xl p-12 relative overflow-hidden">
-          <div className="relative z-10">
-            <div className="text-center mb-8">
-              <div className="tag inline-block mb-4">
-                Industries We Transform
-              </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-                Replace People-Intensive Processes with AI
-              </h3>
-              <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Our AI solutions excel in industries where human labor is
-                repetitive, time-consuming, and costly. Automate these processes
-                and scale without limits.
-              </p>
-            </div>
-
-            {/* <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mt-12">
-              {industries.map((industry, index) => (
-                <motion.div
-                  key={industry.name}
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: index * 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-6 text-center shadow-sm hover:shadow-md transition-shadow duration-300 flex flex-col items-center gap-3"
-                >
-                  <div className="p-2 rounded-full bg-gray-50">
-                    {industry.icon}
-                  </div>
-                  <p className="text-sm font-semibold text-gray-800">
-                    {industry.name}
-                  </p>
-                </motion.div>
-              ))}
-            </div> */}
-            <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mt-12">
-              {/* Customer Support - Top Left */}
-              <div className="lg:row-span-2 lg:col-span-2">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-full bg-gray-50">
-                      {industries[0].icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-12 gap-1">
-                        {[...Array(36)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-1 h-1 bg-red-200 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900">
-                    {industries[0].name}
-                  </h4>
-                </motion.div>
-              </div>
-
-              {/* Lead Onboarding - Top Right */}
-              <div className="lg:row-span-2 lg:col-span-1">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.05 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-full bg-gray-50">
-                      {industries[1].icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-12 gap-1">
-                        {[...Array(36)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-1 h-1 bg-red-200 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900">
-                    {industries[1].name}
-                  </h4>
-                </motion.div>
-              </div>
-
-              {/* Sales Operations - Middle Right */}
-              <div className="lg:row-span-2 lg:col-span-1">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.1 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-full bg-gray-50">
-                      {industries[2].icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-12 gap-1">
-                        {[...Array(36)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-1 h-1 bg-red-200 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900">
-                    {industries[2].name}
-                  </h4>
-                </motion.div>
-              </div>
-
-              {/* Data Entry - Bottom Left */}
-              <div className="lg:col-span-1 lg:row-start-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.15 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-full bg-gray-50">
-                      {industries[3].icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-12 gap-1">
-                        {[...Array(36)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-1 h-1 bg-red-200 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900">
-                    {industries[3].name}
-                  </h4>
-                </motion.div>
-              </div>
-
-              {/* Content Moderation - Bottom Right */}
-              <div className="lg:col-span-2 lg:row-start-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-full bg-gray-50">
-                      {industries[4].icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-12 gap-1">
-                        {[...Array(36)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-1 h-1 bg-red-200 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900">
-                    {industries[4].name}
-                  </h4>
-                </motion.div>
-              </div>
-
-              {/* Empty space for Appointment Scheduling if you want to add it - Bottom Left Row 3 */}
-              <div className="lg:col-span-1 lg:row-start-3">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.3, delay: 0.25 }}
-                  whileHover={{ scale: 1.05 }}
-                  className="bg-white rounded-xl p-8 shadow-sm hover:shadow-md transition-shadow duration-300 h-full"
-                >
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="p-3 rounded-full bg-gray-50">
-                      {industries[5].icon}
-                    </div>
-                    <div className="flex-1">
-                      <div className="grid grid-cols-12 gap-1">
-                        {[...Array(36)].map((_, i) => (
-                          <div
-                            key={i}
-                            className="w-1 h-1 bg-red-200 rounded-full"
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <h4 className="text-xl font-semibold text-gray-900">
-                    {industries[5].name}
-                  </h4>
-                </motion.div>
-              </div>
-            </div>
-
-            <div className="mt-12 text-center">
-              <p className="text-gray-600 text-lg">
-                <span className="font-bold">And many more...</span> Any process
-                that relies on repetitive human interaction can be automated
-                with our AI solutions.
-              </p>
-            </div>
-          </div>
-        </div>
+       
         <motion.img
           src={"/assets/pyramid.png"}
           style={{ translateY }}
           height={262}
           width={262}
           alt="pyramid"
-          className="hidden md:block absolute right-56 top-40 pointer-events-none z-10"
+          className="hidden md:block absolute left-56 top-20 pointer-events-none z-10"
         />
         <motion.img
-          src={"/assets/noodle.png"}
+          src={"/assets/cylinder.png"}
           style={{ translateY }}
           height={248}
           width={248}
           alt="tube"
-          className="hidden md:block absolute left-56 bottom-20 rotate-45 pointer-events-none z-10"
+          className="hidden md:block absolute right-14 bottom-0 rotate-45 pointer-events-none z-10"
         />
       </div>
     </section>

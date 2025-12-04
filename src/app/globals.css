@@ -16,9 +16,14 @@
     @apply w-auto h-8;
   }
 
-  .tag {
+  /* .tag {
     @apply tracking-tight text-sm inline-flex border border-[#222]/10 px-3 py-1 rounded-lg;
+  } */
+
+  .tag {
+    @apply tracking-tight text-2xl inline-flex border border-[1px] border-[#222] px-3 py-1 rounded-lg;
   }
+
   .section-title {
     @apply text-3xl md:text-[54px] md:leading-[60px] font-bold tracking-tighter text-center bg-gradient-to-b from-black to-[#001e80] bg-clip-text text-transparent ;
   }
@@ -28,7 +33,7 @@
   }
 
   .section-heading {
-    @apply max-w-[540px] mx-auto;
+    @apply max-w-[600px] mx-auto;
   }
 
   .card {
@@ -213,4 +218,13 @@
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease-out forwards;
+}
+
+.glass-card{
+  background: rgba(255, 255, 255, 0.15);        /* transparent white tint */
+  backdrop-filter: blur(18px) saturate(180%);   /* add blur + color depth */
+  -webkit-backdrop-filter: blur(18px) saturate(180%);
+  border: 1px solid rgba(255,255,255,0.3);      /* soft glass border */
+  box-shadow: 0 4px 30px rgba(0,0,0,0.1);       /* subtle shadow for elevation */
+  border-radius: 16px;
 }

@@ -1,22 +1,28 @@
-'use client';
-import { useState, useRef } from 'react';
-import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import DemoInput from '@/components/DemoInput';
-import AgentWidget from '@/components/AgentWidget';
+"use client";
+import { useState, useRef } from "react";
+import {
+  motion,
+  AnimatePresence,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import DemoInput from "@/components/DemoInput";
+import AgentWidget from "@/components/AgentWidget";
+import { DynamicIcon } from 'lucide-react/dynamic';
 
 export const Demos = () => {
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
-    offset: ['start end', 'end start'],
+    offset: ["start end", "end start"],
   });
   const translateY = useTransform(scrollYProgress, [0, 1], [150, -150]);
-  const [activeTab, setActiveTab] = useState<'email' | 'voice' | 'ai'>('email');
+  const [activeTab, setActiveTab] = useState<"email" | "voice" | "ai">("voice");
 
   const tabs = [
-    { id: 'email' as const, label: 'Get a Demo', icon: '📧' },
-    { id: 'voice' as const, label: 'Talk to a Voice Agent', icon: '🎤' },
-    { id: 'ai' as const, label: 'Talk to our AI', icon: '💬' },
+    { id: "email" as const, label: "Email Zyra", icon: "at-sign" },
+    { id: "voice" as const, label: "Call Zyra", icon: "audio-lines" },
+    { id: "ai" as const, label: "Chat with Zyra", icon: "message-square-more" },
   ];
 
   return (
@@ -32,34 +38,44 @@ export const Demos = () => {
           </div>
           <h2 className="section-title mt-5">See the AI Workforce in Action</h2>
           <p className="text-center text-[22px] leading-[30px] tracking-tighter text-[#010d3e] mt-5">
-            Experience our AI solutions firsthand. Choose how you&apos;d like to interact.
+            Experience our AI solutions firsthand. Choose how you&apos;d like to
+            interact.
           </p>
         </div>
 
         {/* Tab Navigation */}
         <div className="flex justify-center mb-12">
-          <div className="inline-flex bg-white rounded-lg p-2 shadow-md border border-gray-100">
+          <div
+            className="inline-flex py-3 px-6 rounded-full bg-[#c5aaf1]/40 backdrop-blur-xl shadow-lg"
+          >
             {tabs.map((tab) => (
+              <>
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`px-6 py-3 rounded-md font-medium text-sm transition-all duration-300 ${
+                className={`px-6 py-3 rounded-full text-xl transition-all duration-300 flex items-center justify-center gap-2 ${
                   activeTab === tab.id
-                    ? 'bg-black text-white shadow-md'
-                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                  ? "bg-[black] text-white border border-black font-bold"
+                  : "text-black font-medium hover:text-gray-900 hover:scale-105 "
                 }`}
               >
-                <span className="mr-2">{tab.icon}</span>
+                {/* <span className="mr-2">{tab.icon}</span> */}
                 {tab.label}
+                <DynamicIcon 
+                  name={tab.icon as any} 
+                  color={activeTab === tab.id ? "white" : "black"} 
+                  size={activeTab === tab.id ? 30 : 20}
+                />
               </button>
+              </>
             ))}
           </div>
         </div>
 
         {/* Tab Content */}
-        <div className="relative flex justify-center min-h-[500px]">
+        <div className="relative flex justify-center md:min-h-[600px]">
           <AnimatePresence mode="wait">
-            {activeTab === 'email' && (
+            {activeTab === "email" && (
               <motion.div
                 key="email"
                 initial={{ opacity: 0, y: 20 }}
@@ -70,17 +86,18 @@ export const Demos = () => {
               >
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Request a Demo
+                    Chat with Zyra, Our Sales Agent
                   </h3>
                   <p className="text-gray-600">
-                    Share your email and let our AI sales agent reach out immediately
+                    Share your email and let our Zyra will reach out
+                    immediately
                   </p>
                 </div>
                 <DemoInput />
               </motion.div>
             )}
 
-            {activeTab === 'voice' && (
+            {activeTab === "voice" && (
               <motion.div
                 key="voice"
                 initial={{ opacity: 0, y: 20 }}
@@ -91,10 +108,10 @@ export const Demos = () => {
               >
                 <div className="text-center mb-8">
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">
-                    Talk to a Voice Agent
+                    Talk to a Deen
                   </h3>
                   <p className="text-gray-600">
-                    Have a real-time conversation with our AI voice agent
+                    Questions? Deen will answer them all
                   </p>
                 </div>
                 <div className="flex justify-center">
@@ -103,7 +120,7 @@ export const Demos = () => {
               </motion.div>
             )}
 
-            {activeTab === 'ai' && (
+            {activeTab === "ai" && (
               <motion.div
                 key="ai"
                 initial={{ opacity: 0, y: 20 }}
@@ -115,21 +132,20 @@ export const Demos = () => {
                 <div className="bg-white rounded-2xl p-12 shadow-lg border border-gray-100">
                   <div className="text-6xl mb-6">🚀</div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                    AI Chat Coming Soon
+                    Zyra
                   </h3>
                   <p className="text-gray-600 text-lg mb-6">
-                    Our AI chat interface is currently under development.
-                    In the meantime, try our voice agent or request a demo!
+                  Zyra’s taking a quick power nap — we’ll wake him up soon.!
                   </p>
                   <div className="flex gap-4 justify-center">
                     <button
-                      onClick={() => setActiveTab('voice')}
+                      onClick={() => setActiveTab("voice")}
                       className="btn btn-primary"
                     >
                       Try Voice Agent
                     </button>
                     <button
-                      onClick={() => setActiveTab('email')}
+                      onClick={() => setActiveTab("email")}
                       className="btn btn-text"
                     >
                       Request Demo
@@ -143,7 +159,7 @@ export const Demos = () => {
 
         {/* Decorative Elements */}
         <motion.img
-          src={'/assets/pyramid.png'}
+          src={"/assets/pyramid.png"}
           style={{ translateY }}
           height={262}
           width={262}
@@ -151,7 +167,7 @@ export const Demos = () => {
           className="hidden md:block absolute right-56 top-40 pointer-events-none z-10"
         />
         <motion.img
-          src={'/assets/tube.png'}
+          src={"/assets/tube.png"}
           style={{ translateY }}
           height={248}
           width={248}
@@ -162,4 +178,3 @@ export const Demos = () => {
     </section>
   );
 };
-

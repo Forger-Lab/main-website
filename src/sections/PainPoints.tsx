@@ -1,15 +1,10 @@
 "use client";
 import { motion, useScroll, useTransform } from "framer-motion";
 import {
-  
   ClockAlert,
   ClockArrowDown,
-  MessageSquare,
-  Loader,
   Weight,
   Loader2,
-  Layers,
-  Database,
   TrendingDown,
   Users,
   CheckCircle2,
@@ -23,6 +18,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { useRef } from "react";
+
 
 export const PainPoints = () => {
   const ref = useRef(null);
@@ -164,7 +160,7 @@ export const PainPoints = () => {
         height={248}
         width={248}
         alt="tube"
-        className="hidden md:block absolute md:left-[10%] md:-bottom-1 transform pointer-events-none z-10"
+        className="hidden md:block absolute md:left-[2%] md:-bottom-1 transform pointer-events-none z-10"
       />
       <div className="container">
         <div className="section-heading mb-24">
@@ -175,18 +171,18 @@ export const PainPoints = () => {
             Grow Without the Growing Pains
           </h2>
           <p className="section-subtitle mt-5">
-            More demand is a good problem — until you can’t keep up. Missed
-            leads, delayed responses, manual admin, and scattered processes
-            choke growth. SolvoLab builds AI‑powered systems that eliminate
-            busywork and unlock scale.
+            More demand is a good problem — until you can’t keep up. <span className="font-bold">Missed
+            leads</span>, <span className="font-bold">delayed responses</span>, <span className="font-bold">manual admin</span>, and <span className="font-bold">scattered processes</span>
+             choke growth. SolvoLab builds <span className="font-bold">AI‑powered systems</span> that <span className="font-bold">eliminate
+            busywork</span> and <span className="font-bold">unlock scale</span>.
           </p>
         </div>
 
         {/* Industries Section */}
         <div className="mb-24">
-          <div className="flex justify-center">
+          {/* <div className="flex justify-center">
             <div className="tag">Common scaling problems we eliminate</div>
-          </div>
+          </div> */}
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -257,68 +253,6 @@ export const PainPoints = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-
-        {/* Services Grid */}
-
-        <div className="">
-          <div className="flex justify-center ">
-            <div className="tag"> What you gain</div>
-          </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-5">
-            {services.map((service, index) => (
-              <motion.div
-                key={service.title}
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                whileHover={{ scale: 1, boxShadow: "0px 14px 28px #EAEAEA" }}
-                transition={{
-                  // Initial entry
-                  y: { duration: 0.5 },
-                  opacity: { duration: 0.5 },
-                  delay: index * 0.1,
-
-                  // Hover state
-                  scale: { duration: 0.2, type: "tween" },
-                }}
-                className={`
-        card bg-white p-4 transition-all duration-300 border border-[#f1f1f1] my-2 group rounded-xl
-        ${
-          service.title.includes("Predictable")
-            ? "md:col-span-1"
-            : "md:col-span-1"
-        }
-      `}
-              >
-                <div
-                  className={`relative overflow-hidden bg-gradient-to-br ${service.gradient} rounded-2xl p-6 mb-6 h-48 flex items-center justify-center group-hover:scale-105 transition duration-200`}
-                >
-                  {/* The Shine Effect Overlay */}
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out skew-x-12" />
-                  <div className="transform group-hover:animate-bounce">
-                    {service.icon}
-                  </div>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                  {service.title}
-                </h3>
-                <p className="text-md text-gray-700 mb-1 font-medium">
-                  {service.subtitle}
-                </p>
-                <p className="text-gray-600 leading-relaxed">
-                  {service.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="mt-[30px] flex justify-center gap-4">
-          <div className="flex gap-1 items-center transition hover:shadow-md hover:scale-105 ">
-            <Link href="#DemoSection" className="btn btn-primary ">
-            See Exactly How This Works
-            </Link>
-          </div>
         </div>
       </div>
     </section>

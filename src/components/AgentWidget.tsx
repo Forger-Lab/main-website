@@ -186,12 +186,12 @@ export default function AgentWidget() {
 
   return (
     <form onSubmit={connectToAgent} className="w-full max-w-sm mx-auto p-6 bg-white rounded-xl shadow-lg border border-gray-100 space-y-6">
-      <div className="text-center">
+      {/* <div className="text-center">
         <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
           Chat with AI
         </h2>
         <p className="text-gray-500 text-sm mt-2">Enter your details to start a voice session</p>
-      </div>
+      </div> */}
       
       <div className="space-y-4">
         <div className="space-y-2">

@@ -6,14 +6,16 @@ import { CallToAction } from "@/sections/CallToAction";
 import { Footer } from "@/sections/Footer";
 import HowItWorks from "@/sections/HowItWorks";
 import { PainPoints } from "@/sections/PainPoints";
+import WhatYouGain from "@/sections/Whatyougain";
 export default function Home() {
   return (
     <>
       <Header />
       <Hero />
       <PainPoints/>
+      <WhatYouGain/>
       <Services />
-      <HowItWorks />
+      {/* <HowItWorks /> */}
       <Demos />
       <CallToAction />
       <Footer />
