@@ -219,9 +219,9 @@ export const Services = () => {
       icon: <Users className="w-14 h-14 text-white" />,
       gradient: "from-blue-500 to-cyan-600",
       points: [
-        "Lead capture, engagement, and conversion optimization.",
-        "Automated support across chat, email, and voice channels.",
-        "Direct‑mail and personalized outreach that follows through.",
+        "Lead capture, engagement, and conversion",
+        "Automated support across chat, email, and voice",
+        "Direct‑mail and outreach that follows through",
       ],
     },
     {
@@ -230,9 +230,9 @@ export const Services = () => {
       icon: <Workflow className="w-14 h-14 text-white" />, // Or <Cpu />
       gradient: "from-emerald-500 to-green-600",
       points: [
-        "Data entry and record updates synced instantly across tools.",
-        "Research and information gathering done on command.",
-        "Scheduling, reminders, and administrative task handling.",
+        "Data entry and record updates synced across tools",
+        "Research and info gathering done on command",
+        "Scheduling, reminders, and admin task handling",
       ],
     },
     {
@@ -241,9 +241,8 @@ export const Services = () => {
       icon: <BrainCircuit className="w-14 h-14 text-white" />,
       gradient: "from-violet-500 to-purple-600",
       points: [
-        "Instant insights derived from calls, messages, and raw data.",
-        "Analytics that trigger automated actions — not just dashboards.",
-        "Predictive modeling to forecast trends and opportunities.", // Added to balance
+        "Instant insights from calls, messages, and data",
+        "Analytics that trigger action — not just dashboards",
       ],
     },
     {
@@ -252,9 +251,7 @@ export const Services = () => {
       icon: <Layers className="w-14 h-14 text-white" />,
       gradient: "from-amber-500 to-orange-600",
       points: [
-        "SaaS products and operational apps built for massive scale.",
-        "Bespoke architectures designed to fit your specific business logic.", // Added to balance
-        "Seamless integration with your existing legacy tech stack.", // Added to balance
+        "SaaS products and operational apps built for scale",
       ],
     },
   ];
@@ -289,55 +286,55 @@ export const Services = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-16">
           {features.map((feature, index) => (
-            <div  key={feature.title} className="col-span-1 flex justify-center">
-            <motion.div
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              whileHover={{ scale: 1, boxShadow: "0px 14px 28px #EAEAEA" }}
-              transition={{
-                // Initial entry
-                y: { duration: 0.5 },
-                opacity: { duration: 0.5 },
-                delay: index * 0.1,
+            <div key={feature.title} className="col-span-1 flex justify-center">
+              <motion.div
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                whileHover={{ scale: 1, boxShadow: "0px 14px 28px #EAEAEA" }}
+                transition={{
+                  // Initial entry
+                  y: { duration: 0.5 },
+                  opacity: { duration: 0.5 },
+                  delay: index * 0.1,
 
-                // Hover state
-                scale: { duration: 0.2, type: "tween" },
-              }}
-              className={`
+                  // Hover state
+                  scale: { duration: 0.2, type: "tween" },
+                }}
+                className={`
         card bg-white py-4 px-6 transition-all duration-300 border border-[#f1f1f1] my-2 group rounded-xl
        
        min-w-[450px]`}
-            >
-              <div
-                className={`relative overflow-hidden bg-gradient-to-br ${feature.gradient} rounded-2xl p-6 mb-6 h-48 flex items-center justify-center  group-hover:scale-105 transition duration-200`}
               >
-                {/* The Shine Effect Overlay */}
-                <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out skew-x-12" />
-                <div className="transform group-hover:animate-bounce">
-                  {feature.icon}
+                <div
+                  className={`relative overflow-hidden bg-gradient-to-br ${feature.gradient} rounded-2xl p-6 mb-6 h-48 flex items-center justify-center  group-hover:scale-105 transition duration-200`}
+                >
+                  {/* The Shine Effect Overlay */}
+                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700 ease-in-out skew-x-12" />
+                  <div className="transform group-hover:animate-bounce">
+                    {feature.icon}
+                  </div>
                 </div>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                {feature.title}
-              </h3>
-              <p className="text-md text-gray-700 mb-1 font-medium">
-                {feature.subtitle}
-              </p>
-              <ul className="space-y-2">
-                {feature.points.map((point, i) => (
-                  <li
-                    key={i}
-                    className="flex items-start text-sm leading-relaxed text-gray-700"
-                  >
-                    <span className="mr-2 text-green-500">
-                      • {/* Or use a check icon here */}
-                    </span>
-                    {point}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">
+                  {feature.title}
+                </h3>
+                <p className="text-md text-gray-700 mb-1 font-medium">
+                  {feature.subtitle}
+                </p>
+                <ul className="space-y-2">
+                  {feature.points.map((point, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start text-sm leading-relaxed text-gray-700"
+                    >
+                      <span className="mr-2 text-green-500">
+                        • {/* Or use a check icon here */}
+                      </span>
+                      {point}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
             </div>
           ))}
         </div>
