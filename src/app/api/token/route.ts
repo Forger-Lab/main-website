@@ -15,6 +15,7 @@ async function verifyRecaptcha(token: string): Promise<{ success: boolean; error
     return { success: false, error: 'No reCAPTCHA token provided' };
   }
 
+  
   const secretKey = process.env.RECAPTCHA_SECRET_KEY;
   if (!secretKey) {
     console.error('RECAPTCHA_SECRET_KEY not configured');
