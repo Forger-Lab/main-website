@@ -1,0 +1,122 @@
+.section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: var(--space-12) 0 var(--space-16);
+  background-color: transparent;
+}
+
+/* 12 logos, each 200px wide = 2400px for one set */
+/* Animation moves by one full set (2400px) */
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-200px * 12));
+  }
+}
+
+.slider {
+  height: 80px;
+  margin: auto;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+.slideTrack {
+  animation: scroll 40s linear infinite;
+  display: flex;
+  width: calc(200px * 24); /* 12 logos × 2 sets × 200px */
+}
+
+.slide {
+  height: 80px;
+  width: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  height: 32px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(0.7);
+  opacity: 0.6;
+  transition:
+    filter 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.logo:hover {
+  filter: grayscale(0%) brightness(1);
+  opacity: 1;
+}
+
+.tagline {
+  margin-top: var(--space-8);
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-500);
+  letter-spacing: 0.02em;
+}
+
+.highlight {
+  color: var(--color-primary-500);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .section {
+    padding: var(--space-8) 0 var(--space-12);
+  }
+
+  .slider {
+    height: 60px;
+  }
+
+  .slide {
+    height: 60px;
+    width: 150px;
+  }
+
+  .slideTrack {
+    width: calc(150px * 24);
+    animation-name: scrollMobile;
+  }
+
+  @keyframes scrollMobile {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-150px * 12));
+    }
+  }
+
+  .logo {
+    height: 24px;
+    max-width: 120px;
+  }
+
+  .tagline {
+    font-size: var(--font-size-xs);
+  }
+}

@@ -1,0 +1,401 @@
+/* ==============================================
+   Services Page Styles
+   ============================================== */
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  padding: var(--space-20) 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-50) 0%,
+    var(--color-neutral-0) 100%
+  );
+  /* overflow: hidden; */
+}
+
+/* Cross grid background pattern - top left corner */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 60%;
+  background-image: url("/crossgrid2.svg");
+  background-size: 500px 500px;
+  background-position: top left;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+
+/* Cross grid background pattern - bottom right corner */
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 50%;
+  height: 60%;
+  background-image: url("/crossgrid2.svg");
+  background-size: 500px 500px;
+  background-position: bottom right;
+  background-repeat: no-repeat;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: 0;
+  clip-path: polygon(100% 0, 100% 100%, 0 100%);
+}
+
+.heroContent {
+  max-width: 720px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.heroTitle {
+  font-size: var(--font-size-5xl);
+  line-height: 1.15;
+  margin-bottom: var(--space-6);
+}
+
+.highlight {
+  color: var(--color-primary-600);
+}
+
+.heroSubtitle {
+  font-size: var(--font-size-xl);
+  color: var(--color-neutral-600);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===== SECTION COMMON ===== */
+.sectionSubtitle {
+  font-size: var(--font-size-lg);
+  color: var(--color-neutral-600);
+  max-width: 600px;
+  margin: var(--space-4) auto var(--space-12);
+}
+
+/* ===== CAPABILITIES ===== */
+.capabilities {
+  background-color: var(--color-neutral-0);
+}
+
+.capabilityGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.capabilityCard {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease;
+}
+
+.capabilityCard:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.capIconWrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.capIcon {
+  font-size: 1.5rem;
+  line-height: 1;
+}
+
+.capTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1e293b;
+  margin-bottom: 8px;
+}
+
+.capDesc {
+  font-size: 14px;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+.capLink {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+}
+
+.capLink:hover {
+  color: var(--color-primary-700);
+}
+
+/* ===== METHODOLOGY ===== */
+.methodology {
+  background-color: var(--color-neutral-50);
+}
+
+.methodologyGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-4);
+  position: relative;
+  padding: var(--space-12) 0;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.methodologyItem {
+  text-align: center;
+  padding: var(--space-6);
+  position: relative;
+  z-index: 2;
+  background-color: var(
+    --color-neutral-50
+  ); /* Match section bg to cover line if needed, or transparent */
+}
+
+/* Staggered layout for desktop */
+@media (min-width: 1025px) {
+  .methodologyItem:nth-child(odd) {
+    transform: translateY(-40px);
+  }
+
+  .methodologyItem:nth-child(even) {
+    transform: translateY(40px);
+  }
+}
+
+/* Connector Line Container */
+.connectorLine {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.connectorLine svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.connectorPath {
+  fill: none;
+  stroke: var(--color-primary-200);
+  stroke-width: 3;
+  stroke-dasharray: 10 6; /* Optional: dashed line looks technical */
+  stroke-linecap: round;
+}
+
+.phaseNumber {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--color-primary-600);
+  color: var(--color-neutral-0);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--radius-full);
+  margin-bottom: var(--space-4);
+}
+
+.phaseTitle {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-3);
+}
+
+.phaseDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-600);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ===== TECH STACK ===== */
+.techStack {
+  background-color: var(--color-neutral-0);
+}
+
+.techGrid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-4);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.techItem {
+  padding: var(--space-3) var(--space-6);
+  background-color: var(--color-neutral-100);
+  border-radius: var(--radius-full);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-neutral-700);
+  font-size: var(--font-size-sm);
+}
+
+/* ===== CTA SECTION ===== */
+.ctaSection {
+  padding: var(--space-20) 0;
+  background: linear-gradient(
+    135deg,
+    var(--color-primary-600) 0%,
+    var(--color-primary-800) 100%
+  );
+}
+
+.ctaTitle {
+  color: var(--color-neutral-0);
+  margin-bottom: var(--space-4);
+}
+
+.ctaSubtitle {
+  color: var(--color-primary-100);
+  font-size: var(--font-size-lg);
+  max-width: 600px;
+  margin: 0 auto var(--space-8);
+}
+
+.ctaButtons {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-4);
+  flex-wrap: wrap;
+}
+
+/* ===== SERVICE BADGE ===== */
+.serviceBadge {
+  display: inline-block;
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+  background-color: var(--color-primary-50);
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-full);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
+}
+
+/* ===== USE CASES ===== */
+.useCases {
+  background-color: var(--color-neutral-50);
+}
+
+.useCaseGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-6);
+}
+
+.useCaseCard {
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+}
+
+.useCaseBadge {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-secondary-600);
+  margin-bottom: var(--space-3);
+}
+
+.useCaseTitle {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--space-2);
+}
+
+.useCaseDesc {
+  font-size: var(--font-size-sm);
+  color: var(--color-neutral-600);
+  line-height: var(--line-height-relaxed);
+  flex-grow: 1;
+  margin-bottom: var(--space-4);
+}
+
+.useCaseLink {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary-600);
+}
+
+/* ===== WHY GRID ===== */
+.whyGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-8);
+  max-width: 900px;
+  margin: var(--space-10) auto 0;
+}
+
+.whyItem {
+  text-align: center;
+}
+
+.whyItem h3 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--space-2);
+}
+
+.whyItem p {
+  font-size: var(--font-size-base);
+  color: var(--color-neutral-600);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .capabilityGrid,
+  .useCaseGrid {
+    grid-template-columns: 1fr;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .methodologyGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .connectorLine {
+    display: none;
+  }
+
+  .whyGrid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: var(--font-size-4xl);
+  }
+
+  .methodologyGrid {
+    grid-template-columns: 1fr;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+}

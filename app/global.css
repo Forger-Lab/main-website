@@ -1,0 +1,306 @@
+@import "./styles/design-tokens.css";
+
+/* ==============================================
+   Base Reset & Global Styles
+   ============================================== */
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-normal);
+  color: var(--color-neutral-800);
+  background-color: var(--color-neutral-0);
+}
+
+/* ==============================================
+   Typography
+   ============================================== */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--color-neutral-900);
+}
+
+h1 {
+  font-size: var(--font-size-5xl);
+  letter-spacing: -0.02em;
+}
+
+h2 {
+  font-size: var(--font-size-4xl);
+  letter-spacing: -0.01em;
+}
+
+h3 {
+  font-size: var(--font-size-2xl);
+}
+
+h4 {
+  font-size: var(--font-size-xl);
+}
+
+p {
+  color: var(--color-neutral-600);
+  line-height: var(--line-height-relaxed);
+}
+
+a {
+  color: var(--color-primary-600);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-700);
+}
+
+/* ==============================================
+   Layout Utilities
+   ============================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+.section {
+  padding: var(--space-20) 0;
+}
+
+.section--lg {
+  padding: var(--space-24) 0;
+}
+
+/* ==============================================
+   Button Base Styles
+   ============================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  line-height: 1;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  text-decoration: none;
+}
+
+.btn--primary {
+  background-color: var(--color-primary-600);
+  color: var(--color-neutral-0);
+}
+
+.btn--primary:hover {
+  background-color: var(--color-primary-700);
+  color: var(--color-neutral-0);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
+}
+
+.btn--primary--2 {
+  background-color: var(--color-primary-600);
+  color: var(--color-neutral-0);
+}
+
+.btn--primary--2:hover {
+  background-color: var(--color-primary-500);
+  color: var(--color-neutral-0);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px -4px rgba(37, 99, 235, 0.4);
+}
+
+.btn--secondary {
+  background-color: var(--color-neutral-100);
+  color: var(--color-neutral-800);
+}
+
+.btn--secondary:hover {
+  background-color: var(--color-neutral-200);
+  color: var(--color-neutral-900);
+}
+
+.btn--outline {
+  background-color: transparent;
+  color: var(--color-primary-600);
+  border: 2px solid var(--color-primary-600);
+  transition: "transform 0.3s";
+}
+
+.btn--outline:hover {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+  transform: scale(1.02);
+}
+
+.btn--outline--2 {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  transition: "transform 0.3s";
+}
+
+.btn--outline--2:hover {
+  background-color: var(--color-primary-50);
+  color: var(--color-primary-700);
+  transform: scale(1.02);
+}
+
+.btn--lg {
+  padding: var(--space-4) var(--space-8);
+  font-size: var(--font-size-lg);
+}
+
+/* ==============================================
+   Card Base Styles
+   ============================================== */
+
+.card {
+  background-color: var(--color-neutral-0);
+  border: 1px solid var(--color-neutral-200);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  transition: all var(--transition-base);
+}
+
+.card:hover {
+  box-shadow: 0 20px 40px -8px rgba(0, 0, 0, 0.12);
+  border-color: var(--color-neutral-300);
+}
+
+.card--interactive {
+  cursor: pointer;
+}
+
+.card--interactive:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.15);
+}
+
+/* ==============================================
+   Text Utilities
+   ============================================== */
+
+.text-center {
+  text-align: center;
+}
+.text-left {
+  text-align: left;
+}
+.text-right {
+  text-align: right;
+}
+
+.text-primary {
+  color: var(--color-primary-600);
+}
+.text-secondary {
+  color: var(--color-secondary-600);
+}
+.text-muted {
+  color: var(--color-neutral-500);
+}
+
+.text-sm {
+  font-size: var(--font-size-sm);
+}
+.text-lg {
+  font-size: var(--font-size-lg);
+}
+.text-xl {
+  font-size: var(--font-size-xl);
+}
+
+/* ==============================================
+   Flex Utilities
+   ============================================== */
+
+.flex {
+  display: flex;
+}
+.flex-col {
+  flex-direction: column;
+}
+.items-center {
+  align-items: center;
+}
+.justify-center {
+  justify-content: center;
+}
+.justify-between {
+  justify-content: space-between;
+}
+.gap-2 {
+  gap: var(--space-2);
+}
+.gap-4 {
+  gap: var(--space-4);
+}
+.gap-6 {
+  gap: var(--space-6);
+}
+.gap-8 {
+  gap: var(--space-8);
+}
+
+/* ==============================================
+   Grid Utilities
+   ============================================== */
+
+.grid {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.grid-cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+@media (max-width: 768px) {
+  .grid-cols-2,
+  .grid-cols-3 {
+    grid-template-columns: 1fr;
+  }
+
+  h1 {
+    font-size: var(--font-size-4xl);
+  }
+
+  h2 {
+    font-size: var(--font-size-3xl);
+  }
+}
