@@ -9,50 +9,51 @@ import AnimatedSection, {
 } from "../../components/AnimatedSection";
 import AnimatedCounter from "../../components/AnimatedCounter";
 import styles from "../industry.module.css";
+import { MapPin, CircleDollarSign, BellRing } from "lucide-react";
 
 const painPoints = [
   {
-    title: "The Data Entry Trap",
-    headline: "Manual Keying is a Liability.",
+    title: "The Phone Tag Epidemic",
+    headline: "01: The Phone Tag Epidemic",
     description:
-      "Transcribing Bills of Lading is slow and error-prone. A single digit error in a weight or address can delay a shipment for days.",
+      "Staff spend 40% of their day confirming appointments, handling cancellations, and answering basic FAQs that could be handled by a machine.",
   },
   {
-    title: "The Visibility Vacuum",
-    headline: "The 'Check Call' Grind.",
+    title: "Data Silos & Manual Entry",
+    headline: "02: Data Silos & Manual Entry",
     description:
-      "Your team spends hours answering 'Where is my truck?' emails. This reactive communication prevents them from booking more freight.",
+      "Patient info trapped in disparate systems leads to errors. Manually moving data from a web form to an EMR is a high-risk, low-value task.",
   },
   {
-    title: "Quoting Latency",
-    headline: "Slow Quotes Lose Loads.",
+    title: "High No-Show Rates",
+    headline: "03: High No-Show Rates",
     description:
-      "If you can't quote a lane in minutes, you lose the business. Manual rate sheet lookups are obsolete.",
+      "Without persistent, multi-channel reminders (Voice, SMS, Email), clinics face empty slots that represent thousands of dollars in lost daily revenue.",
   },
 ];
 
 const solutions = [
   {
-    title: "AI Document Extraction (IDP)",
+    title: "AI Medical Voice Assistants",
     description:
-      "Drag and drop a PDF Bill of Lading. Our AI agents parse the data, validate it against your ERP, and create the order automatically. 99% accuracy.",
-    icon: "📄",
+      "Our voice agents handle inbound appointment setting and outbound reminders with a natural human tone, updating your scheduling software in real-time.",
+    icon: <MapPin size={40} strokeWidth={1.5} />,
   },
   {
-    title: "Automated Status Webhooks",
+    title: "Unified Patient Data Workflows",
     description:
-      "Push tracking updates directly to your customer's portal. When the carrier updates their status, your client knows instantly.",
-    icon: "🔔",
+      "We build custom middleware to sync your website leads, patient intake forms, and EMR/CRM systems, eliminating manual data entry and reducing human error.",
+    icon: <CircleDollarSign size={40} strokeWidth={1.5} />,
   },
   {
-    title: "Dynamic Rate Calculation",
+    title: "Inbound Lead & SEO Optimization",
     description:
-      "We connect your historical lane data with live market APIs to generate instant, profitable quotes.",
-    icon: "💹",
+      "We ensure your clinic ranks for \"near me\" searches through advanced SEO and AEO (Answer Engine Optimization), capturing patients exactly when they need care.",
+    icon: <BellRing size={40} strokeWidth={1.5} />,
   },
 ];
 
-export default function LogisticsPage() {
+export default function HealthcarePage() {
   return (
     <>
       <Header />
@@ -63,28 +64,37 @@ export default function LogisticsPage() {
           {/* Right side masked image */}
           <div className={styles.heroImageMask}>
             <img
-              src="https://images.unsplash.com/photo-1593824854968-7833add41c16?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-              alt="Logistics warehouse"
+              src="https://images.unsplash.com/photo-1516549655169-df83a0774514?q=80&w=1470&auto=format&fit=crop"
+              alt="Medical Clinic setup"
               className={styles.heroImage}
-              // style={{ transform: "scaleX(-1)" }}
             />
             <div className={styles.heroImageOverlay} />
           </div>
 
+          {/* Content */}
           <div className="container">
             <AnimatedSection className={styles.heroContent}>
               <h1 className={styles.heroTitle}>
-                Move Freight,{" "}
-                <span className={styles.highlight}>Not Paper.</span>
+                Clinical Workflow & <span className={styles.highlight}>Patient Engagement AI</span>
               </h1>
               <p className={styles.heroSubtitle}>
-                Automate Bill of Lading processing, instant quoting, and carrier
-                tracking with AI-driven workflows. Cut your document processing
-                time by 90%.
+                Overwhelmed by appointment no-shows and phone tag? Automate your patient journey.
               </p>
               <Link href="/contact" className="btn btn--primary btn--lg">
-                Streamline My Supply Chain
+                Automate Clinical Workflows
               </Link>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Intro Section */}
+        <section className={`section ${styles.intro}`}>
+          <div className="container text-center">
+            <AnimatedSection>
+              <h2>Is Your Staff Drowning in Phone Calls and Scheduling?</h2>
+              <p className={styles.sectionSubtitle}>
+                Stop letting administrative friction impact patient care. SolvoLab develops the HIPAA-compliant automation tools that allow your clinical staff to focus on medicine, not data entry.
+              </p>
             </AnimatedSection>
           </div>
         </section>
@@ -93,9 +103,9 @@ export default function LogisticsPage() {
         <section className={`section ${styles.painPoints}`}>
           <div className="container">
             <AnimatedSection className="text-center">
-              <h2>Operational Bottlenecks</h2>
+              <h2>The Operational Drain</h2>
               <p className={styles.sectionSubtitle}>
-                Manual processes that are slowing down your freight operation.
+                Administrative chaos in healthcare leads to burnt-out staff and frustrated patients.
               </p>
             </AnimatedSection>
 
@@ -117,9 +127,9 @@ export default function LogisticsPage() {
         <section className={`section section--lg ${styles.solutions}`}>
           <div className="container">
             <AnimatedSection className="text-center">
-              <h2>The Modern 3PL Tech Stack</h2>
+              <h2>The Modern Digital Clinic</h2>
               <p className={styles.sectionSubtitle}>
-                AI-powered automation built for logistics operations.
+                Secure, AI-driven automation for the healthcare sector.
               </p>
             </AnimatedSection>
 
@@ -144,31 +154,28 @@ export default function LogisticsPage() {
           <div className="container">
             <AnimatedSection className={styles.caseContent}>
               <div className={styles.caseLabel}>Case Study</div>
-              <h2 className={styles.caseTitle}>
-                90% Faster Document Processing
-              </h2>
+              <h2 className={styles.caseTitle}>Slashing No-Shows to Zero</h2>
               <p className={styles.caseDesc}>
-                How a regional 3PL automated Bill of Lading intake and
-                eliminated manual data entry across their operations.
+                How a multi-location dental practice integrated AI Voice Reminders with their EMR, reducing patient no-shows by 85% and saving 20 hours per week of receptionist phone time.
               </p>
               <div className={styles.caseMetrics}>
                 <div className={styles.metric}>
                   <span className={styles.metricValue}>
-                    <AnimatedCounter value={90} suffix="%" />
+                    <AnimatedCounter value={85} suffix="%" />
                   </span>
-                  <span className={styles.metricLabel}>Time Saved</span>
+                  <span className={styles.metricLabel}>Fewer No-shows</span>
                 </div>
                 <div className={styles.metric}>
                   <span className={styles.metricValue}>
-                    <AnimatedCounter value={99} suffix="%" />
+                    <AnimatedCounter value={100} suffix="%" />
                   </span>
-                  <span className={styles.metricLabel}>Accuracy</span>
+                  <span className={styles.metricLabel}>EMR Sync</span>
                 </div>
                 <div className={styles.metric}>
                   <span className={styles.metricValue}>
-                    <AnimatedCounter value={3} suffix="x" />
+                    <AnimatedCounter value={20} />
                   </span>
-                  <span className={styles.metricLabel}>More Capacity</span>
+                  <span className={styles.metricLabel}>Hours Saved/Wk</span>
                 </div>
               </div>
             </AnimatedSection>
@@ -179,20 +186,19 @@ export default function LogisticsPage() {
         <section className={styles.ctaSection}>
           <div className="container text-center">
             <AnimatedSection>
-              <h2 className={styles.ctaTitle}>Ready to Automate?</h2>
+              <h2 className={styles.ctaTitle}>Ready to Focus on Medicine?</h2>
               <p className={styles.ctaSubtitle}>
-                Schedule a logistics operations audit and discover your
-                automation opportunities.
+                Schedule a clinical workflow audit and discover the power of AI-driven patient engagement.
               </p>
               <div className={styles.ctaButtons}>
                 <Link href="/contact" className="btn btn--primary--2 btn--lg">
-                  Start Automating Documents
+                  Schedule a Clinical Ops Audit
                 </Link>
                 <Link
-                  href="/services/ai-agent-development"
+                  href="/services/system-integration-api"
                   className="btn btn--outline--2 btn--lg"
                 >
-                  Understand IDP Technology
+                  Explore Automation Capabilities
                 </Link>
               </div>
             </AnimatedSection>

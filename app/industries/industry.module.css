@@ -107,8 +107,11 @@
 }
 
 .painCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: var(--space-6);
-  border-left: 3px solid var(--color-primary-600);
+  border-top: 3px solid var(--color-primary-600);
   background-color: var(--color-neutral-50);
 }
 

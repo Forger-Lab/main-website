@@ -6,22 +6,19 @@ import styles from "./Header.module.css";
 
 const solutions = [
   {
-    title: "Security Operations",
-    description: "Eliminate ghost shifts & automate payroll",
-    href: "/industries/security-guard-operations",
-    icon: "🛡️",
+    title: "Legal Practice Automation",
+    description: "AI Intake Response in Seconds",
+    href: "/industries/legal-practice-automation",
   },
   {
-    title: "Flooring & Tile Retail",
-    description: "Track samples & sync inventory",
-    href: "/industries/flooring-tile-retail",
-    icon: "🏠",
+    title: "Real Estate Lead Conversion",
+    description: "24/7 AI Voice Follow-ups",
+    href: "/industries/real-estate-lead-conversion",
   },
   {
-    title: "Logistics & 3PL",
-    description: "Automate bills of lading & freight tracking",
-    href: "/industries/logistics-3pl-automation",
-    icon: "🚚",
+    title: "Clinical Workflow AI",
+    description: "Eliminate No-Show Loss",
+    href: "/industries/clinical-workflow-ai",
   },
 ];
 
@@ -128,7 +125,6 @@ export default function Header() {
                         href={item.href}
                         className={styles.dropdownItem}
                       >
-                        <span className={styles.dropdownIcon}>{item.icon}</span>
                         <div>
                           <div className={styles.dropdownTitle}>
                             {item.title}

@@ -6,29 +6,29 @@
 :root {
   /* ===== Colors ===== */
 
-  /* Primary - Deep professional blue */
-  --color-primary-50: #eff6ff;
-  --color-primary-100: #dbeafe;
-  --color-primary-200: #bfdbfe;
-  --color-primary-300: #93c5fd;
-  --color-primary-400: #60a5fa;
-  --color-primary-500: #3b82f6;
-  --color-primary-600: #2563eb;
-  --color-primary-700: #1d4ed8;
-  --color-primary-800: #1e40af;
-  --color-primary-900: #1e3a8a;
+  /* Primary - Brand Pink */
+  --color-primary-50: #fbf0f7;
+  --color-primary-100: #f6ddeb;
+  --color-primary-200: #eeadd5;
+  --color-primary-300: #e587bd;
+  --color-primary-400: #d65fa3;
+  --color-primary-500: #c350a1;
+  --color-primary-600: #a83c88;
+  --color-primary-700: #8b2b6e;
+  --color-primary-800: #75235c;
+  --color-primary-900: #611e4d;
 
-  /* Secondary - Teal accent */
-  --color-secondary-50: #f0fdfa;
-  --color-secondary-100: #ccfbf1;
-  --color-secondary-200: #99f6e4;
-  --color-secondary-300: #5eead4;
-  --color-secondary-400: #2dd4bf;
-  --color-secondary-500: #14b8a6;
-  --color-secondary-600: #0d9488;
-  --color-secondary-700: #0f766e;
-  --color-secondary-800: #115e59;
-  --color-secondary-900: #134e4a;
+  /* Secondary - Brand Purple */
+  --color-secondary-50: #f4f2f8;
+  --color-secondary-100: #e9e5f2;
+  --color-secondary-200: #d6cee4;
+  --color-secondary-300: #bcaed2;
+  --color-secondary-400: #9e8abc;
+  --color-secondary-500: #896ec0;
+  --color-secondary-600: #795baf;
+  --color-secondary-700: #65469a;
+  --color-secondary-800: #543881;
+  --color-secondary-900: #46306c;
 
   /* Neutral - Clean grays */
   --color-neutral-0: #ffffff;

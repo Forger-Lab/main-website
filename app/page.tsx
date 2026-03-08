@@ -7,31 +7,32 @@ import Footer from "./components/Footer";
 import LogoMarquee from "./components/LogoMarquee";
 import AnimatedCounter from "./components/AnimatedCounter";
 import styles from "./page.module.css";
+import { Scale, Home as HomeIcon, HeartPulse, Search, Compass, Settings, FlaskConical, Rocket } from "lucide-react";
 
 const industries = [
   {
-    id: "security",
-    icon: "🛡️",
-    title: "Security Guard Operations",
-    hook: "Struggling with payroll errors and unverified patrols? Automate your workforce management.",
-    href: "/industries/security-guard-operations",
-    stats: "Eliminate Ghost Shifts",
+    id: "legal",
+    icon: <Scale size={42} strokeWidth={1.5} />,
+    title: "Legal Practice Automation",
+    hook: "Struggling with manual billable hours and slow client intake? Automate your legal operations.",
+    href: "/industries/legal-practice-automation",
+    stats: "AI Intake Response in Seconds",
   },
   {
-    id: "flooring",
-    icon: "🏠",
-    title: "Flooring & Tile Retail",
-    hook: "Inventory drift and lost samples killing margins? Sync your showroom with reality.",
-    href: "/industries/flooring-tile-retail",
-    stats: "Stop Losing Samples",
+    id: "real-estate",
+    icon: <HomeIcon size={42} strokeWidth={1.5} />,
+    title: "Real Estate Lead Conversion",
+    hook: "Losing hot leads to slow follow-ups? Automate your property inquiries and appointments.",
+    href: "/industries/real-estate-lead-conversion",
+    stats: "24/7 AI Voice Follow-ups",
   },
   {
-    id: "logistics",
-    icon: "🚚",
-    title: "Logistics & 3PL",
-    hook: "Drowning in paperwork? Automate Bill of Lading processing and freight tracking.",
-    href: "/industries/logistics-3pl-automation",
-    stats: "Automate Bills of Lading",
+    id: "healthcare",
+    icon: <HeartPulse size={42} strokeWidth={1.5} />,
+    title: "Clinical Workflow AI",
+    hook: "Overwhelmed by appointment no-shows and phone tag? Automate your patient journey.",
+    href: "/industries/clinical-workflow-ai",
+    stats: "Eliminate No-Show Loss",
   },
 ];
 
@@ -39,7 +40,7 @@ const roadmap = [
   {
     phase: "01",
     title: "Discovery & Audit",
-    icon: "🔍",
+    icon: <Search size={32} strokeWidth={1.5} />,
     duration: "Week 1-2",
     description:
       "Deep-dive into your current operations to uncover hidden inefficiencies and automation opportunities.",
@@ -58,7 +59,7 @@ const roadmap = [
   {
     phase: "02",
     title: "Architecture Design",
-    icon: "📐",
+    icon: <Compass size={32} strokeWidth={1.5} />,
     duration: "Week 2-3",
     description:
       "Blueprint your custom automation architecture with scalability and maintainability at its core.",
@@ -77,7 +78,7 @@ const roadmap = [
   {
     phase: "03",
     title: "Build & Integrate",
-    icon: "⚙️",
+    icon: <Settings size={32} strokeWidth={1.5} />,
     duration: "Week 3-6",
     description:
       "Deploy n8n workflows, AI agents, and custom integrations in iterative sprints with continuous validation.",
@@ -96,7 +97,7 @@ const roadmap = [
   {
     phase: "04",
     title: "Testing & Optimization",
-    icon: "🧪",
+    icon: <FlaskConical size={32} strokeWidth={1.5} />,
     duration: "Week 6-7",
     description:
       "Rigorous testing with real data scenarios. Fine-tune performance and eliminate edge cases.",
@@ -115,7 +116,7 @@ const roadmap = [
   {
     phase: "05",
     title: "Launch & Scale",
-    icon: "🚀",
+    icon: <Rocket size={32} strokeWidth={1.5} />,
     duration: "Week 8+",
     description:
       "Go live with confidence. Ongoing support, monitoring, and iterative improvements as you scale.",

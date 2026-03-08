@@ -9,50 +9,51 @@ import AnimatedSection, {
 } from "../../components/AnimatedSection";
 import AnimatedCounter from "../../components/AnimatedCounter";
 import styles from "../industry.module.css";
+import { MapPin, CircleDollarSign, BellRing } from "lucide-react";
 
 const painPoints = [
   {
-    title: "The Ghost Shift",
-    headline: "Paying for Empty Posts?",
+    title: "The Intake Black Hole",
+    headline: "01: The Intake Black Hole",
     description:
-      "Manual check-ins are easily forged. When a guard is late or absent, you're often the last to know—until the client complains. This erodes trust and contracts.",
+      "Potential clients don't wait. If your firm doesn't respond to an inquiry within minutes, they call the next lawyer on Google. Manual intake is slow and prone to human error.",
   },
   {
-    title: "Payroll Purgatory",
-    headline: "The Weekly Reconciliation Nightmare.",
+    title: "Document Review Fatigue",
+    headline: "02: Document Review Fatigue",
     description:
-      "Bridging the gap between scheduling software and payroll systems often means hours of manual data entry. One typo can lead to wage theft accusations or overpayment.",
+      "Your associates spend hundreds of hours scanning thousands of documents for specific clauses. This manual labor is expensive, slow, and limits your case capacity.",
   },
   {
-    title: "The Black Hole",
-    headline: "Critical Data Trapped in Paper.",
+    title: "Fragmented Case Data",
+    headline: "03: Fragmented Case Data",
     description:
-      "Handwritten incident reports are unsearchable and slow to action. You lack the data to prove value to your clients.",
+      "When communication lives in emails, notes live in notebooks, and deadlines live on a wall calendar, high-stakes details fall through the cracks, leading to compliance risks.",
   },
 ];
 
 const solutions = [
   {
-    title: "Geofenced Verification",
+    title: "AI-Powered 24/7 Intake",
     description:
-      "We integrate your scheduling tool with mobile GPS. If a guard isn't within the geofence at shift start, an automated n8n workflow triggers an SMS alert to the supervisor instantly.",
-    icon: "📍",
+      "We deploy AI Voice and Chat agents that qualify leads, check for conflicts of interest, and book consultations directly into your calendar—day or night.",
+    icon: <MapPin size={40} strokeWidth={1.5} />,
   },
   {
-    title: "Payroll Synchronization",
+    title: "Automated RAG Document Discovery",
     description:
-      "Seamlessly pipe verified hours from your time-tracking app directly to your payroll provider. No manual entry. No errors.",
-    icon: "💰",
+      "We build custom Retrieval-Augmented Generation (RAG) tools that allow you to \"chat\" with your case files. Find specific precedents or clauses across 10,000 pages in seconds.",
+    icon: <CircleDollarSign size={40} strokeWidth={1.5} />,
   },
   {
-    title: "Intelligent Incident Routing",
+    title: "Seamless CRM Synchronization",
     description:
-      "Digitize reports with AI processing. High-priority incidents trigger immediate Slack/SMS alerts to management; low-priority logs are archived automatically.",
-    icon: "🚨",
+      "Every lead and document is automatically routed to your CRM (Clio, MyCase, etc.) via custom API integrations, ensuring a single source of truth for every case.",
+    icon: <BellRing size={40} strokeWidth={1.5} />,
   },
 ];
 
-export default function SecurityOperationsPage() {
+export default function LegalPracticePage() {
   return (
     <>
       <Header />
@@ -60,14 +61,11 @@ export default function SecurityOperationsPage() {
       <main>
         {/* Hero Section */}
         <section className={styles.hero}>
-          {/* Background gradient for left side */}
-          {/* <div className={styles.heroBgLeft} /> */}
-
           {/* Right side masked image */}
           <div className={styles.heroImageMask}>
             <img
-              src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1472&auto=format&fit=crop"
-              alt="Global network visualization"
+              src="https://images.unsplash.com/photo-1589829085413-56de8ae18c73?q=80&w=1472&auto=format&fit=crop"
+              alt="Legal firm concept"
               className={styles.heroImage}
             />
             <div className={styles.heroImageOverlay} />
@@ -77,17 +75,26 @@ export default function SecurityOperationsPage() {
           <div className="container">
             <AnimatedSection className={styles.heroContent}>
               <h1 className={styles.heroTitle}>
-                Is Your Guard Force Growing Faster Than Your{" "}
-                <span className={styles.highlight}>Control?</span>
+                Legal Practice Automation & <span className={styles.highlight}>AI Intake</span>
               </h1>
               <p className={styles.heroSubtitle}>
-                Stop wrestling with manual rosters, missed check-ins, and
-                payroll disputes. SolvoLab builds the automated command center
-                your operations demand.
+                Struggling with manual billable hours and slow client intake? Automate your legal operations.
               </p>
               <Link href="/contact" className="btn btn--primary btn--lg">
-                Automate My Guard Force
+                Automate Your Practice
               </Link>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {/* Intro Section */}
+        <section className={`section ${styles.intro}`}>
+          <div className="container text-center">
+            <AnimatedSection>
+              <h2>Is Your Practice Buried Under Administrative Paperwork?</h2>
+              <p className={styles.sectionSubtitle}>
+                Stop losing billable hours to manual data entry, missed discovery deadlines, and unresponsiveness. SolvoLab builds the intelligent legal engine your firm needs to scale without the overhead.
+              </p>
             </AnimatedSection>
           </div>
         </section>
@@ -98,8 +105,7 @@ export default function SecurityOperationsPage() {
             <AnimatedSection className="text-center">
               <h2>The Operational Drain</h2>
               <p className={styles.sectionSubtitle}>
-                These silent profit killers are costing you contracts and peace
-                of mind.
+                These administrative bottlenecks are eroding your margins and delaying justice.
               </p>
             </AnimatedSection>
 
@@ -121,9 +127,9 @@ export default function SecurityOperationsPage() {
         <section className={`section section--lg ${styles.solutions}`}>
           <div className="container">
             <AnimatedSection className="text-center">
-              <h2>Your Autonomous Security Operations Center</h2>
+              <h2>Your Intelligent Legal Command Center</h2>
               <p className={styles.sectionSubtitle}>
-                Purpose-built automation for the security industry.
+                Custom AI and workflow automation built specifically for high-growth firms.
               </p>
             </AnimatedSection>
 
@@ -148,30 +154,28 @@ export default function SecurityOperationsPage() {
           <div className="container">
             <AnimatedSection className={styles.caseContent}>
               <div className={styles.caseLabel}>Case Study</div>
-              <h2 className={styles.caseTitle}>Recovering 20 Hours a Week</h2>
+              <h2 className={styles.caseTitle}>Recovering 20 Billable Hours a Week</h2>
               <p className={styles.caseDesc}>
-                How a mid-sized security agency used SolvoLab to automate shift
-                confirmations, reducing dispatcher workload by 40% and
-                eliminating payroll errors.
+                How a mid-sized law firm used SolvoLab to automate client intake, increasing conversions by 40% and reclaiming hundreds of unbillable administrative hours.
               </p>
               <div className={styles.caseMetrics}>
                 <div className={styles.metric}>
                   <span className={styles.metricValue}>
                     <AnimatedCounter value={0} />
                   </span>
-                  <span className={styles.metricLabel}>Payroll Errors</span>
+                  <span className={styles.metricLabel}>Missed Leads</span>
                 </div>
                 <div className={styles.metric}>
                   <span className={styles.metricValue}>
                     <AnimatedCounter value={100} suffix="%" />
                   </span>
-                  <span className={styles.metricLabel}>Shift Verification</span>
+                  <span className={styles.metricLabel}>CRM Integration</span>
                 </div>
                 <div className={styles.metric}>
                   <span className={styles.metricValue}>
                     <AnimatedCounter value={40} suffix="%" />
                   </span>
-                  <span className={styles.metricLabel}>Less Admin Time</span>
+                  <span className={styles.metricLabel}>More Conversions</span>
                 </div>
               </div>
             </AnimatedSection>
@@ -182,14 +186,13 @@ export default function SecurityOperationsPage() {
         <section className={styles.ctaSection}>
           <div className="container text-center">
             <AnimatedSection>
-              <h2 className={styles.ctaTitle}>Ready to Take Control?</h2>
+              <h2 className={styles.ctaTitle}>Ready to Scale Your Firm?</h2>
               <p className={styles.ctaSubtitle}>
-                Schedule a security operations audit and discover your
-                automation opportunities.
+                Schedule a legal practice automation audit and discover your true capacity.
               </p>
               <div className={styles.ctaButtons}>
                 <Link href="/contact" className="btn btn--primary--2 btn--lg">
-                  Schedule a Security Ops Audit
+                  Schedule a Legal Ops Audit
                 </Link>
                 <Link
                   href="/services/system-integration-api"

@@ -8,46 +8,53 @@ import AnimatedSection, {
   AnimatedItem,
 } from "../components/AnimatedSection";
 import styles from "./results.module.css";
+import { Building2, ShieldCheck, Database } from "lucide-react";
 
 const caseStudies = [
   {
-    id: "security",
-    industry: "Security Operations",
-    headline: "Recovering 20 Hours a Week",
+    id: "architech",
+    company: "ArchiTech Institute",
+    logo: <Building2 size={28} strokeWidth={1.5} />,
+    service: "CMS Integration & Lead Inbound",
+    headline: "Unifying Data & Accelerating Lead Capture",
     description:
-      "How a mid-sized security agency used SolvoLab to automate shift confirmations, reducing dispatcher workload by 40% and eliminating payroll errors.",
+      "How ArchiTech Institute eliminated manual data entry by seamlessly integrating their CMS, leading to faster response times and perfectly synced inbound leads.",
     metrics: [
-      { value: "0", label: "Payroll Errors" },
-      { value: "100%", label: "Shift Verification" },
-      { value: "40%", label: "Less Admin Time" },
+      { value: "100%", label: "Data Sync" },
+      { value: "+28%", label: "Lead Capture" },
+      { value: "15hrs", label: "Saved Weekly" },
     ],
-    link: "/industries/security-guard-operations",
+    link: "/services/system-integration-api",
   },
   {
-    id: "flooring",
-    industry: "Flooring & Tile Retail",
-    headline: "Zero Lost Samples",
+    id: "vigilant",
+    company: "Vigilant Security Services",
+    logo: <ShieldCheck size={28} strokeWidth={1.5} />,
+    service: "SEO/GEO Lead Inbound",
+    headline: "Dominating Local Search & Lead Generation",
     description:
-      "How a multi-location flooring retailer eliminated sample loss and increased close rates with automated tracking and visualization tools.",
+      "How Vigilant Security Services leveraged our AI-driven Generative Engine Optimization (GEO) to dominate local 'near me' searches and automate their inbound outreach.",
     metrics: [
-      { value: "$0", label: "Sample Loss" },
-      { value: "95%", label: "Return Rate" },
-      { value: "+22%", label: "Close Rate" },
+      { value: "3x", label: "Local Traffic" },
+      { value: "24/7", label: "Instant Response" },
+      { value: "+42%", label: "More Consults" },
     ],
-    link: "/industries/flooring-tile-retail",
+    link: "/industries/real-estate-lead-conversion",
   },
   {
-    id: "logistics",
-    industry: "Logistics & 3PL",
-    headline: "90% Faster Document Processing",
+    id: "cpshub",
+    company: "CPShub",
+    logo: <Database size={28} strokeWidth={1.5} />,
+    service: "AI-Driven Data Scrapers & Cleaners",
+    headline: "Flawless Data at Unprecedented Scale",
     description:
-      "How a regional 3PL automated Bill of Lading intake and eliminated manual data entry across their operations.",
+      "How CPShub automated their entire data pipeline with our custom AI scrapers and cleaners, ensuring real-time, error-free insights without human intervention.",
     metrics: [
-      { value: "90%", label: "Time Saved" },
-      { value: "99%", label: "Accuracy" },
-      { value: "3x", label: "More Capacity" },
+      { value: "99.9%", label: "Data Accuracy" },
+      { value: "Zero", label: "Manual Entry" },
+      { value: "Live", label: "Data Sync" },
     ],
-    link: "/industries/logistics-3pl-automation",
+    link: "/services/ai-agent-development",
   },
 ];
 
@@ -89,8 +96,16 @@ export default function ResultsPage() {
               {caseStudies.map((study) => (
                 <AnimatedItem key={study.id}>
                   <div className={`card ${styles.caseCard}`}>
+                    <div style={{ display: "flex", alignItems: "center", gap: "12px", marginBottom: "16px" }}>
+                      <div style={{ color: "var(--color-primary-600)", display: "flex" }}>
+                        {study.logo}
+                      </div>
+                      <h4 style={{ margin: 0, fontSize: "1.25rem", color: "var(--color-neutral-900)", fontWeight: "bold" }}>
+                        {study.company}
+                      </h4>
+                    </div>
                     <span className={styles.industryBadge}>
-                      {study.industry}
+                      {study.service}
                     </span>
                     <h3 className={styles.caseTitle}>{study.headline}</h3>
                     <p className={styles.caseDesc}>{study.description}</p>

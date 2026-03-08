@@ -4,14 +4,14 @@ import styles from "./Footer.module.css";
 const footerLinks = {
   solutions: [
     {
-      label: "Security Operations",
-      href: "/industries/security-guard-operations",
+      label: "Legal Practice Automation",
+      href: "/industries/legal-practice-automation",
     },
     {
-      label: "Flooring & Tile Retail",
-      href: "/industries/flooring-tile-retail",
+      label: "Real Estate Lead Conversion",
+      href: "/industries/real-estate-lead-conversion",
     },
-    { label: "Logistics & 3PL", href: "/industries/logistics-3pl-automation" },
+    { label: "Clinical Workflow AI", href: "/industries/clinical-workflow-ai" },
   ],
   platform: [
     { label: "n8n Automation", href: "/services/n8n-workflow-automation" },

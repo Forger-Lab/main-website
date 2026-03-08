@@ -129,7 +129,8 @@
 .industryCard {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  text-align: center;
   padding: var(--space-8);
   text-decoration: none;
   height: 100%;
@@ -476,7 +477,11 @@
 /* ===== CTA SECTION ===== */
 .ctaSection {
   padding: var(--space-20) 0;
-  background: linear-gradient(224.84deg, #2359d9 27.92%, #173987 76.39%);
+  background: linear-gradient(
+    224.84deg,
+    var(--color-primary-600) 27.92%,
+    var(--color-primary-800) 76.39%
+  );
 }
 
 .ctaTitle {

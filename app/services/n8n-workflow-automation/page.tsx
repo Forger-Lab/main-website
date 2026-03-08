@@ -46,25 +46,25 @@ const capabilities = [
 
 const useCases = [
   {
-    industry: "Security",
-    title: "Shift Verification Automation",
+    industry: "Legal",
+    title: "AI-Powered Intake Workflows",
     description:
-      "GPS check-in triggers workflow → validates against schedule → alerts supervisor if mismatch → logs to payroll.",
-    link: "/industries/security-guard-operations",
+      "Website form triggers AI agent → qualifies lead & checks conflicts → books calendar slot → alerts attorney.",
+    link: "/industries/legal-practice-automation",
   },
   {
-    industry: "Flooring",
-    title: "Sample Tracking Workflows",
+    industry: "Real Estate",
+    title: "Instant Lead Follow-ups",
     description:
-      "QR scan triggers check-out → starts 3-day timer → sends SMS reminder → escalates to manager if not returned.",
-    link: "/industries/flooring-tile-retail",
+      "Zillow lead hits inbox → triggers AI Voice Outreach → qualifies budget → schedules property tour automatically.",
+    link: "/industries/real-estate-lead-conversion",
   },
   {
-    industry: "Logistics",
-    title: "BoL Processing Pipelines",
+    industry: "Healthcare",
+    title: "Patient Engagement Automation",
     description:
-      "Document upload triggers AI extraction → validates against ERP → creates order → notifies carrier.",
-    link: "/industries/logistics-3pl-automation",
+      "Appointment approaches → automated SMS/Voice reminder sent → synced with EMR → no-shows eliminated.",
+    link: "/industries/clinical-workflow-ai",
   },
 ];
 
