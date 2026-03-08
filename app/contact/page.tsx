@@ -6,70 +6,37 @@ import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./contact.module.css";
 
-const industries = [
-  { value: "security", label: "Security Operations" },
-  { value: "flooring", label: "Flooring & Tile Retail" },
-  { value: "logistics", label: "Logistics & 3PL" },
-  { value: "other", label: "Other" },
-];
-
-const securityQuestions = [
-  { value: "under-50", label: "Less than 50" },
-  { value: "50-200", label: "50 - 200" },
-  { value: "200-plus", label: "200+" },
-];
-
-const retailQuestions = [
-  { value: "1", label: "1 location" },
-  { value: "2-5", label: "2 - 5 locations" },
-  { value: "5-plus", label: "5+ locations" },
-];
-
-const logisticsQuestions = [
-  { value: "under-100", label: "Less than 100" },
-  { value: "100-1000", label: "100 - 1,000" },
-  { value: "1000-plus", label: "1,000+" },
-];
-
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
-    industry: "",
-    qualifier: "",
     message: "",
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log("Form submitted:", formData);
-    alert("Thank you! We'll be in touch within 24 hours.");
-  };
+    setIsSubmitting(true);
+    setSubmitStatus("idle");
 
-  const getQualifierOptions = () => {
-    switch (formData.industry) {
-      case "security":
-        return {
-          label: "How many guards do you manage?",
-          options: securityQuestions,
-        };
-      case "flooring":
-        return {
-          label: "How many locations do you have?",
-          options: retailQuestions,
-        };
-      case "logistics":
-        return {
-          label: "Monthly shipment volume?",
-          options: logisticsQuestions,
-        };
-      default:
-        return null;
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+
+      if (!res.ok) throw new Error("Failed to send");
+
+      setSubmitStatus("success");
+      setFormData({ name: "", email: "", message: "" });
+    } catch {
+      setSubmitStatus("error");
+    } finally {
+      setIsSubmitting(false);
     }
   };
-
-  const qualifierConfig = getQualifierOptions();
 
   return (
     <>
@@ -132,68 +99,15 @@ export default function ContactPage() {
                   </div>
                 </div>
 
-                {/* Industry Select */}
-                <div className={styles.formGroup}>
-                  <label htmlFor="industry" className={styles.label}>
-                    Which industry best describes you?
-                  </label>
-                  <select
-                    id="industry"
-                    className={styles.select}
-                    value={formData.industry}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        industry: e.target.value,
-                        qualifier: "",
-                      })
-                    }
-                    required
-                  >
-                    <option value="">Select your industry</option>
-                    {industries.map((ind) => (
-                      <option key={ind.value} value={ind.value}>
-                        {ind.label}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-
-                {/* Dynamic Qualifier Question */}
-                {qualifierConfig && (
-                  <div className={styles.formGroup}>
-                    <label htmlFor="qualifier" className={styles.label}>
-                      {qualifierConfig.label}
-                    </label>
-                    <select
-                      id="qualifier"
-                      className={styles.select}
-                      value={formData.qualifier}
-                      onChange={(e) =>
-                        setFormData({ ...formData, qualifier: e.target.value })
-                      }
-                      required
-                    >
-                      <option value="">Select an option</option>
-                      {qualifierConfig.options.map((opt) => (
-                        <option key={opt.value} value={opt.value}>
-                          {opt.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                )}
-
-                {/* Message */}
                 <div className={styles.formGroup}>
                   <label htmlFor="message" className={styles.label}>
-                    Describe your biggest friction point right now.
+                    Message
                   </label>
                   <textarea
                     id="message"
                     className={styles.textarea}
-                    placeholder="Tell us about the manual processes or bottlenecks you're facing..."
-                    rows={4}
+                    placeholder="How can we help you?"
+                    rows={6}
                     value={formData.message}
                     onChange={(e) =>
                       setFormData({ ...formData, message: e.target.value })
@@ -203,9 +117,25 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit */}
-                <button type="submit" className="btn btn--primary btn--lg">
-                  Request My Audit
+                <button
+                  type="submit"
+                  className="btn btn--primary btn--lg"
+                  disabled={isSubmitting}
+                  style={{ opacity: isSubmitting ? 0.7 : 1 }}
+                >
+                  {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
+
+                {submitStatus === "success" && (
+                  <p style={{ color: "#22c55e", marginTop: "1rem", textAlign: "center", fontWeight: 500 }}>
+                    ✅ Message sent! Check your inbox for a confirmation email.
+                  </p>
+                )}
+                {submitStatus === "error" && (
+                  <p style={{ color: "#ef4444", marginTop: "1rem", textAlign: "center", fontWeight: 500 }}>
+                    Something went wrong. Please try again or reach out via WhatsApp.
+                  </p>
+                )}
               </form>
 
               {/* Alternative CTA */}
