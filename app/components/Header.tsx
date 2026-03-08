@@ -49,11 +49,11 @@ export default function Header() {
       {/* Utility Bar */}
       <div className={styles.utilityBar}>
         <div className={`container ${styles.utilityContent}`}>
-          <a href="mailto:support@solvolab.com" className={styles.utilityLink}>
+          <a href="mailto:saboor@solvolab.com" className={styles.utilityLink}>
             Support
           </a>
-          <a href="tel:+1234567890" className={styles.utilityLink}>
-            📞 (123) 456-7890
+          <a href="tel:+966532962900" className={styles.utilityLink}>
+            📞 (966) 532-962-900
           </a>
         </div>
       </div>
