@@ -122,10 +122,14 @@ export default function ContactPage() {
 
                 {/* Submit */}
                 <div style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "center" }}>
-                  <ReCAPTCHA
-                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
-                    onChange={(token: string | null) => setRecaptchaToken(token)}
-                  />
+                  {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
+                    <ReCAPTCHA
+                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
+                      onChange={(token: string | null) => setRecaptchaToken(token)}
+                    />
+                  ) : (
+                    <div style={{ color: "red", fontWeight: "bold" }}>Configuration Error: ReCAPTCHA Site Key is missing. Check environment variables.</div>
+                  )}
                 </div>
                 <button
                   type="submit"
