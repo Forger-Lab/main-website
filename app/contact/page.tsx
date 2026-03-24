@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import ReCAPTCHA from "react-google-recaptcha";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./contact.module.css";
@@ -12,11 +13,14 @@ export default function ContactPage() {
     email: "",
     message: "",
   });
+  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!recaptchaToken) return;
+
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -24,7 +28,7 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({ ...formData, recaptchaToken }),
       });
 
       if (!res.ok) throw new Error("Failed to send");
@@ -117,11 +121,20 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit */}
+                <div style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "center" }}>
+                  <ReCAPTCHA
+                    sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY || ""}
+                    onChange={(token: string | null) => setRecaptchaToken(token)}
+                  />
+                </div>
                 <button
                   type="submit"
                   className="btn btn--primary btn--lg"
-                  disabled={isSubmitting}
-                  style={{ opacity: isSubmitting ? 0.7 : 1 }}
+                  disabled={isSubmitting || !recaptchaToken}
+                  style={{ 
+                    opacity: isSubmitting || !recaptchaToken ? 0.7 : 1,
+                    cursor: isSubmitting || !recaptchaToken ? "not-allowed" : "pointer" 
+                  }}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}
                 </button>
@@ -139,14 +152,14 @@ export default function ContactPage() {
               </form>
 
               {/* Alternative CTA */}
-              <div className={styles.alternative}>
+              {/* <div className={styles.alternative}>
                 <p className={styles.altText}>
                   Not ready to talk? Download our free resource.
                 </p>
                 <Link href="#" className="btn btn--secondary">
                   Get the Self-Audit Checklist
                 </Link>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>

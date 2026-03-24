@@ -5,11 +5,25 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: Request) {
   try {
-    const { name, email, message } = await request.json();
+    const { name, email, message, recaptchaToken } = await request.json();
 
-    if (!name || !email || !message) {
+    if (!name || !email || !message || !recaptchaToken) {
       return NextResponse.json(
-        { error: "Name, email, and message are required." },
+        { error: "Name, email, message, and reCAPTCHA token are required." },
+        { status: 400 }
+      );
+    }
+
+    // Verify reCAPTCHA token
+    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
+
+    const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+    const recaptchaData = await recaptchaRes.json();
+
+    if (!recaptchaData.success) {
+      return NextResponse.json(
+        { error: "Failed reCAPTCHA verification." },
         { status: 400 }
       );
     }
