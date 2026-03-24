@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import ReCAPTCHA from "react-google-recaptcha";
+import Script from "next/script";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import styles from "./contact.module.css";
@@ -13,18 +13,34 @@ export default function ContactPage() {
     email: "",
     message: "",
   });
-  const [recaptchaToken, setRecaptchaToken] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!recaptchaToken) return;
 
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
     try {
+      let recaptchaToken = "";
+      
+      // Execute the invisible reCAPTCHA Enterprise challenge before submission
+      // @ts-expect-error grecaptcha is loaded externally
+      if (typeof window !== "undefined" && window.grecaptcha && window.grecaptcha.enterprise) {
+        // @ts-expect-error grecaptcha is loaded externally
+        await new Promise<void>((resolve) => window.grecaptcha.enterprise.ready(resolve));
+        // @ts-expect-error grecaptcha is loaded externally
+        recaptchaToken = await window.grecaptcha.enterprise.execute(
+          process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+          { action: 'CONTACT_SUBMIT' }
+        );
+      }
+
+      if (!recaptchaToken) {
+        throw new Error("Failed to load reCAPTCHA Enterprise challenge.");
+      }
+
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -35,7 +51,8 @@ export default function ContactPage() {
 
       setSubmitStatus("success");
       setFormData({ name: "", email: "", message: "" });
-    } catch {
+    } catch (err) {
+      console.error(err);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -44,6 +61,12 @@ export default function ContactPage() {
 
   return (
     <>
+      {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
+        <Script 
+          src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+          strategy="afterInteractive"
+        />
+      )}
       <Header />
 
       <main>
@@ -121,23 +144,13 @@ export default function ContactPage() {
                 </div>
 
                 {/* Submit */}
-                <div style={{ marginBottom: "1.5rem", display: "flex", justifyContent: "center" }}>
-                  {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY ? (
-                    <ReCAPTCHA
-                      sitekey={process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}
-                      onChange={(token: string | null) => setRecaptchaToken(token)}
-                    />
-                  ) : (
-                    <div style={{ color: "red", fontWeight: "bold" }}>Configuration Error: ReCAPTCHA Site Key is missing. Check environment variables.</div>
-                  )}
-                </div>
                 <button
                   type="submit"
                   className="btn btn--primary btn--lg"
-                  disabled={isSubmitting || !recaptchaToken}
+                  disabled={isSubmitting}
                   style={{ 
-                    opacity: isSubmitting || !recaptchaToken ? 0.7 : 1,
-                    cursor: isSubmitting || !recaptchaToken ? "not-allowed" : "pointer" 
+                    opacity: isSubmitting ? 0.7 : 1,
+                    cursor: isSubmitting ? "not-allowed" : "pointer" 
                   }}
                 >
                   {isSubmitting ? "Sending..." : "Send Message"}

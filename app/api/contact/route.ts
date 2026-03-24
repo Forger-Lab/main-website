@@ -14,16 +14,41 @@ export async function POST(request: Request) {
       );
     }
 
-    // Verify reCAPTCHA token
-    const recaptchaSecretKey = process.env.RECAPTCHA_SECRET_KEY;
-    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${recaptchaSecretKey}&response=${recaptchaToken}`;
+    // Verify reCAPTCHA Enterprise token (Requires Google Cloud API Key)
+    // To generate the API Key, go to Google Cloud Platform -> APIs & Services -> Credentials -> Create API Key.
+    const apiKey = process.env.GCP_API_KEY || process.env.RECAPTCHA_SECRET_KEY; // The API Key (Starts with AIza...)
+    const projectId = process.env.GCP_PROJECT_ID || "cs-poc-5g1m4mkqvtquseo0zgmtytj"; // Using the Project ID you provided
+    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+    
+    const verifyUrl = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
 
-    const recaptchaRes = await fetch(verifyUrl, { method: "POST" });
+    const assessmentRequest = {
+      event: {
+        token: recaptchaToken,
+        expectedAction: "CONTACT_SUBMIT",
+        siteKey: siteKey,
+      }
+    };
+
+    const recaptchaRes = await fetch(verifyUrl, { 
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(assessmentRequest)
+    });
     const recaptchaData = await recaptchaRes.json();
+    console.log("Enterprise Assessment result: ", JSON.stringify(recaptchaData, null, 2));
 
-    if (!recaptchaData.success) {
+    if (!recaptchaData.tokenProperties?.valid) {
       return NextResponse.json(
-        { error: "Failed reCAPTCHA verification." },
+        { error: `Enterprise Validation failed: ${recaptchaData.tokenProperties?.invalidReason || 'Unknown error'}` },
+        { status: 400 }
+      );
+    }
+
+    // Optional: block low-risk scores. Scale is 0.0 (likely bot) to 1.0 (likely valid)
+    if (recaptchaData.riskAnalysis && recaptchaData.riskAnalysis.score < 0.5) {
+      return NextResponse.json(
+        { error: "Submission rejected by spam detection filter." },
         { status: 400 }
       );
     }
