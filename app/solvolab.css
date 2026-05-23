@@ -69,8 +69,8 @@
   100% { transform: scale(1.4); opacity: 0; }
 }
 @keyframes sl-wave {
-  0%, 100% { height: 20%; }
-  50% { height: 90%; }
+  0%, 100% { transform: scaleY(0.2); }
+  50% { transform: scaleY(0.9); }
 }
 @keyframes sl-logo-scroll {
   from { transform: translateX(0); }
@@ -495,10 +495,12 @@
 }
 .solvo-root .wave .bar {
   flex: 1;
+  height: 100%;
   background: var(--grad);
   border-radius: 2px;
+  transform-origin: center;
+  transform: scaleY(0.2);
   animation: sl-wave 1.2s ease-in-out infinite;
-  min-height: 3px;
 }
 .solvo-root .transcript {
   font-family: var(--mono);

@@ -626,7 +626,10 @@ function HowItWorks() {
   const [active, setActive] = useState(0);
 
   useEffect(() => {
-    function onScroll() {
+    let ticking = false;
+    let last = -1;
+    function compute() {
+      ticking = false;
       const el = sectionRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
@@ -635,9 +638,18 @@ function HowItWorks() {
       const scrolled = -rect.top;
       const p = Math.max(0, Math.min(0.9999, scrolled / totalScroll));
       const idx = Math.floor(p * steps.length);
-      setActive(idx);
+      if (idx !== last) {
+        last = idx;
+        setActive(idx);
+      }
     }
-    onScroll();
+    function onScroll() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(compute);
+      }
+    }
+    compute();
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onScroll);
     return () => {
