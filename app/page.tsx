@@ -228,7 +228,10 @@ function ChatCard({ className = "" }: { className?: string }) {
     { from: "bot", text: "✅ Booked. Synced to your calendar + HubSpot. Mike will text you 1 hr before." },
   ];
 
-  const [shown, setShown] = useState<ChatStep[]>([]);
+  // Seed with the full conversation so the largest bubble is in the SSR/first paint (good LCP),
+  // then the effect holds it briefly before starting the looping animation.
+  const seeded = script.filter((s) => !s.typing);
+  const [shown, setShown] = useState<ChatStep[]>(seeded);
   const [typing, setTyping] = useState(false);
 
   useEffect(() => {
@@ -236,6 +239,8 @@ function ChatCard({ className = "" }: { className?: string }) {
     const timeouts: ReturnType<typeof setTimeout>[] = [];
     const wait = (ms: number) => new Promise<void>((r) => timeouts.push(setTimeout(r, ms)));
     async function run() {
+      // Keep the seeded conversation visible first so it counts toward LCP, no empty flash.
+      await wait(4000);
       while (!cancelled) {
         setShown([]);
         setTyping(false);

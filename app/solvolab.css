@@ -1,5 +1,5 @@
 /* ========== SolvoLab landing — scoped under .solvo-root ========== */
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap");
+/* Fonts are loaded via next/font in app/layout.tsx (no render-blocking @import). */
 
 :root {
   --sl-bg: #f3f6fc;
@@ -35,9 +35,9 @@
   --shadow-card: 0 1px 0 rgba(10, 22, 50, 0.04), 0 10px 30px -12px rgba(15, 37, 87, 0.18);
   --shadow-glow: 0 30px 80px -20px rgba(15, 37, 87, 0.35), 0 10px 30px -10px rgba(224, 22, 107, 0.22);
 
-  --display: "Space Grotesk", ui-sans-serif, sans-serif;
-  --body: "Manrope", ui-sans-serif, sans-serif;
-  --mono: "JetBrains Mono", ui-monospace, monospace;
+  --display: var(--font-display), "Space Grotesk", ui-sans-serif, sans-serif;
+  --body: var(--font-body), "Manrope", ui-sans-serif, sans-serif;
+  --mono: var(--font-mono), "JetBrains Mono", ui-monospace, monospace;
 }
 
 /* streak travels exactly once around the perimeter, then rests */
