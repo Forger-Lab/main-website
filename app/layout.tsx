@@ -32,7 +32,7 @@ const jetbrainsMono = JetBrains_Mono({
 export const metadata: Metadata = {
   title: "SolvoLab | AI Automation Agency",
   description:
-    "Transform manual bottlenecks into automated growth engines. Specialized AI & Automation architecture for Security, Retail, and Logistics.",
+    "AI voice agents, web chat, and CRM automation for home services, dental, real estate, auto, and professional services SMBs. Live in 3 weeks. No new headcount.",
 };
 
 export default function RootLayout({

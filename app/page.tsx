@@ -1,6 +1,10 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
+import { Hammer, Stethoscope, Home as HomeIcon, Car, Briefcase, Phone, MessageSquare, Send, Workflow } from "lucide-react";
+import RoiCalculator from "@/components/RoiCalculator";
+import IndustryCard from "@/components/IndustryCard";
+import ServiceCard from "@/components/ServiceCard";
 import "./solvolab.css";
 
 /* ---------- Inline icons (stroke-based) ---------- */
@@ -199,6 +203,7 @@ function Nav() {
           <span>SolvoLab</span>
         </a>
         <div className="nav-links">
+          <a className="nav-link" href="#industries">Industries</a>
           <a className="nav-link" href="#services">Services</a>
           <a className="nav-link" href="#how">How it works</a>
           <a className="nav-link" href="#roi">ROI</a>
@@ -314,8 +319,8 @@ function VoiceCard({ className = "" }: { className?: string }) {
         ))}
       </div>
       <div className="transcript">
-        <div><span className="role">caller →</span> &ldquo;...we need quotes by Friday for the new clinic.&rdquo;</div>
-        <div style={{ marginTop: 4 }}><span className="role">solvo →</span> &ldquo;Booking your free site walk-through for Thursday 10am.&rdquo;</div>
+        <div><span className="role">caller →</span> &ldquo;...need to reschedule my cleaning and ask about Invisalign pricing.&rdquo;</div>
+        <div style={{ marginTop: 4 }}><span className="role">solvo →</span> &ldquo;Rescheduling you to Thursday 3pm. Sending the Invisalign consult link by text — Dr. Patel can see you next week.&rdquo;</div>
       </div>
     </div>
   );
@@ -324,16 +329,16 @@ function VoiceCard({ className = "" }: { className?: string }) {
 /* ---------- Sequence card ---------- */
 function SequenceCard({ className = "" }: { className?: string }) {
   const steps = [
-    { ic: <I.Mail />, label: "Intro email · personalized w/ site scrape", time: "+0m", done: true },
-    { ic: <I.Bot />, label: "SMS follow-up if no open in 2h", time: "+2h", done: true },
-    { ic: <I.Mic />, label: "AI voice callback · qualification script", time: "+1d", done: true },
-    { ic: <I.Calendar />, label: "Meeting booked → synced to HubSpot", time: "+1d 14m", done: false },
+    { ic: <I.Mail />, label: "Estimate request · captured from web form", time: "+0m", done: true },
+    { ic: <I.Bot />, label: "SMS follow-up if no reply in 2h", time: "+2h", done: true },
+    { ic: <I.Mic />, label: "AI voice callback · qualifies the repair", time: "+1d", done: true },
+    { ic: <I.Calendar />, label: "Drop-off booked → synced to CRM", time: "+1d 14m", done: false },
   ];
 
   return (
     <div className={`card seq ${className}`}>
       <div className="seq-head">
-        <div className="title">Sequence · Acme Plumbing</div>
+        <div className="title">Sequence · Westside Auto Body</div>
         <div className="tag">running</div>
       </div>
       {steps.map((s, i) => (
@@ -358,20 +363,20 @@ function Hero() {
         <div className="hero-grid">
         <div ref={textRef} className={`reveal ${textIn ? "in" : ""}`}>
           <h1 className="h1">
-            <span className="grad">AI agents</span> that close your inbound,<br />
-            so your team doesn&apos;t have to.
+            Your phone rings at 11pm.<br />
+            Now it <span className="grad">actually gets answered.</span>
           </h1>
 
-          <p className="lede" style={{ width: "550px", maxWidth: "100%" }}>
-            SolvoLab builds AI-native lead operations for small businesses — voice agents, chat,
-            outbound sequences, and CRM automations that qualify, follow up, and book meetings
-            <em> 24/7</em>, without growing headcount.
+          <p className="lede" style={{ width: "600px", maxWidth: "100%" }}>
+            SolvoLab builds AI voice agents, web chat, and CRM automation for the businesses where
+            the <em>first response wins the job</em> — home services, dental &amp; medical, real estate,
+            auto, and professional services. Live in 3 weeks. No new headcount.
           </p>
 
           <div className="hero-actions">
             <CtaButton label="Book a strategy call" />
-            <a className="btn btn-ghost" href="#services">
-              See our services
+            <a className="btn btn-ghost" href="#industries">
+              See who we build for
             </a>
           </div>
         </div>
@@ -477,93 +482,188 @@ function Integrations() {
   );
 }
 
-/* ---------- Services with stage tabs ---------- */
+/* ---------- Industries we build for ---------- */
+const industries = [
+  {
+    icon: Hammer,
+    name: "Home Services",
+    pain: "Storm hits, phone rings off the hook, and you're already on a ladder.",
+    useCases: [
+      "Voice agent that qualifies storm/repair/replacement and books the inspection",
+      "SMS follow-up for quote requests that didn't close on the first call",
+      "Job-status updates that stop “what's the ETA?” calls before they happen",
+    ],
+    subVerticals: "Roofing · HVAC · Plumbing · Electrical · Restoration · Pest Control",
+  },
+  {
+    icon: Stethoscope,
+    name: "Dental & Medical",
+    pain: "Front desk is with a patient. The new lead just called your competitor.",
+    useCases: [
+      "Voice agent for new-patient intake, insurance check, and booking",
+      "Recall + reactivation sequences for patients who haven't been back in 12+ months",
+      "No-show recovery flows that auto-rebook canceled slots",
+    ],
+    subVerticals: "Dental · Dermatology · Med-spas · Physical Therapy · Veterinary · Chiropractic",
+  },
+  {
+    icon: HomeIcon,
+    name: "Real Estate & Property Management",
+    pain: "The first agent to reply wins the lead. You were at a showing.",
+    useCases: [
+      "Web chat that qualifies buyer/renter intent and books the showing",
+      "5-minute inbound voice response for portal leads (Zillow, Realtor, Apartments.com)",
+      "Tenant maintenance intake that triages and dispatches without a call",
+    ],
+    subVerticals: "Brokerages · Solo Agents · Property Managers · STR Operators",
+  },
+  {
+    icon: Car,
+    name: "Auto Services",
+    pain: "Service writer is under a hood. The estimate call goes to voicemail.",
+    useCases: [
+      "Voice agent for year/make/model qualification and drop-off booking",
+      "Quote-request chat that captures VIN, photos, and insurance details",
+      "Reminder flows for inspections, oil changes, and tire rotations",
+    ],
+    subVerticals: "Body Shops · Independent Dealers · Detailing · Mobile Mechanics · Tire Shops",
+  },
+  {
+    icon: Briefcase,
+    name: "Professional Services",
+    pain: "The case worth $40K calls at 9pm. Your office is closed.",
+    useCases: [
+      "24/7 voice intake that qualifies and books the consult",
+      "Conflict-check + intake form collection before the first human conversation",
+      "Follow-up sequences for warm leads that didn't sign on call #1",
+    ],
+    subVerticals: "PI Law · Immigration · Family Law · Accounting · Insurance · Financial Advisory",
+  },
+];
+
+function Industries() {
+  const grid = useRevealGrid("industries-grid");
+  return (
+    <section id="industries">
+      <div className="container">
+        <Reveal className="section-head">
+          <div>
+            <div className="section-eyebrow"><span className="num">02</span>Industries</div>
+            <h2 className="h2">Built for the businesses where one missed call is a lost customer.</h2>
+          </div>
+          <p className="section-sub">
+            Five industries, one pattern: high-intent inbound, expensive lead time, and a team
+            that&apos;s already busy doing the actual work. Here&apos;s how SolvoLab shows up for each.
+          </p>
+        </Reveal>
+
+        <div ref={grid.ref} className={grid.className}>
+          {industries.map((ind) => (
+            <IndustryCard
+              key={ind.name}
+              icon={ind.icon}
+              name={ind.name}
+              pain={ind.pain}
+              useCases={ind.useCases}
+              subVerticals={ind.subVerticals}
+            />
+          ))}
+        </div>
+
+        <p className="industries-foot">
+          Don&apos;t see your industry? If your business runs on inbound calls and high-ticket service,
+          we probably fit. <a href="#cta">Book a 30-min audit →</a>
+        </p>
+      </div>
+    </section>
+  );
+}
+
+/* ---------- What we actually build ---------- */
+const buildServices = [
+  {
+    icon: Phone,
+    name: "AI Voice Agent",
+    tagline: "A 24/7 phone agent that picks up, qualifies, and books — in your brand voice.",
+    included: [
+      "Custom voice + persona trained on your offer, pricing, and objections",
+      "Live calendar booking, CRM logging, and call transcripts",
+      "Spam filtering and human handoff when it matters",
+      "Bilingual support (English + Spanish standard; others on request)",
+    ],
+    pairedWith: "Web Chat, CRM Automation",
+  },
+  {
+    icon: MessageSquare,
+    name: "Web Chat Agent",
+    tagline: "A chat agent on your site that qualifies leads in 60 seconds and books the meeting.",
+    included: [
+      "Trained on your site, services, FAQs, and pricing logic",
+      "Instant booking and quote requests routed to the right person",
+      "SMS + email follow-up if the visitor bounces mid-conversation",
+      "Conversation analytics so you see exactly what people ask",
+    ],
+    pairedWith: "Voice Agent, Outbound Sequences",
+  },
+  {
+    icon: Send,
+    name: "Outbound & Follow-up Sequences",
+    tagline: "Email, SMS, and AI voice callbacks that work old leads and new inbound that didn't close.",
+    included: [
+      "Personalized intro emails using public data on the prospect",
+      "SMS follow-ups timed to actual engagement, not arbitrary delays",
+      "AI voice callbacks for warm leads that ghost after the first reply",
+      "Auto-stop when a meeting is booked or the lead replies",
+    ],
+    pairedWith: "CRM Automation, Voice Agent",
+  },
+  {
+    icon: Workflow,
+    name: "CRM & Workflow Automation",
+    tagline: "The plumbing behind everything — so leads, jobs, and follow-ups don't fall through the cracks.",
+    included: [
+      "Native sync with HubSpot, Salesforce, Pipedrive, Zoho, or Monday",
+      "Auto lead-scoring, round-robin routing, and ownership rules",
+      "Internal alerts in Slack or SMS when a high-value lead lands",
+      "Reporting dashboards built around your real KPIs, not vanity metrics",
+    ],
+    pairedWith: "Every other service — this is the spine.",
+  },
+];
+
 function Services() {
-  const [tab, setTab] = useState<"smb" | "growth">("smb");
-
-  const smbServices = [
-    { img: "/cards/website.svg", title: "Website development", subtitle: "A website that turns visitors into leads", desc: "Your shop window online — fast, polished, and built to convert the traffic Google sends you. AI chat picks up every inquiry from day one.", chips: ["Modern site", "Mobile-first", "Built-in AI chat"] },
-    { img: "/cards/seo.svg", imgPosition: "center 25%", title: "SEO + AEO", subtitle: "Get found on Google & AI search", desc: "Show up when customers look for what you do — on Google, and when they ask ChatGPT, Perplexity, or Claude for a recommendation.", chips: ["Local SEO", "AI search (AEO)", "Google Business"] },
-    { img: "/cards/ai-reception.svg", title: "AI receptionist", subtitle: "Always-on response across every channel", desc: "Every call, chat, and form gets answered in seconds — even at 9pm, even while you're on a job. Your business stops missing leads.", chips: ["Voice", "Web chat", "SMS"] },
-  ];
-
-  const growthServices = [
-    { img: "/cards/ai-reception.svg", title: "Chat AI Receptionist", subtitle: "Instant AI response, 24/7", desc: "An AI agent on your site, WhatsApp, and ads that greets every visitor in seconds, answers their questions, and books the ones worth meeting.", chips: ["Website", "WhatsApp", "Ads"] },
-    { img: "/cards/voice-ai.png", title: "Voice AI Receptionist", subtitle: "Instant voice AI callback", desc: "Lead fills a form or misses your line? An AI voice agent calls them back in under a minute, qualifies, and puts them on your calendar.", chips: ["Inbound", "Callback", "Multilingual"] },
-    { img: "/cards/sequence.png", title: "AI Powered Sequences", subtitle: "Follow-up that doesn't quit", desc: "Email, SMS, and voice cadences that nudge leads with the right message at the right time — and back off the moment they reply.", chips: ["Email", "SMS", "Smart cadence"] },
-    { img: "/cards/crm.png", title: "CRM integrations", subtitle: "Wired into the tools you already use", desc: "Every conversation, qualified lead, and booked meeting flows into HubSpot, GoHighLevel, or Salesforce. No copy-paste, no lost leads.", chips: ["HubSpot", "GHL", "Salesforce"] },
-    { img: "/cards/workflow-automation.png", title: "Internal ops automation", subtitle: "Automate the busywork behind the scenes", desc: "Invoices, onboarding, scheduling, weekly reports — the manual tasks your team hates, handled by AI workflows that just run.", chips: ["Workflows", "Reports", "Custom"] },
-    { img: "/cards/lead-funnel.png", title: "Lead-ops optimization", subtitle: "Fix the leaks in your funnel", desc: "We audit every step from ad click to closed deal, find where leads slip through, and tune the routing so every one gets touched in seconds.", chips: ["Audit", "Routing", "Speed-to-lead"] },
-  ];
-
-  const list = tab === "smb" ? smbServices : growthServices;
-  const [secRef, secIn] = useReveal<HTMLDivElement>(0.1);
-
+  const grid = useRevealGrid("build-grid");
   return (
     <section id="services">
       <div className="container">
         <Reveal className="section-head">
           <div>
-            <div className="section-eyebrow"><span className="num">02</span>Services</div>
-            <h2 className="h2">We meet your business where it is.</h2>
+            <div className="section-eyebrow"><span className="num">03</span>Services</div>
+            <h2 className="h2">Four things we build. They work alone. They work better together.</h2>
           </div>
           <p className="section-sub">
-            Two journeys, one AI stack. Whether you have a great service no one can find yet,
-            or an inbox of leads your team can&apos;t keep up with — we work the side that&apos;s holding
-            your business back.
+            Most clients start with one and add the others as they see what&apos;s possible. Each is a
+            real, productized build — not a vague &ldquo;we&apos;ll figure it out.&rdquo;
           </p>
         </Reveal>
 
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          <div className="tabs" role="tablist">
-            <button className={`tab ${tab === "smb" ? "active" : ""}`} onClick={() => setTab("smb")}>
-              Stage 1 — Get found, get leads
-            </button>
-            <button className={`tab ${tab === "growth" ? "active" : ""}`} onClick={() => setTab("growth")}>
-              Stage 2 — Manage &amp; convert inbound
-            </button>
-          </div>
-        </div>
-
-        <div className="stage-frame">
-          {tab === "smb" ? (
-            <p>
-              <strong>For you if:</strong> you run a solid business, but your online channel
-              isn&apos;t pulling its weight — no site at all, or one that&apos;s been live for years and
-              still isn&apos;t bringing in leads. We build (or rebuild) your digital storefront,
-              get you found, and turn that quiet phone into a pipeline worth managing.
-            </p>
-          ) : (
-            <p>
-              <strong>For you if:</strong> leads come in faster than your team can chase them.
-              Half go cold before someone replies. We deploy AI agents that capture every
-              inbound in &lt; 60 seconds, qualify in plain language, and drop the right ones
-              into your reps&apos; calendars — without growing headcount.
-            </p>
-          )}
-        </div>
-
-        <div ref={secRef} className="services-grid" key={tab}>
-          {secIn && list.map((s) => (
-            <div className={`card service${"img" in s ? " service--featured" : ""}`} key={s.title}>
-              {"img" in s ? (
-                <div className="service-img-wrap">
-                  <img src={s.img as string} alt={s.title} className="service-img" style={"imgPosition" in s ? { objectPosition: s.imgPosition as string } : undefined} />
-                </div>
-              ) : (
-                <div className="ic-wrap">{(s as {ic: React.ReactNode}).ic}</div>
-              )}
-              <div className="service-titles">
-                <h3>{s.title}</h3>
-                <div className="service-sub">{s.subtitle}</div>
-              </div>
-              <p>{s.desc}</p>
-              <div className="meta">
-                {s.chips.map((c) => <span className="chip" key={c}>{c}</span>)}
-              </div>
-            </div>
+        <div ref={grid.ref} className={grid.className}>
+          {buildServices.map((s) => (
+            <ServiceCard
+              key={s.name}
+              icon={s.icon}
+              name={s.name}
+              tagline={s.tagline}
+              included={s.included}
+              pairedWith={s.pairedWith}
+            />
           ))}
         </div>
+
+        <p className="industries-foot">
+          Not sure which to start with? On the audit call we&apos;ll tell you the one that pays for
+          itself fastest given your current setup.
+        </p>
       </div>
     </section>
   );
@@ -577,7 +677,7 @@ function HowItWorks() {
       duration: "Days 1–3", durationLabel: "Week 1",
       activities: [
         "60-min discovery + stakeholder interviews",
-        "Inventory every inbound channel — site, ads, social, referrals",
+        "Mystery-shop your own business — we call, chat, and submit forms to find where leads die.",
         "Speed-to-lead benchmark with mystery-shop tests",
         "Leak-point analysis: where leads go cold",
         "CRM hygiene + routing review",
@@ -665,11 +765,11 @@ function HowItWorks() {
         <div className="how-inner container">
           <div className="how-head">
             <div className="section-eyebrow" style={{ justifyContent: "center" }}>
-              <span className="num">03</span>How it works
+              <span className="num">04</span>How it works
             </div>
             <h2 className="h2">Live in three weeks. Tuned forever.</h2>
             <p className="section-sub" style={{ textAlign: "center", margin: "12px auto 0" }}>
-              No 6-month rollouts. We move fast because SMBs need results this quarter, not next year.
+              No 6-month rollouts. Three weeks from signed contract to your first AI-booked appointment.
             </p>
           </div>
 
@@ -720,93 +820,7 @@ function HowItWorks() {
   );
 }
 
-/* ---------- ROI calculator ---------- */
-function ROI() {
-  const [leads, setLeads] = useState(300);
-  const [aov, setAov] = useState(2400);
-  const [closeRate, setCloseRate] = useState(12);
-  const [sdrCost, setSdrCost] = useState(4800);
-
-  const baseTouched = Math.round(leads * 0.28);
-  const solvoTouched = Math.round(leads * 0.96);
-  const baseDeals = Math.round(baseTouched * (closeRate / 100));
-  const solvoDeals = Math.round(solvoTouched * ((closeRate * 1.4) / 100));
-  const extraRevenue = (solvoDeals - baseDeals) * aov;
-  const extraMeetings = solvoTouched - baseTouched;
-  const monthlySavings = sdrCost;
-
-  const fmt = (n: number) => n.toLocaleString("en-US", { maximumFractionDigits: 0 });
-  const money = (n: number) => "$" + fmt(n);
-
-  const grid = useRevealGrid("roi-wrap");
-
-  return (
-    <section id="roi">
-      <div className="container">
-        <Reveal className="section-head">
-          <div>
-            <div className="section-eyebrow"><span className="num">04</span>The math</div>
-            <h2 className="h2">What it&apos;s worth to never miss a lead again.</h2>
-          </div>
-          <p className="section-sub">
-            Drag the sliders. Rough numbers, but the gap is real — most SMBs only touch ~28% of
-            inbound leads within an hour.
-          </p>
-        </Reveal>
-
-        <div ref={grid.ref} className={grid.className}>
-          <div className="card roi-card">
-            <div className="slider-row">
-              <div className="label"><span>Inbound leads / month</span><span className="val">{fmt(leads)}</span></div>
-              <input type="range" min="50" max="2000" step="10" value={leads} onChange={(e) => setLeads(+e.target.value)} />
-            </div>
-            <div className="slider-row">
-              <div className="label"><span>Average order value</span><span className="val">{money(aov)}</span></div>
-              <input type="range" min="200" max="20000" step="100" value={aov} onChange={(e) => setAov(+e.target.value)} />
-            </div>
-            <div className="slider-row">
-              <div className="label"><span>Current close rate on touched leads</span><span className="val">{closeRate}%</span></div>
-              <input type="range" min="3" max="40" step="1" value={closeRate} onChange={(e) => setCloseRate(+e.target.value)} />
-            </div>
-            <div className="slider-row">
-              <div className="label"><span>Cost of one SDR / receptionist</span><span className="val">{money(sdrCost)}/mo</span></div>
-              <input type="range" min="2000" max="12000" step="100" value={sdrCost} onChange={(e) => setSdrCost(+e.target.value)} />
-            </div>
-
-            <div style={{ marginTop: 28, paddingTop: 24, borderTop: "1px solid var(--border)", display: "flex", gap: 24, flexWrap: "wrap", fontFamily: "var(--mono)", fontSize: 11, color: "var(--text-mute)", letterSpacing: "0.06em" }}>
-              <div>BASELINE TOUCH RATE · 28%</div>
-              <div>SOLVO TOUCH RATE · 96%</div>
-            </div>
-          </div>
-
-          <div className="roi-result">
-            <div className="roi-big">{money(extraRevenue)}</div>
-            <div className="roi-label">Extra revenue per month, recovered</div>
-
-            <div className="roi-breakdown">
-              <div className="item">
-                <div className="n">+{fmt(extraMeetings)}</div>
-                <div className="l">Leads touched in &lt; 60s</div>
-              </div>
-              <div className="item">
-                <div className="n">+{fmt(solvoDeals - baseDeals)}</div>
-                <div className="l">Net new deals closed</div>
-              </div>
-              <div className="item">
-                <div className="n">{money(monthlySavings)}</div>
-                <div className="l">Headcount saved / month</div>
-              </div>
-              <div className="item">
-                <div className="n">{Math.round(extraRevenue / Math.max(sdrCost, 1))}×</div>
-                <div className="l">Return vs. one SDR</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-}
+/* ---------- ROI calculator lives in components/RoiCalculator.tsx ---------- */
 
 /* ---------- Clients ---------- */
 const clients = [
@@ -824,11 +838,11 @@ function Clients() {
         <Reveal className="section-head">
           <div>
             <div className="section-eyebrow"><span className="num">06</span>Clients</div>
-            <h2 className="h2">Trusted by teams that move fast.</h2>
+            <h2 className="h2">Early teams who bet on us.</h2>
           </div>
           <p className="section-sub">
-            From solo operators to regional service businesses — they all had the same problem:
-            too many leads, not enough hours. We fixed that.
+            We&apos;re a new agency with a strong opinion about how SMBs should use AI. These teams
+            agreed and let us prove it. Want to be next?
           </p>
         </Reveal>
 
@@ -841,6 +855,10 @@ function Clients() {
               <span className="client-name">{c.name}</span>
             </div>
           ))}
+        </div>
+
+        <div className="launch-badge-wrap">
+          <span className="launch-badge">Become a launch partner — limited 2026 spots</span>
         </div>
       </div>
     </section>
@@ -882,13 +900,14 @@ function Proof() {
             <div className="desc">of manual reporting and tracking removed across the team every month.</div>
           </div>
         </div>
+
       </div>
     </section>
   );
 }
 
-/* ---------- Contact form (same fields + reCAPTCHA as /contact) ---------- */
-function ContactForm() {
+/* ---------- Final CTA + contact form (merged) ---------- */
+function CTA() {
   const SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -959,104 +978,75 @@ function ContactForm() {
   };
 
   return (
-    <section id="contact">
-      <div className="container">
-        <Reveal className="section-head">
-          <div>
-            <div className="section-eyebrow"><span className="num">08</span>Get in touch</div>
-            <h2 className="h2">Tell us where the bottleneck is.</h2>
-          </div>
-          <p className="section-sub">
-            Drop your details and a note about what&apos;s slowing your team down. We&apos;ll come back
-            with where AI &amp; automation would move the needle — usually within a day.
-          </p>
-        </Reveal>
-
-        <Reveal className="card contact-card">
-          <form onSubmit={handleSubmit} className="solvo-form">
-            <div className="form-row">
-              <div className="form-group">
-                <label htmlFor="sl-name" className="form-label">Full Name</label>
-                <input
-                  type="text"
-                  id="sl-name"
-                  className="form-input"
-                  placeholder="John Smith"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="sl-email" className="form-label">Business Email</label>
-                <input
-                  type="email"
-                  id="sl-email"
-                  className="form-input"
-                  placeholder="john@company.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  required
-                />
-              </div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="sl-message" className="form-label">Message</label>
-              <textarea
-                id="sl-message"
-                className="form-textarea"
-                placeholder="How can we help you?"
-                rows={6}
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                required
-              />
-            </div>
-
-            <div className="form-foot">
-              <button
-                type="submit"
-                className="btn btn-primary form-submit"
-                disabled={isSubmitting}
-                style={{ opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
-              >
-                {isSubmitting ? "Sending…" : <>Send message <I.Arrow /></>}
-              </button>
-
-              {submitStatus === "success" && (
-                <p className="form-status is-success">✅ Message sent! Check your inbox for a confirmation email.</p>
-              )}
-              {submitStatus === "error" && (
-                <p className="form-status is-error">{errorMsg}</p>
-              )}
-            </div>
-          </form>
-        </Reveal>
-      </div>
-    </section>
-  );
-}
-
-/* ---------- CTA ---------- */
-function CTA() {
-  return (
     <section id="cta">
       <div className="container">
         <div className="cta">
           <Reveal className="cta-inner">
             <div className="section-eyebrow" style={{ justifyContent: "center" }}><span className="num">→</span>Start here</div>
             <h2 className="h2" style={{ margin: "0 auto 20px", textAlign: "center", maxWidth: 720 }}>
-              Talk to an actual human about a fleet of AI agents.
+              Book a 30-minute audit. Leave with a list of leaks worth real money.
             </h2>
-            <p className="section-sub" style={{ margin: "0 auto 36px", textAlign: "center", maxWidth: 540 }}>
-              30-minute audit. We&apos;ll map your inbound funnel and tell you, on the call, exactly which
-              agents would move the needle — and which wouldn&apos;t.
-            </p>
-            <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
-              <a className="btn btn-primary" href="#">Book a free audit <I.Arrow /></a>
-              <a className="btn btn-ghost" href="#">saboor@solvolab.com</a>
-            </div>
+            <div style={{ marginBottom: 36 }} />
+
+            <form onSubmit={handleSubmit} className="solvo-form cta-form">
+              <div className="form-row">
+                <div className="form-group">
+                  <label htmlFor="sl-name" className="form-label">Full Name</label>
+                  <input
+                    type="text"
+                    id="sl-name"
+                    className="form-input"
+                    placeholder="John Smith"
+                    value={formData.name}
+                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="sl-email" className="form-label">Business Email</label>
+                  <input
+                    type="email"
+                    id="sl-email"
+                    className="form-input"
+                    placeholder="john@company.com"
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    required
+                  />
+                </div>
+              </div>
+
+              <div className="form-group">
+                <label htmlFor="sl-message" className="form-label">Which call do you keep missing?</label>
+                <textarea
+                  id="sl-message"
+                  className="form-textarea"
+                  placeholder="Tell us what's slowing your team down…"
+                  rows={5}
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  required
+                />
+              </div>
+
+              <div className="form-foot">
+                <button
+                  type="submit"
+                  className="btn btn-primary form-submit"
+                  disabled={isSubmitting}
+                  style={{ opacity: isSubmitting ? 0.7 : 1, cursor: isSubmitting ? "not-allowed" : "pointer" }}
+                >
+                  {isSubmitting ? "Sending…" : <>Book my 30-min audit <I.Arrow /></>}
+                </button>
+
+                {submitStatus === "success" && (
+                  <p className="form-status is-success">✅ Message sent! Check your inbox for a confirmation email.</p>
+                )}
+                {submitStatus === "error" && (
+                  <p className="form-status is-error">{errorMsg}</p>
+                )}
+              </div>
+            </form>
           </Reveal>
         </div>
       </div>
@@ -1103,7 +1093,7 @@ function SolvoFooter() {
         </div>
         <div className="foot-bottom">
           <div>© 2026 SolvoLab — built by AI, sold by humans.</div>
-          <div>solvolab.com · /privacy · /terms</div>
+          <div>solvolab.com · <a href="/privacy">/privacy</a> · /terms</div>
         </div>
       </div>
     </footer>
@@ -1122,12 +1112,12 @@ export default function Home() {
       <main>
         <Hero />
         <Integrations />
+        <Industries />
         <Services />
         <HowItWorks />
-        <ROI />
+        <RoiCalculator />
         <Clients />
         <Proof />
-        <ContactForm />
         <CTA />
       </main>
 
