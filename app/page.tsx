@@ -1085,8 +1085,10 @@ function SolvoFooter() {
           </div>
           <div className="foot-col">
             <h5>Contact</h5>
-            <a href="#">saboor@solvolab.com</a>
-            <a href="#">Book a call</a>
+            <a href="mailto:saboor@solvolab.com">saboor@solvolab.com</a>
+            <a href="tel:+13074434309">+1 307 443 4309</a>
+            <a href="tel:+966532962900">+966 53 296 2900</a>
+            <a href="#cta">Book a call</a>
             <a href="#">LinkedIn</a>
             <a href="#">X / Twitter</a>
           </div>
