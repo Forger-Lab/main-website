@@ -33,7 +33,7 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "SolvoLab | AI Automation Agency",
+  title: "SolvoLab | Never Miss A Lead",
   description:
     "AI voice agents, web chat, and CRM automation for home services, dental, real estate, auto, and professional services SMBs. Live in 3 weeks. No new headcount.",
 };
