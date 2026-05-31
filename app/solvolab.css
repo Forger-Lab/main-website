@@ -2151,3 +2151,133 @@
   transition: transform 240ms cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .solvo-root .nav-link:hover::after { transform: scaleX(1); }
+
+/* ============================================================
+   Responsive — phone / small-tablet adaptations.
+   Desktop layout above stays as-is.
+   ============================================================ */
+
+/* nav: right cluster contains links + CTA + burger; burger only on small */
+.solvo-root .nav-right { display: flex; align-items: center; gap: 6px; }
+.solvo-root .nav-burger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  margin-left: 4px;
+  border-radius: 10px;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--sl-text);
+  cursor: pointer;
+  transition: background 160ms ease, border-color 160ms ease;
+}
+.solvo-root .nav-burger:hover { background: rgba(15, 37, 87, 0.06); }
+.solvo-root .nav-burger:focus-visible { outline: 2px solid var(--magenta); outline-offset: 2px; }
+
+@media (max-width: 760px) {
+  .solvo-root .nav-inner { padding: 14px 18px; }
+  .solvo-root .nav-burger { display: inline-flex; }
+  /* hide the link strip by default; show as a drop-down panel when toggled */
+  .solvo-root .nav-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    padding: 12px 16px 16px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 2px;
+    background: rgba(243, 246, 252, 0.96);
+    backdrop-filter: blur(14px) saturate(160%);
+    -webkit-backdrop-filter: blur(14px) saturate(160%);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 16px 32px -16px rgba(15, 37, 87, 0.25);
+  }
+  .solvo-root .nav-links[data-open="true"] { display: flex; }
+  .solvo-root .nav-links .nav-link {
+    padding: 12px 14px;
+    font-size: 15px;
+    border-radius: 10px;
+  }
+  /* the underline-sweep underline doesn't fit a vertical menu */
+  .solvo-root .nav-links .nav-link::after { display: none; }
+}
+
+/* container + section padding tighten on small phones */
+@media (max-width: 640px) {
+  .solvo-root .container { padding: 0 18px; }
+  .solvo-root section { padding: 64px 0; }
+}
+
+/* hero: collapse the 3-card "stack" into a normal vertical list on small */
+@media (max-width: 760px) {
+  .solvo-root .hero { padding: 24px 0 48px; }
+  .solvo-root .hero-stage { min-height: auto; }
+  .solvo-root .glow-orb { display: none; }
+  .solvo-root .stack {
+    position: static;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .solvo-root .stack-card,
+  .solvo-root .stack-card.c1,
+  .solvo-root .stack-card.c2,
+  .solvo-root .stack-card.c3 {
+    position: static;
+    width: 100%;
+    top: auto;
+    left: auto;
+    right: auto;
+    transform: none !important;
+  }
+  /* prevent grid-children from forcing the grid wider than viewport */
+  .solvo-root .hero-grid > * { min-width: 0; }
+}
+
+/* hero typography ease on phones */
+@media (max-width: 640px) {
+  .solvo-root .h1 { line-height: 1.08; margin: 16px 0 18px; }
+  .solvo-root .lede { font-size: 17px; }
+}
+@media (max-width: 420px) {
+  .solvo-root .hero-actions { flex-direction: column; align-items: stretch; }
+  .solvo-root .hero-actions .btn,
+  .solvo-root .hero-actions .btn-cta-wrap { width: 100%; }
+  .solvo-root .hero-actions .btn-cta { width: 100%; justify-content: center; }
+}
+
+/* "How it works" — drop scroll-jack on small screens, render cards as a list */
+@media (max-width: 760px) {
+  .solvo-root .how-scroll { height: auto; padding: 64px 0; }
+  .solvo-root .how-sticky { position: static; height: auto; overflow: visible; display: block; }
+  .solvo-root .how-inner { height: auto; }
+  .solvo-root .how-head { position: static; top: auto; left: auto; right: auto; }
+  .solvo-root .how-body { position: static; transform: none; margin-top: 28px; max-width: 100%; }
+  .solvo-root .how-stage { perspective: none; min-height: 0; display: flex; flex-direction: column; gap: 14px; }
+  .solvo-root .how-card-big {
+    position: static !important;
+    inset: auto;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+    z-index: auto;
+    margin: 0;
+  }
+  .solvo-root .how-dots { display: none; }
+}
+
+/* CTA card padding scales down on phones */
+@media (max-width: 640px) {
+  .solvo-root .cta { padding: 48px 22px; border-radius: 20px; }
+  .solvo-root .cta-inner .h2 { font-size: clamp(28px, 7vw, 40px); }
+}
+
+/* ROI: allow the inline-select overlay text to wrap on very small phones */
+@media (max-width: 480px) {
+  .solvo-root .roi-select-text { white-space: normal; }
+  .solvo-root .roi-pick-sentence { font-size: 16px; line-height: 1.45; }
+}

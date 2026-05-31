@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState } from "react";
-import { Hammer, Stethoscope, Home as HomeIcon, Car, Briefcase, Phone, MessageSquare, Send, Workflow } from "lucide-react";
+import { Hammer, Stethoscope, Home as HomeIcon, Car, Briefcase, Phone, MessageSquare, Send, Workflow, Menu, X } from "lucide-react";
 import RoiCalculator from "@/components/RoiCalculator";
 import IndustryCard from "@/components/IndustryCard";
 import ServiceCard from "@/components/ServiceCard";
@@ -195,20 +195,48 @@ function useRevealGrid(base: string) {
 
 /* ---------- Nav ---------- */
 function Nav() {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  // close menu on outside click
+  useEffect(() => {
+    if (!menuOpen) return;
+    function onDocClick(e: MouseEvent) {
+      if (!navRef.current) return;
+      if (!navRef.current.contains(e.target as Node)) setMenuOpen(false);
+    }
+    document.addEventListener("click", onDocClick);
+    return () => document.removeEventListener("click", onDocClick);
+  }, [menuOpen]);
+
+  const close = () => setMenuOpen(false);
+
   return (
-    <nav className="nav">
+    <nav className="nav" ref={navRef}>
       <div className="container nav-inner">
-        <a href="#" className="brand">
+        <a href="#" className="brand" onClick={close}>
           <img src={LOGO} alt="SolvoLab" />
           <span>SolvoLab</span>
         </a>
-        <div className="nav-links">
-          <a className="nav-link" href="#industries">Industries</a>
-          <a className="nav-link" href="#services">Services</a>
-          <a className="nav-link" href="#how">How it works</a>
-          <a className="nav-link" href="#roi">ROI</a>
-          <a className="nav-link" href="#proof">Outcomes</a>
+        <div className="nav-right">
+          <div id="nav-menu" className="nav-links" data-open={menuOpen}>
+            <a className="nav-link" href="#industries" onClick={close}>Industries</a>
+            <a className="nav-link" href="#services" onClick={close}>Services</a>
+            <a className="nav-link" href="#how" onClick={close}>How it works</a>
+            <a className="nav-link" href="#roi" onClick={close}>ROI</a>
+            <a className="nav-link" href="#proof" onClick={close}>Outcomes</a>
+          </div>
           <CtaButton small label="Book a call" />
+          <button
+            type="button"
+            className="nav-burger"
+            aria-expanded={menuOpen}
+            aria-controls="nav-menu"
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            onClick={() => setMenuOpen((v) => !v)}
+          >
+            {menuOpen ? <X size={22} strokeWidth={1.8} /> : <Menu size={22} strokeWidth={1.8} />}
+          </button>
         </div>
       </div>
     </nav>
@@ -367,7 +395,7 @@ function Hero() {
             Now it <span className="grad">actually gets answered.</span>
           </h1>
 
-          <p className="lede" style={{ width: "600px", maxWidth: "100%" }}>
+          <p className="lede" style={{ maxWidth: "600px" }}>
             SolvoLab builds AI voice agents, web chat, and CRM automation for the businesses where
             the <em>first response wins the job</em> — home services, dental &amp; medical, real estate,
             auto, and professional services. Live in 3 weeks. No new headcount.
@@ -728,8 +756,11 @@ function HowItWorks() {
   useEffect(() => {
     let ticking = false;
     let last = -1;
+    const mq = typeof window !== "undefined" ? window.matchMedia("(min-width: 761px)") : null;
     function compute() {
       ticking = false;
+      // On mobile the section renders as a plain stacked list — no scroll-driven flip.
+      if (mq && !mq.matches) return;
       const el = sectionRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
