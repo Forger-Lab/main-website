@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { INDUSTRIES, CTA_THRESHOLD, type SliderConfig } from "@/lib/calculator-config";
 import { calculate } from "@/lib/calculator-math";
+import { trackClick } from "@/lib/analytics";
 
 /* ---------- formatting helpers ---------- */
 const fmtCurrency = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
@@ -201,7 +202,11 @@ export default function RoiCalculator() {
               {/* CTA */}
               {showCta ? (
                 <div className="roi-cta-wrap">
-                  <a className="btn btn-primary" href="#cta">
+                  <a
+                    className="btn btn-primary"
+                    href="#cta"
+                    onClick={() => trackClick(`booknow_roi_${industry.id}`)}
+                  >
                     Book a 30-min audit <Arrow />
                   </a>
                 </div>

@@ -5,6 +5,7 @@ import { Hammer, Stethoscope, Home as HomeIcon, Car, Briefcase, Phone, MessageSq
 import RoiCalculator from "@/components/RoiCalculator";
 import IndustryCard from "@/components/IndustryCard";
 import ServiceCard from "@/components/ServiceCard";
+import { trackClick } from "@/lib/analytics";
 import "./solvolab.css";
 
 /* ---------- Inline icons (stroke-based) ---------- */
@@ -86,7 +87,7 @@ const I = {
 const LOGO = "/brandlogo/SolvoLabLogo-Cut.png";
 
 /* ---------- CTA button with a pink streak that traces its border ---------- */
-function CtaButton({ label = "Book a call", small = false, href = "#cta" }: { label?: string; small?: boolean; href?: string }) {
+function CtaButton({ label = "Book a call", small = false, href = "#cta", eventName = "booknow_cta" }: { label?: string; small?: boolean; href?: string; eventName?: string }) {
   const wrapRef = useRef<HTMLDivElement>(null);
   const [size, setSize] = useState({ w: 0, h: 0 });
   const gradId = useId().replace(/:/g, "");
@@ -142,7 +143,7 @@ function CtaButton({ label = "Book a call", small = false, href = "#cta" }: { la
           />
         </svg>
       )}
-      <a className={`btn btn-primary btn-cta${small ? " btn-sm" : ""}`} href={href}>{label} <I.Arrow /></a>
+      <a className={`btn btn-primary btn-cta${small ? " btn-sm" : ""}`} href={href} onClick={() => trackClick(eventName)}>{label} <I.Arrow /></a>
     </div>
   );
 }
@@ -220,13 +221,13 @@ function Nav() {
         </a>
         <div className="nav-right">
           <div id="nav-menu" className="nav-links" data-open={menuOpen}>
-            <a className="nav-link" href="#industries" onClick={close}>Industries</a>
-            <a className="nav-link" href="#services" onClick={close}>Services</a>
-            <a className="nav-link" href="#how" onClick={close}>How it works</a>
-            <a className="nav-link" href="#roi" onClick={close}>ROI</a>
-            <a className="nav-link" href="#proof" onClick={close}>Outcomes</a>
+            <a className="nav-link" href="#industries" onClick={() => { trackClick("nav_industries"); close(); }}>Industries</a>
+            <a className="nav-link" href="#services" onClick={() => { trackClick("nav_services"); close(); }}>Services</a>
+            <a className="nav-link" href="#how" onClick={() => { trackClick("nav_how"); close(); }}>How it works</a>
+            <a className="nav-link" href="#roi" onClick={() => { trackClick("nav_roi"); close(); }}>ROI</a>
+            <a className="nav-link" href="#proof" onClick={() => { trackClick("nav_outcomes"); close(); }}>Outcomes</a>
           </div>
-          <CtaButton small label="Book a call" />
+          <CtaButton small label="Book a call" eventName="booknow_nav" />
           <button
             type="button"
             className="nav-burger"
@@ -409,8 +410,8 @@ function Hero() {
           </p>
 
           <div className="hero-actions">
-            <CtaButton label="Book a strategy call" />
-            <a className="btn btn-ghost" href="#industries">
+            <CtaButton label="Book a strategy call" eventName="booknow_hero" />
+            <a className="btn btn-ghost" href="#industries" onClick={() => trackClick("see_industries_hero")}>
               See who we build for
             </a>
           </div>
@@ -607,7 +608,7 @@ function Industries() {
 
         <p className="industries-foot">
           Don&apos;t see your industry? If your business runs on inbound calls and high-ticket service,
-          we probably fit. <a href="#cta">Book a 30-min audit →</a>
+          we probably fit. <a href="#cta" onClick={() => trackClick("booknow_industries_foot")}>Book a 30-min audit →</a>
         </p>
       </div>
     </section>
@@ -966,6 +967,7 @@ function CTA() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    trackClick("booknow_form_submit");
     setIsSubmitting(true);
     setSubmitStatus("idle");
 
@@ -1109,31 +1111,31 @@ function SolvoFooter() {
           </div>
           <div className="foot-col">
             <h5>Services</h5>
-            <a href="#">AI receptionists</a>
-            <a href="#">Voice agents</a>
-            <a href="#">Outbound sequences</a>
-            <a href="#">CRM integrations</a>
+            <a href="#services" onClick={() => trackClick("footer_service_ai_reception")}>AI receptionists</a>
+            <a href="#services" onClick={() => trackClick("footer_service_voice")}>Voice agents</a>
+            <a href="#services" onClick={() => trackClick("footer_service_outbound")}>Outbound sequences</a>
+            <a href="#services" onClick={() => trackClick("footer_service_crm")}>CRM integrations</a>
           </div>
           <div className="foot-col">
             <h5>Company</h5>
-            <a href="#">About</a>
-            <a href="#">Case studies</a>
-            <a href="#">Pricing</a>
-            <a href="#">Careers</a>
+            <a href="#" onClick={() => trackClick("footer_company_about")}>About</a>
+            <a href="#" onClick={() => trackClick("footer_company_case_studies")}>Case studies</a>
+            <a href="#" onClick={() => trackClick("footer_company_pricing")}>Pricing</a>
+            <a href="#" onClick={() => trackClick("footer_company_careers")}>Careers</a>
           </div>
           <div className="foot-col">
             <h5>Contact</h5>
-            <a href="mailto:saboor@solvolab.com">saboor@solvolab.com</a>
-            <a href="tel:+13074434309">+1 307 443 4309</a>
-            <a href="tel:+966532962900">+966 53 296 2900</a>
-            <a href="#cta">Book a call</a>
-            <a href="#">LinkedIn</a>
-            <a href="#">X / Twitter</a>
+            <a href="mailto:saboor@solvolab.com" onClick={() => trackClick("contact_email")}>saboor@solvolab.com</a>
+            <a href="tel:+13074434309" onClick={() => trackClick("contact_phone_us")}>+1 307 443 4309</a>
+            <a href="tel:+966532962900" onClick={() => trackClick("contact_phone_sa")}>+966 53 296 2900</a>
+            <a href="#cta" onClick={() => trackClick("booknow_footer")}>Book a call</a>
+            <a href="#" onClick={() => trackClick("social_linkedin")}>LinkedIn</a>
+            <a href="#" onClick={() => trackClick("social_twitter")}>X / Twitter</a>
           </div>
         </div>
         <div className="foot-bottom">
           <div>© 2026 SolvoLab — built by AI, sold by humans.</div>
-          <div>solvolab.com · <a href="/privacy">/privacy</a> · /terms</div>
+          <div>solvolab.com · <a href="/privacy" onClick={() => trackClick("footer_privacy")}>/privacy</a> · /terms</div>
         </div>
       </div>
     </footer>
