@@ -418,6 +418,15 @@
   background: #14b86e;
   box-shadow: 0 0 8px #14b86e;
 }
+.solvo-root .chat-list {
+  display: flex;
+  flex-direction: column;
+  height: 280px;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.solvo-root .chat-list::-webkit-scrollbar { width: 0; height: 0; display: none; }
 .solvo-root .msg {
   font-size: 13.5px;
   line-height: 1.5;

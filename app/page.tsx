@@ -266,6 +266,13 @@ function ChatCard({ className = "" }: { className?: string }) {
   const seeded = script.filter((s) => !s.typing);
   const [shown, setShown] = useState<ChatStep[]>(seeded);
   const [typing, setTyping] = useState(false);
+  const listRef = useRef<HTMLDivElement>(null);
+
+  // Keep the latest message in view as content grows.
+  useEffect(() => {
+    const el = listRef.current;
+    if (el) el.scrollTop = el.scrollHeight;
+  }, [shown, typing]);
 
   useEffect(() => {
     let cancelled = false;
@@ -309,7 +316,7 @@ function ChatCard({ className = "" }: { className?: string }) {
         </div>
         <div className="status">live</div>
       </div>
-      <div style={{ display: "flex", flexDirection: "column", minHeight: 240 }}>
+      <div ref={listRef} className="chat-list">
         {shown.map((m, i) => (
           <div key={i} className={`msg ${m.from}`}>{m.text}</div>
         ))}
