@@ -6,6 +6,9 @@ export const metadata: Metadata = {
   title: "Privacy Policy | SolvoLab",
   description:
     "How SolvoLab collects, uses, shares, and protects personal information across our website and AI automation services.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 const LOGO = "/brandlogo/SolvoLabLogo-Cut.png";
