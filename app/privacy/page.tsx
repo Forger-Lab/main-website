@@ -2,12 +2,26 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import "../solvolab.css";
 
+const PRIVACY_TITLE = "Privacy Policy | SolvoLab";
+const PRIVACY_DESCRIPTION =
+  "How SolvoLab collects, uses, shares, and protects personal information across our website and AI automation services.";
+
 export const metadata: Metadata = {
-  title: "Privacy Policy | SolvoLab",
-  description:
-    "How SolvoLab collects, uses, shares, and protects personal information across our website and AI automation services.",
+  title: PRIVACY_TITLE,
+  description: PRIVACY_DESCRIPTION,
   alternates: {
     canonical: "/privacy",
+  },
+  openGraph: {
+    type: "article",
+    url: "/privacy",
+    title: PRIVACY_TITLE,
+    description: PRIVACY_DESCRIPTION,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: PRIVACY_TITLE,
+    description: PRIVACY_DESCRIPTION,
   },
 };
 

@@ -33,14 +33,69 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.solvolab.com";
+const SITE_NAME = "SolvoLab";
+const DEFAULT_TITLE = "SolvoLab | Never Miss A Lead";
+const DEFAULT_DESCRIPTION =
+  "AI voice agents, web chat, and CRM automation for home services, dental, real estate, auto, and professional services SMBs. Live in 3 weeks. No new headcount.";
+const OG_IMAGE = "/brandlogo/SolvoLabLogo.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
-  title: "SolvoLab | Never Miss A Lead",
-  description:
-    "AI voice agents, web chat, and CRM automation for home services, dental, real estate, auto, and professional services SMBs. Live in 3 weeks. No new headcount.",
+  title: {
+    default: DEFAULT_TITLE,
+    template: "%s | SolvoLab",
+  },
+  description: DEFAULT_DESCRIPTION,
+  applicationName: SITE_NAME,
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
+  publisher: SITE_NAME,
+  keywords: [
+    "AI voice agent",
+    "AI receptionist",
+    "AI web chat",
+    "CRM automation",
+    "lead automation",
+    "home services automation",
+    "dental front desk AI",
+    "real estate inbound",
+    "auto shop AI",
+    "professional services AI",
+    "SolvoLab",
+  ],
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    type: "website",
+    url: "/",
+    siteName: SITE_NAME,
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    locale: "en_US",
+    images: [
+      {
+        url: OG_IMAGE,
+        alt: "SolvoLab — AI agents that answer the calls you keep missing.",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: DEFAULT_TITLE,
+    description: DEFAULT_DESCRIPTION,
+    images: [OG_IMAGE],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
   },
 };
 
