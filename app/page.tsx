@@ -450,16 +450,10 @@ function Hero() {
 function Integrations() {
   const items = [
     { slug: "hubspot", name: "HubSpot" },
-    { slug: "salesforce", name: "Salesforce" },
-    { slug: "pipedrive", name: "Pipedrive" },
     { slug: "zoho", name: "Zoho CRM" },
-    { slug: "mondaydotcom", name: "Monday" },
-    { slug: "openai", name: "OpenAI" },
     { slug: "anthropic", name: "Anthropic" },
     { slug: "elevenlabs", name: "ElevenLabs" },
-    { slug: "twilio", name: "Twilio" },
     { slug: "whatsapp", name: "WhatsApp" },
-    { slug: "slack", name: "Slack" },
     { slug: "calendly", name: "Calendly" },
     { slug: "googleads", name: "Google Ads" },
     { slug: "meta", name: "Meta" },
