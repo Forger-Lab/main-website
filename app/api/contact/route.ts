@@ -71,7 +71,7 @@ export async function POST(request: Request) {
     await resend.emails.send({
       from: "SolvoLab <noreply@contact.solvolab.com>",
       to: email,
-      subject: "We've received your message — SolvoLab",
+      subject: "We've received your message, SolvoLab",
       html: `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -94,7 +94,7 @@ export async function POST(request: Request) {
             <td style="padding: 30px 20px; color: #333333;">
                 <p>Hey ${name}!</p>
                 <p>Thanks for reaching out to us! We've received your message and wanted to let you know that our team is already on it.</p>
-                <p>We'll get back to you within 24 hours with a thoughtful response. In the meantime, here's a quick look at what we can do for you — from intelligent automation to AI-driven workflows, we help businesses like yours eliminate manual bottlenecks and scale faster.</p>
+                <p>We'll get back to you within 24 hours with a thoughtful response. In the meantime, here's a quick look at what we can do for you, from intelligent automation to AI-driven workflows, we help businesses like yours eliminate manual bottlenecks and scale faster.</p>
                 <p>Ready to dive deeper? Book a quick 15-minute discovery call and let's explore how SolvoLab can transform your operations.</p>
                 <p>Cheers to smoother operations,</p>
                 <p>The SolvoLab Team</p>

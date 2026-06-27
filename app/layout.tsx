@@ -1,31 +1,26 @@
 import type { Metadata } from "next";
-import { Inter, Space_Grotesk, JetBrains_Mono, Manrope } from "next/font/google";
+import { Hanken_Grotesk, Schibsted_Grotesk, IBM_Plex_Mono } from "next/font/google";
 import Script from "next/script";
+import ClientReveal from "@/components/ClientReveal";
 import "./global.css";
 
 const GA_MEASUREMENT_ID = "G-TF9M22BP03";
 
-const inter = Inter({
+const hanken = Hanken_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
+  variable: "--font-body",
 });
 
-const spaceGrotesk = Space_Grotesk({
+const schibsted = Schibsted_Grotesk({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
   variable: "--font-display",
 });
 
-const manrope = Manrope({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  display: "swap",
-  variable: "--font-body",
-});
-
-const jetbrainsMono = JetBrains_Mono({
+const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
   display: "swap",
@@ -76,7 +71,7 @@ export const metadata: Metadata = {
     images: [
       {
         url: OG_IMAGE,
-        alt: "SolvoLab — AI agents that answer the calls you keep missing.",
+        alt: "SolvoLab, AI agents that answer the calls you keep missing.",
       },
     ],
   },
@@ -106,8 +101,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${spaceGrotesk.variable} ${manrope.variable} ${jetbrainsMono.variable}`}>
+      <body className={`${schibsted.variable} ${hanken.variable} ${ibmPlexMono.variable}`}>
         {children}
+        <ClientReveal />
 
         {/* Google Analytics (gtag.js) */}
         <Script
