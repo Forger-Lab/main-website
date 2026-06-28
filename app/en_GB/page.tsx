@@ -9,12 +9,13 @@ export const metadata: Metadata = {
   description:
     "SolvoLab replaces your web designer, SEO agency, and CRM consultant with one team that builds and runs your entire growth pipeline, with no gaps.",
   alternates: {
-    canonical: "/",
+    canonical: "/en_GB",
   },
   openGraph: {
     title: "SolvoLab, The 24/7 Client Engine",
     description:
       "SolvoLab replaces your web designer, SEO agency, and CRM consultant with one team that builds and runs your entire growth pipeline, with no gaps.",
+    url: "/en_GB",
   },
   twitter: {
     title: "SolvoLab, The 24/7 Client Engine",
@@ -64,8 +65,8 @@ const schemaJson = {
     },
     {
       "@type": "WebPage",
-      "@id": "https://www.solvolab.com/#webpage",
-      "url": "https://www.solvolab.com",
+      "@id": "https://www.solvolab.com/en_GB/#webpage",
+      "url": "https://www.solvolab.com/en_GB",
       "name": "SolvoLab, The 24/7 Client Engine",
       "about": {
         "@id": "https://www.solvolab.com/#organization"
@@ -82,7 +83,7 @@ const schemaJson = {
         "@id": "https://www.solvolab.com/#organization"
       },
       "url": "https://www.solvolab.com/web-development",
-      "description": "A custom, fast, mobile-first site engineered to turn visitors into inquiries, not just look pretty."
+      "description": "A custom, fast, mobile-first site engineered to turn visitors into enquiries, not just look pretty."
     },
     {
       "@type": "Service",
@@ -92,7 +93,7 @@ const schemaJson = {
         "@id": "https://www.solvolab.com/#organization"
       },
       "url": "https://www.solvolab.com/seo",
-      "description": "Technical foundation, on-page optimization, and Google Business Profile so you rank where buying intent is highest."
+      "description": "Technical foundation, on-page optimisation, and Google Business Profile so you rank where buying intent is highest."
     },
     {
       "@type": "Service",
@@ -107,7 +108,7 @@ const schemaJson = {
     {
       "@type": "Service",
       "@id": "https://www.solvolab.com/#crm-service",
-      "name": "CRM Command Center",
+      "name": "CRM Command Centre",
       "provider": {
         "@id": "https://www.solvolab.com/#organization"
       },
@@ -126,9 +127,9 @@ const schemaJson = {
     },
     {
       "@type": "FAQPage",
-      "@id": "https://www.solvolab.com/#faq",
+      "@id": "https://www.solvolab.com/en_GB/#faq",
       "isPartOf": {
-        "@id": "https://www.solvolab.com/#webpage"
+        "@id": "https://www.solvolab.com/en_GB/#webpage"
       },
       "mainEntity": [
         {
@@ -144,7 +145,7 @@ const schemaJson = {
           "name": "What's included in The Engine?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Five connected systems: (1) Web Design & Development, (2) SEO & Local SEO, (3) Lead Capture & AI Receptionist, (4) CRM Command Center, and (5) Automation & Follow-Up. The same team builds and owns all five so each hands off cleanly to the next."
+            "text": "Five connected systems: (1) Web Design & Development, (2) SEO & Local SEO, (3) Lead Capture & AI Receptionist, (4) CRM Command Centre, and (5) Automation & Follow-Up. The same team builds and owns all five so each hands off cleanly to the next."
           }
         },
         {
@@ -329,7 +330,7 @@ export default function Home() {
               <div className="card reveal" style={{ padding: "34px", display: "flex", flexDirection: "column", gap: "14px" }}>
                 <span className="eyebrow">Scenario B</span>
                 <h3 className="h3">You get traffic. It doesn't convert.</h3>
-                <p style={{ color: "var(--ink-2)", fontSize: "16px", lineHeight: "1.6", margin: "0" }}>Visitors land, but your site doesn't turn them into inquiries. Follow-up is slow or manual, after-hours leads go unanswered, and prospects quietly slip through the cracks before anyone calls them back.</p>
+                <p style={{ color: "var(--ink-2)", fontSize: "16px", lineHeight: "1.6", margin: "0" }}>Visitors land, but your site doesn't turn them into enquiries. Follow-up is slow or manual, after-hours leads go unanswered, and prospects quietly slip through the cracks before anyone calls them back.</p>
               </div>
             </div>
 
@@ -356,14 +357,14 @@ export default function Home() {
                 <span className="pillar-ic" data-ic="globe"><Icon name="globe" /></span>
                 <span className="step-tag">01 · Get found &amp; convert</span>
                 <h3>Web Design &amp; Development</h3>
-                <p>A custom, fast, mobile-first site engineered to turn visitors into inquiries, not just look pretty.</p>
+                <p>A custom, fast, mobile-first site engineered to turn visitors into enquiries, not just look pretty.</p>
                 <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
               </Link>
               <Link className="pillar card reveal" href="/seo">
                 <span className="pillar-ic" data-ic="search"><Icon name="search" /></span>
                 <span className="step-tag">02 · Get found &amp; convert</span>
                 <h3>SEO &amp; Local SEO</h3>
-                <p>Technical foundation, on-page optimization, and Google Business Profile so you rank where buying intent is highest.</p>
+                <p>Technical foundation, on-page optimisation, and Google Business Profile so you rank where buying intent is highest.</p>
                 <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
               </Link>
               <Link className="pillar card reveal" href="/lead-capture">
@@ -376,7 +377,7 @@ export default function Home() {
               <Link className="pillar card reveal" href="/crm">
                 <span className="pillar-ic" data-ic="database"><Icon name="database" /></span>
                 <span className="step-tag">04 · Never lose a lead</span>
-                <h3>CRM Command Center</h3>
+                <h3>CRM Command Centre</h3>
                 <p>Every lead, call, and deal in one place, with a unified dashboard for rankings, traffic, and conversions.</p>
                 <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
               </Link>
@@ -414,7 +415,7 @@ export default function Home() {
                 <ul className="feature-list">
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Conversion-built website + technical SEO</span><span className="ft-desc">Custom, fast, mobile-first, engineered to rank and convert.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Lead capture + AI receptionist wired in</span><span className="ft-desc">Forms, chat, call-back, and 24/7 inbound voice agent.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM command center + automations live</span><span className="ft-desc">Every lead tracked; follow-up running on autopilot.</span></span></li>
+                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM command centre + automations live</span><span className="ft-desc">Every lead tracked; follow-up running on autopilot.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Onboarding &amp; strategy sprint</span><span className="ft-desc">We map your full funnel and launch fast.</span></span></li>
                 </ul>
               </div>
@@ -442,11 +443,11 @@ export default function Home() {
             </div>
 
             <div className="incl-grid">
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="globe"><Icon name="globe" /></span><div><h4>Conversion-built website</h4><p>Custom, fast, mobile-first, engineered to turn visitors into inquiries.</p></div></div>
+              <div className="incl-item reveal"><span className="incl-ic" data-ic="globe"><Icon name="globe" /></span><div><h4>Conversion-built website</h4><p>Custom, fast, mobile-first, engineered to turn visitors into enquiries.</p></div></div>
               <div className="incl-item reveal"><span className="incl-ic" data-ic="gauge"><Icon name="gauge" /></span><div><h4>Technical SEO foundation</h4><p>Speed, schema, indexing, Core Web Vitals, the groundwork Google rewards.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="target"><Icon name="target" /></span><div><h4>On-page SEO + keyword mapping</h4><p>Every page optimized to rank for what your buyers actually type.</p></div></div>
+              <div className="incl-item reveal"><span className="incl-ic" data-ic="target"><Icon name="target" /></span><div><h4>On-page SEO + keyword mapping</h4><p>Every page optimised to rank for what your buyers actually type.</p></div></div>
               <div className="incl-item reveal"><span className="incl-ic" data-ic="map"><Icon name="map" /></span><div><h4>Google Business Profile + local SEO</h4><p>Show up in the map pack and &ldquo;near me&rdquo; searches where intent is highest.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="database"><Icon name="database" /></span><div><h4>CRM command center</h4><p>Every lead, call, and deal in one place, you never lose track of a prospect.</p></div></div>
+              <div className="incl-item reveal"><span className="incl-ic" data-ic="database"><Icon name="database" /></span><div><h4>CRM command centre</h4><p>Every lead, call, and deal in one place, you never lose track of a prospect.</p></div></div>
               <div className="incl-item reveal"><span className="incl-ic" data-ic="headset"><Icon name="headset" /></span><div><h4>Lead-capture suite</h4><p>Smart forms, live chat, and a call-back widget that catch leads while they're hot.</p></div></div>
               <div className="incl-item reveal"><span className="incl-ic" data-ic="phone"><Icon name="phone" /></span><div><h4>AI receptionist (inbound voice)</h4><p>Answers calls 24/7, qualifies the caller, and books the appointment.</p></div></div>
               <div className="incl-item reveal"><span className="incl-ic" data-ic="chat"><Icon name="chat" /></span><div><h4>Missed-call text-back</h4><p>Every missed call auto-texted back in seconds, so no lead goes cold.</p></div></div>
@@ -492,7 +493,7 @@ export default function Home() {
               <div>
                 <span className="eyebrow on-dark">Zero risk</span>
                 <h2 className="h2" style={{ margin: "14px 0 14px" }}>The 90-Day Momentum Guarantee.</h2>
-                <p className="lede" style={{ maxWidth: "640px" }}>Within 90 days of launch, you'll see measurable growth in your organic visibility and inbound leads. If you don't, we keep working at no extra cost until you do. You carry zero risk, we don't get to coast on a retainer, we earn it by moving your numbers.</p>
+                <p className="lede" style={{ maxWidth: "640px" }}>Within 90 days of launch, you'll see measurable growth in organic visibility and inbound leads. If you don't, we keep working at no extra cost until you do. You carry zero risk, we don't get to coast on a retainer, we earn it by moving your numbers.</p>
               </div>
             </div>
           </div>
@@ -552,7 +553,7 @@ export default function Home() {
               <details className="faq-item">
                 <summary className="faq-question">What's included in The Engine?</summary>
                 <div className="faq-answer">
-                  Five connected systems: (1) Web Design &amp; Development, (2) SEO &amp; Local SEO, (3) Lead Capture &amp; AI Receptionist, (4) CRM Command Center, and (5) Automation &amp; Follow-Up. The same team builds and owns all five so each hands off cleanly to the next.
+                  Five connected systems: (1) Web Design &amp; Development, (2) SEO &amp; Local SEO, (3) Lead Capture &amp; AI Receptionist, (4) CRM Command Centre, and (5) Automation &amp; Follow-Up. The same team builds and owns all five so each hands off cleanly to the next.
                 </div>
               </details>
               <details className="faq-item">

@@ -12,8 +12,16 @@ const routes: Array<{
   changeFrequency: MetadataRoute.Sitemap[number]["changeFrequency"];
   priority: number;
 }> = [
-  { path: "/",        changeFrequency: "weekly",  priority: 1.0 },
-  { path: "/privacy", changeFrequency: "yearly",  priority: 0.3 },
+  { path: "/",                changeFrequency: "weekly",  priority: 1.0 },
+  { path: "/en_GB",           changeFrequency: "weekly",  priority: 0.9 },
+  { path: "/about",           changeFrequency: "monthly", priority: 0.8 },
+  { path: "/automation",      changeFrequency: "weekly",  priority: 0.8 },
+  { path: "/crm",             changeFrequency: "weekly",  priority: 0.8 },
+  { path: "/lead-capture",    changeFrequency: "weekly",  priority: 0.8 },
+  { path: "/seo",             changeFrequency: "weekly",  priority: 0.8 },
+  { path: "/web-development", changeFrequency: "weekly",  priority: 0.8 },
+  { path: "/contact",         changeFrequency: "monthly", priority: 0.7 },
+  { path: "/privacy",         changeFrequency: "yearly",  priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -25,3 +33,4 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority,
   }));
 }
+
