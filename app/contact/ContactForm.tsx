@@ -176,21 +176,9 @@ ${formData.message || "None"}
                   >
                     <Icon name="mail" />
                   </span>
-                  <a href="mailto:hello@solvolab.com" style={{ color: "#EAF6F1", textDecoration: "none", fontWeight: "600" }}>
-                    hello@solvolab.com
+                  <a href="mailto:saboor@solvolab.com" style={{ color: "#EAF6F1", textDecoration: "none", fontWeight: "600" }}>
+                    saboor@solvolab.com
                   </a>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-                  <span
-                    className="cl-ic"
-                    data-ic="bolt"
-                    style={{ background: "rgba(84,224,191,0.16)", color: "#8FF0D8" }}
-                  >
-                    <Icon name="bolt" />
-                  </span>
-                  <span style={{ color: "rgba(234,246,241,0.78)", fontSize: "15px" }}>
-                    We reply within one business day.
-                  </span>
                 </div>
               </div>
             </div>
@@ -327,7 +315,7 @@ ${formData.message || "None"}
                   </span>
                   <h2 className="h3" style={{ marginBottom: "10px" }}>Request received.</h2>
                   <p style={{ color: "var(--ink-2)", fontSize: "15px", lineHeight: "1.55", maxWidth: "360px", margin: "0 auto" }}>
-                    Thanks, we&apos;ll review your details and reply within one business day with times for your teardown. Your competitor teardown is already on the list.
+                    Thanks, we&apos;ll review your details and get back to you shortly with times for your teardown. Your competitor teardown is already on the list.
                   </p>
                 </div>
               )}

@@ -35,7 +35,7 @@ export default function Footer() {
           </div>
           <div className="foot-col">
             <h5>Contact</h5>
-            <Link href="mailto:hello@solvolab.com">hello@solvolab.com</Link>
+            <Link href="mailto:saboor@solvolab.com">saboor@solvolab.com</Link>
             <Link href="/contact">Book a call</Link>
             <a href="https://www.linkedin.com/company/110093159" target="_blank" rel="noopener noreferrer">LinkedIn</a>
           </div>

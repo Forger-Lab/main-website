@@ -66,7 +66,7 @@ const schemaJson = {
         "url": `${SITE_URL}/brandlogo/SolvoLabLogo.png`,
         "caption": "SolvoLab Logo",
       },
-      "email": "hello@solvolab.com",
+      "email": "saboor@solvolab.com",
     },
     {
       "@type": "WebPage",
@@ -391,7 +391,7 @@ export default function Builds() {
               <p className="lede">Tell us what you&apos;re trying to build. We&apos;ll tell you how we&apos;d approach it, what it&apos;d take, and whether we&apos;re the right team, on the call, straight.</p>
               <div className="btn-row">
                 <Link className="btn btn-light btn-lg" href="/contact" data-analytics="builds_book_footer">Book a build call <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-                <a className="btn btn-outline-light btn-lg" href="mailto:hello@solvolab.com">hello@solvolab.com</a>
+                <a className="btn btn-outline-light btn-lg" href="mailto:saboor@solvolab.com">saboor@solvolab.com</a>
               </div>
               <div className="upwork-note">
                 <span className="un-ic" data-ic="bolt"><Icon name="bolt" /></span>

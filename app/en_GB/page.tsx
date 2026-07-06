@@ -41,7 +41,7 @@ const schemaJson = {
       "image": {
         "@id": "https://www.solvolab.com/#logo"
       },
-      "email": "hello@solvolab.com",
+      "email": "saboor@solvolab.com",
       "address": {
         "@type": "PostalAddress",
         "streetAddress": "30 N Gould St, STE R",
@@ -241,7 +241,7 @@ const schemaJson = {
           "name": "How do I get started?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Book a free Growth Teardown through the contact page at solvolab.com or email hello@solvolab.com."
+            "text": "Book a free Growth Teardown through the contact page at solvolab.com or email saboor@solvolab.com."
           }
         }
       ]
@@ -625,7 +625,7 @@ export default function Home() {
               <details className="faq-item">
                 <summary className="faq-question">How do I get started?</summary>
                 <div className="faq-answer">
-                  Book a free Growth Teardown through the contact page at solvolab.com or email hello@solvolab.com.
+                  Book a free Growth Teardown through the contact page at solvolab.com or email saboor@solvolab.com.
                 </div>
               </details>
             </div>
