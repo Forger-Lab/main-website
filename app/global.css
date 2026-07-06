@@ -1804,3 +1804,334 @@ section {
   color: var(--teal-700);
 }
 
+/* ==================================================================
+   The Scale Build (/builds) — engineering-flavoured page additions
+   ================================================================== */
+
+/* proof / selected builds */
+.proof-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+@media (max-width: 820px) {
+  .proof-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.proof-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 30px 30px 28px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  position: relative;
+  transition: border-color 200ms, box-shadow 200ms, transform 200ms;
+}
+.proof-card:hover {
+  border-color: var(--teal-300);
+  box-shadow: var(--shadow);
+  transform: translateY(-3px);
+}
+.proof-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.proof-ic {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+  background: var(--teal-soft);
+  color: var(--teal-600);
+  display: grid;
+  place-items: center;
+}
+.proof-ic svg {
+  width: 23px;
+  height: 23px;
+}
+.proof-index {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+.proof-card h3 {
+  font-family: var(--display);
+  font-size: 21px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin: 0;
+}
+.proof-what {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 15px;
+  line-height: 1.6;
+  flex: 1;
+}
+.stack-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.stack-tag {
+  font-family: var(--mono);
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  padding: 6px 11px;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--line-2);
+  color: var(--ink-2);
+}
+.proof-foot {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line);
+}
+.proof-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--mono);
+  font-size: 12px;
+  color: var(--teal-700);
+  font-weight: 500;
+}
+.proof-status::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--teal);
+  box-shadow: 0 0 0 4px var(--teal-soft);
+}
+.proof-client {
+  margin-left: auto;
+  font-size: 13px;
+  color: var(--ink-3);
+}
+.proof-client b {
+  color: var(--ink-2);
+  font-weight: 600;
+}
+.proof-more {
+  font-family: var(--mono);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: var(--teal-soft);
+  color: var(--teal-700);
+  margin-left: 6px;
+  white-space: nowrap;
+}
+
+/* signature element — voice-agent call log in the hero */
+.calllog {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--forest-line);
+  border-radius: var(--radius-lg);
+  padding: 22px 22px 24px;
+  backdrop-filter: blur(4px);
+  font-family: var(--mono);
+}
+.calllog-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+.calllog-head .cl-title {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(234, 246, 241, 0.6);
+}
+.calllog-head .cl-live {
+  font-size: 11px;
+  color: #54e0bf;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+}
+.calllog-head .cl-live::before {
+  content: "";
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: #54e0bf;
+  box-shadow: 0 0 8px #54e0bf;
+}
+.cl-turns {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.cl-turn {
+  display: grid;
+  grid-template-columns: 62px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.cl-who {
+  font-size: 10.5px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding-top: 3px;
+}
+.cl-turn.caller .cl-who {
+  color: rgba(234, 246, 241, 0.5);
+}
+.cl-turn.agent .cl-who {
+  color: #6fe3c6;
+}
+.cl-text {
+  font-family: var(--body);
+  font-size: 14px;
+  line-height: 1.5;
+  padding: 10px 14px;
+  border-radius: 12px;
+}
+.cl-turn.caller .cl-text {
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(234, 246, 241, 0.82);
+  border: 1px solid var(--forest-line);
+}
+.cl-turn.agent .cl-text {
+  background: linear-gradient(135deg, rgba(84, 224, 191, 0.16), rgba(110, 73, 223, 0.12));
+  color: #eaf6f1;
+  border: 1px solid rgba(84, 224, 191, 0.22);
+}
+.cl-foot {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid var(--forest-line);
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+.cl-foot .cl-metric {
+  font-size: 11px;
+  color: rgba(234, 246, 241, 0.55);
+}
+.cl-foot .cl-metric b {
+  display: block;
+  font-family: var(--display);
+  font-size: 18px;
+  color: #fff;
+  letter-spacing: -0.02em;
+  margin-bottom: 1px;
+}
+
+/* stack strip — real technology logos */
+.stack-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  justify-content: center;
+}
+.stack-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px 10px 12px;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow-sm);
+  transition: border-color 160ms, transform 160ms;
+}
+.stack-logo:hover {
+  border-color: var(--teal-300);
+  transform: translateY(-2px);
+}
+.stack-logo img {
+  height: 22px;
+  width: auto;
+  max-width: 40px;
+  object-fit: contain;
+  display: block;
+}
+.stack-logo img.on-dark {
+  width: 22px;
+  height: 22px;
+  padding: 5px;
+  box-sizing: content-box;
+  background: var(--forest);
+  border-radius: 999px;
+}
+.stack-logo span {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink-2);
+  letter-spacing: -0.005em;
+}
+
+/* process — 3 up */
+.proc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+@media (max-width: 760px) {
+  .proc-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* about */
+.about-card {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 32px;
+  align-items: center;
+}
+@media (max-width: 680px) {
+  .about-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+.about-mono {
+  font-family: var(--mono);
+  font-size: 13px;
+  color: var(--ink-3);
+  line-height: 1.8;
+}
+.about-mono .tk {
+  color: var(--teal-700);
+}
+
+/* upwork note in final CTA */
+.upwork-note {
+  margin: 26px auto 0;
+  max-width: 560px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+  font-size: 14px;
+  color: rgba(234, 246, 241, 0.72);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--forest-line);
+  border-radius: 999px;
+  padding: 12px 20px;
+}
+.upwork-note .un-ic {
+  color: #8ff0d8;
+}
+.upwork-note .un-ic svg {
+  width: 18px;
+  height: 18px;
+}
+

@@ -20,6 +20,7 @@ const routes: Array<{
   { path: "/lead-capture",    changeFrequency: "weekly",  priority: 0.8 },
   { path: "/seo",             changeFrequency: "weekly",  priority: 0.8 },
   { path: "/web-development", changeFrequency: "weekly",  priority: 0.8 },
+  { path: "/builds",          changeFrequency: "weekly",  priority: 0.8 },
   { path: "/contact",         changeFrequency: "monthly", priority: 0.7 },
   { path: "/privacy",         changeFrequency: "yearly",  priority: 0.3 },
 ];

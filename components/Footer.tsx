@@ -28,6 +28,7 @@ export default function Footer() {
           <div className="foot-col">
             <h5>Company</h5>
             <Link href="/about">Why us</Link>
+            <Link href="/builds">The Scale Build</Link>
             <Link href="/#pricing">Pricing</Link>
             <Link href="/#engine">How it works</Link>
             <Link href="/contact">Book a teardown</Link>

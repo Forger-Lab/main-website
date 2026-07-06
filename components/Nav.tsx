@@ -114,9 +114,9 @@ export default function Nav() {
               </div>
             </div>
 
+            <Link className="nav-link" href="/builds" aria-current={pathname === "/builds" ? "page" : undefined}>The Scale Build</Link>
             <Link className="nav-link" href="/#pricing" aria-current={pathname === "/#pricing" ? "page" : undefined}>Pricing</Link>
             <Link className="nav-link" href="/about" aria-current={pathname === "/about" ? "page" : undefined}>Why us</Link>
-            <Link className="nav-link" href="/contact" aria-current={pathname === "/contact" ? "page" : undefined}>Contact</Link>
           </div>
 
           <div className="nav-actions">
@@ -145,9 +145,9 @@ export default function Nav() {
         <Link className="m-sub" href="/lead-capture">Lead Capture &amp; AI Receptionist</Link>
         <Link className="m-sub" href="/crm">CRM Command Centre</Link>
         <Link className="m-sub" href="/automation">Automation &amp; Follow-Up</Link>
+        <Link href="/builds">The Scale Build</Link>
         <Link href="/#pricing">Pricing</Link>
         <Link href="/about">Why us</Link>
-        <Link href="/contact">Contact</Link>
         <Link className="btn btn-primary" href="/contact" onClick={() => trackClick("nav_mobile_cta")}>
           Book a Growth Teardown
         </Link>
