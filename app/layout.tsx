@@ -118,6 +118,13 @@ export default function RootLayout({
             gtag('config', '${GA_MEASUREMENT_ID}');
           `}
         </Script>
+
+        {/* Ahrefs Analytics */}
+        <Script
+          src="https://analytics.ahrefs.com/analytics.js"
+          data-key="GxuSi0MN74HYlQQLdT0WtA"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
