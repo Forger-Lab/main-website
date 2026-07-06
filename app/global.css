@@ -1083,6 +1083,16 @@ section {
 .price-card.dark h3 {
   color: #fff;
 }
+.price-card.dark .feature-list .ft-title {
+  color: #fff;
+}
+.price-card.dark .feature-list .ft-desc {
+  color: rgba(234, 246, 241, 0.72);
+}
+.price-card.dark .feature-list .ck {
+  background: rgba(84, 224, 191, 0.16);
+  color: #8ff0d8;
+}
 .price-phase {
   font-family: var(--mono);
   font-size: 12px;

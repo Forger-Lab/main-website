@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import ContactForm from "./ContactForm";
 
 export const metadata: Metadata = {
-  title: "Book a Growth Teardown, SolvoLab",
+  title: "Book a free Growth Teardown, SolvoLab",
   description:
     "Get a free walk-through of the leaks in your funnel and a competitor teardown.",
   alternates: {

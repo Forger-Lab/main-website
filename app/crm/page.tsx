@@ -5,9 +5,9 @@ import Footer from "@/components/Footer";
 import Icon from "@/components/Icon";
 
 export const metadata: Metadata = {
-  title: "CRM Command Centre, SolvoLab",
+  title: "CRM Command Center, SolvoLab",
   description:
-    "Every lead, call, and deal in one place. SolvoLab sets up and runs your CRM command centre, wired directly into your website, chat, and follow-up sequences.",
+    "Every lead, call, and deal in one place. SolvoLab sets up and runs your CRM command center, wired directly into your website, chat, and follow-up sequences.",
   alternates: {
     canonical: "/crm",
   },
@@ -28,16 +28,16 @@ export default function Crm() {
                   <span data-ic="chevron" style={{ transform: "rotate(-90deg)", fontSize: "12px" }}><Icon name="chevron" /></span>{" "}
                   <span>Step 04 · Never lose a lead</span>
                 </div>
-                <span className="eyebrow on-dark">CRM Command Centre</span>
+                <span className="eyebrow on-dark">CRM Command Center</span>
                 <h1 className="h1">Every lead, call, and deal in one place.</h1>
-                <p className="lede">Leads scattered across an inbox, a notepad, and three people's phones is how prospects get forgotten. Your command centre puts every contact, conversation, and opportunity in one system, with a single dashboard that shows rankings, traffic, leads, and conversions at a glance.</p>
+                <p className="lede">Leads scattered across an inbox, a notepad, and three people's phones is how prospects get forgotten. Your command center puts every contact, conversation, and opportunity in one system, with a single dashboard that shows rankings, traffic, leads, and conversions at a glance.</p>
                 <div className="btn-row">
                   <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                   <a className="btn btn-outline-light btn-lg" href="#included">What's included</a>
                 </div>
               </div>
               <div className="mock reveal" style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--forest-line)" }}>
-                <div className="mock-bar"><span className="dot"></span><span className="dot"></span><span className="dot"></span><span className="mock-title" style={{ color: "rgba(234,246,241,0.6)" }}>command centre · dashboard</span></div>
+                <div className="mock-bar"><span className="dot"></span><span className="dot"></span><span className="dot"></span><span className="mock-title" style={{ color: "rgba(234,246,241,0.6)" }}>command center · dashboard</span></div>
                 <div className="mock-row" style={{ borderColor: "var(--forest-line)" }}><span className="mr-ic" data-ic="users"><Icon name="users" /></span><div className="mr-main"><div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>New leads this week</div><div style={{ color: "rgba(234,246,241,0.55)", fontSize: "12.5px", marginTop: "3px" }}>All sources, one pipeline view</div></div><span className="mr-tag">live</span></div>
                 <div className="mock-row" style={{ borderColor: "var(--forest-line)" }}><span className="mr-ic" data-ic="chart"><Icon name="chart" /></span><div className="mr-main"><div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>Rankings &amp; traffic</div><div style={{ color: "rgba(234,246,241,0.55)", fontSize: "12.5px", marginTop: "3px" }}>SEO + site analytics in one screen</div></div><span className="mr-tag">up</span></div>
                 <div className="mock-row" style={{ borderColor: "var(--forest-line)" }}><span className="mr-ic" data-ic="target"><Icon name="target" /></span><div className="mr-main"><div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>Conversion rate</div><div style={{ color: "rgba(234,246,241,0.55)", fontSize: "12.5px", marginTop: "3px" }}>Lead → booked → won</div></div><span className="mr-tag">tracked</span></div>
@@ -66,7 +66,7 @@ export default function Crm() {
                 <span className="eyebrow">What's included</span>
                 <h2 className="h2" style={{ margin: "16px 0 20px" }}>One source of truth for your whole pipeline.</h2>
                 <ul className="feature-list">
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM command centre</span><span className="ft-desc">Every lead, call, and deal in one place, you never lose track of a prospect again.</span></span></li>
+                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM command center</span><span className="ft-desc">Every lead, call, and deal in one place, you never lose track of a prospect again.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Unified analytics dashboard</span><span className="ft-desc">Rankings, traffic, leads, and conversions on one screen, you always know what's working.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Clean pipeline &amp; lead routing</span><span className="ft-desc">Every enquiry lands in the right stage and the right hands, automatically.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Connected to the tools you use</span><span className="ft-desc">Calendar, phone, email, and billing wired in, no copy-paste between systems.</span></span></li>
@@ -117,7 +117,7 @@ export default function Crm() {
             <div className="cta-band reveal">
               <span className="eyebrow on-dark">Your next step</span>
               <h2 className="h2" style={{ marginTop: "16px" }}>Stop losing leads in the gaps.</h2>
-              <p className="lede">Book a free Growth Teardown and we'll show you where prospects are falling out of view today, and what one command centre would catch.</p>
+              <p className="lede">Book a free Growth Teardown and we'll show you where prospects are falling out of view today, and what one command center would catch.</p>
               <div className="btn-row">
                 <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                 <Link className="btn btn-outline-light btn-lg" href="/#engine">Explore the full Engine</Link>

@@ -134,7 +134,7 @@ ${formData.message || "None"}
               <span className="eyebrow on-dark">Your next step</span>
               <h1 className="h1">Book a free Growth Teardown.</h1>
               <p className="lede">
-                We'll show you exactly where you're losing leads today and what your engine would look like built. No pressure, and if it's not a fit, you keep the competitor teardown anyway.
+                We'll show you exactly where you're losing leads today and what your engine would look like built. Your free Growth Teardown includes the competitor teardown, how your top 3 competitors beat you online, yours to keep either way. No pressure.
               </p>
 
               <ul className="feature-list" style={{ marginTop: "32px", maxWidth: "520px" }}>
@@ -252,7 +252,7 @@ ${formData.message || "None"}
                         id="website"
                         name="website"
                         type="text"
-                        placeholder="solvolab.com"
+                        placeholder="yourbusiness.com"
                         value={formData.website}
                         onChange={handleChange}
                       />

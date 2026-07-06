@@ -291,7 +291,7 @@ export default function Builds() {
                 </div>
                 <div className="proof-foot">
                   <span className="proof-status">Resolved &amp; rebuilt</span>
-                  <span className="proof-client">Flagship Client: <b>Vigilant Security Services</b> <span className="proof-more">+6 more</span></span>
+                  <span className="proof-client">Flagship Client: <b>Vigilant Security Services</b></span>
                 </div>
               </article>
             </div>
@@ -388,7 +388,7 @@ export default function Builds() {
             <div className="cta-band reveal">
               <span className="eyebrow on-dark">Your next step</span>
               <h2 className="h2" style={{ marginTop: "16px" }}>Book a build call.</h2>
-              <p className="lede">Tell us what you&apos;re trying to build. We&apos;ll tell you how we&apos;d approach it, what it&apos;d take, and whether we&apos;re the right team, on the call, straight.</p>
+              <p className="lede">Free, 30 minutes, no obligation. Tell us what you&apos;re trying to build. We&apos;ll tell you how we&apos;d approach it, what it&apos;d take, and whether we&apos;re the right team, on the call, straight.</p>
               <div className="btn-row">
                 <Link className="btn btn-light btn-lg" href="/contact" data-analytics="builds_book_footer">Book a build call <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                 <a className="btn btn-outline-light btn-lg" href="mailto:saboor@solvolab.com">saboor@solvolab.com</a>

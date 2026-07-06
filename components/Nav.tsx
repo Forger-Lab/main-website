@@ -86,7 +86,7 @@ export default function Nav() {
                   <Link className="dd-item" href="/crm" onClick={() => trackClick("nav_crm")}>
                     <span className="dd-ic" data-ic="database"><Icon name="database" /></span>
                     <span>
-                      <span className="dd-title">CRM Command Centre</span>
+                      <span className="dd-title">CRM Command Center</span>
                       <span className="dd-sub">Every lead in one place</span>
                     </span>
                   </Link>
@@ -108,7 +108,7 @@ export default function Nav() {
                 <div className="dd-foot">
                   <span className="label">One team · one invoice · no gaps</span>
                   <Link className="btn btn-primary btn-sm" href="/contact" onClick={() => trackClick("nav_dropdown_cta")}>
-                    Book a teardown <span data-ic="arrow"><Icon name="arrow" /></span>
+                    Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span>
                   </Link>
                 </div>
               </div>
@@ -121,7 +121,7 @@ export default function Nav() {
 
           <div className="nav-actions">
             <Link className="btn btn-primary btn-sm btn-desktop" href="/contact" onClick={() => trackClick("nav_header_cta")}>
-              Book a Growth Teardown
+              Book a free Growth Teardown
             </Link>
             <button
               className="nav-toggle"
@@ -143,13 +143,13 @@ export default function Nav() {
         <Link className="m-sub" href="/web-development">Web Design &amp; Development</Link>
         <Link className="m-sub" href="/seo">SEO &amp; Local SEO</Link>
         <Link className="m-sub" href="/lead-capture">Lead Capture &amp; AI Receptionist</Link>
-        <Link className="m-sub" href="/crm">CRM Command Centre</Link>
+        <Link className="m-sub" href="/crm">CRM Command Center</Link>
         <Link className="m-sub" href="/automation">Automation &amp; Follow-Up</Link>
         <Link href="/builds">The Scale Build</Link>
         <Link href="/#pricing">Pricing</Link>
         <Link href="/about">Why us</Link>
         <Link className="btn btn-primary" href="/contact" onClick={() => trackClick("nav_mobile_cta")}>
-          Book a Growth Teardown
+          Book a free Growth Teardown
         </Link>
       </div>
     </>

@@ -22,7 +22,7 @@ export default function Footer() {
             <Link href="/web-development">Web Design &amp; Development</Link>
             <Link href="/seo">SEO &amp; Local SEO</Link>
             <Link href="/lead-capture">Lead Capture &amp; AI Receptionist</Link>
-            <Link href="/crm">CRM Command Centre</Link>
+            <Link href="/crm">CRM Command Center</Link>
             <Link href="/automation">Automation &amp; Follow-Up</Link>
           </div>
           <div className="foot-col">
@@ -31,7 +31,7 @@ export default function Footer() {
             <Link href="/builds">The Scale Build</Link>
             <Link href="/#pricing">Pricing</Link>
             <Link href="/#engine">How it works</Link>
-            <Link href="/contact">Book a teardown</Link>
+            <Link href="/contact">Book a free Growth Teardown</Link>
           </div>
           <div className="foot-col">
             <h5>Contact</h5>
@@ -42,7 +42,7 @@ export default function Footer() {
         </div>
         <div className="foot-bottom">
           <div>© {new Date().getFullYear()} SolvoLab, one team, one pipeline, no gaps.</div>
-          <div className="mono">solvolab.com · <Link href="/privacy">/privacy</Link> · /terms</div>
+          <div className="mono">solvolab.com · <Link href="/privacy">/privacy</Link> · <Link href="/terms">/terms</Link></div>
         </div>
       </div>
     </footer>

@@ -87,6 +87,26 @@ export default function About() {
           </div>
         </section>
 
+        <section className="section" style={{ background: "var(--bg-soft)" }}>
+          <div className="container container-narrow">
+            <div className="section-head reveal" style={{ marginBottom: "28px" }}>
+              <span className="eyebrow">Who&apos;s behind this</span>
+              <h2 className="h2">You work with the person who builds it.</h2>
+            </div>
+            <div className="card reveal about-card" style={{ padding: "40px" }}>
+              <div className="about-mono">
+                <div className="tk">// Abdul Saboor</div>
+                founder &amp; engineer<br />
+                production AI systems<br />
+                data &amp; analytics
+              </div>
+              <div>
+                <p className="lede" style={{ margin: "0" }}>SolvoLab is led by Abdul Saboor, an engineer with a background in production AI systems and data &amp; analytics at scale, including AI evaluation pipelines for a major MENA edtech platform. When you email <a href="mailto:saboor@solvolab.com">saboor@solvolab.com</a>, you reach the person who architects your build, not an account manager. The team stays small on purpose: every engagement is engineered by the people who answer your calls.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
         <section className="section-sm band-dark">
           <div className="grid-tex"></div>
           <div className="container">
@@ -96,6 +116,7 @@ export default function About() {
                 <span className="eyebrow on-dark">Zero risk</span>
                 <h2 className="h2" style={{ margin: "14px 0 14px" }}>We earn the retainer by moving your numbers.</h2>
                 <p className="lede" style={{ maxWidth: "640px" }}>Within 90 days of launch, you'll see measurable growth in your organic visibility and inbound leads. If you don't, we keep working at no extra cost until you do. Every build is fully done-for-you, we focus on moving your numbers, not on retainers.</p>
+                <p style={{ maxWidth: "640px", margin: "14px 0 0", fontSize: "14.5px", color: "rgba(234,246,241,0.62)" }}>Measured in the open: your dashboard tracks rankings, organic traffic, and inbound leads, and we review the numbers with you on every monthly call.</p>
               </div>
             </div>
           </div>

@@ -193,7 +193,7 @@ const schemaJson = {
           "name": "What is the 90-Day Momentum Guarantee?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Within 90 days of launch, you should see measurable growth in organic visibility and inbound leads. If you don't, SolvoLab keeps working at no extra cost until you do."
+            "text": "Within 90 days of launch, you should see measurable growth in organic visibility and inbound leads, tracked on your own dashboard (rankings, organic traffic, and inbound leads) and reviewed with you monthly. If you don't, SolvoLab keeps working at no extra cost until you do."
           }
         },
         {
@@ -201,7 +201,39 @@ const schemaJson = {
           "name": "How much does SolvoLab cost?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Pricing is custom and shared on your teardown call. It's structured as one all-inclusive investment, a Phase 1 build (3-month launch sprint) and a Phase 2 monthly fee from month 4, with platform, tools, and execution all included so there's no separate vendor stack to pay for."
+            "text": "Engagements typically start from $1,500/month, with the exact number scoped on your teardown call based on locations, build size, and call volume. It's structured as one all-inclusive investment, a Phase 1 build (3-month launch sprint) and a Phase 2 monthly fee from month 4, with platform, tools, and execution all included so there's no separate vendor stack to pay for."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who owns the website, CRM, and data?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You do, fully. The website, the CRM, and every lead and contact in it belong to your business from day one, and they stay yours if we ever part ways. SolvoLab builds on your accounts, not its own."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What happens if I want to stop?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You keep everything, the site, the CRM, the automations, and all your data. SolvoLab hands over cleanly with documentation. There are no lock-in contracts designed to trap you."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do you rebuild my site or work with my existing one?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Whichever gets you results faster. On the teardown call SolvoLab assesses your current site honestly: if it's a solid foundation the team builds on it; if it's holding your rankings and conversions back, they'll show you exactly why and rebuild it as part of Phase 1."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Who will I actually work with?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The same small team that builds your engine runs it, no account managers relaying messages to a production team you never meet. You get a direct line to the people doing the work, and a monthly strategy call."
           }
         },
         {
@@ -264,8 +296,8 @@ export default function Home() {
             <div className="hero-grid">
               <div>
                 <span className="eyebrow on-dark">The 24/7 Client Engine</span>
-                <h1 className="h1">Your whole growth pipeline, built and run by <span className="accent on-dark">one team.</span></h1>
-                <p className="lede">Website, SEO, lead capture, CRM, and automated follow-up, engineered together as a single system. No three vendors. No handoffs that break. No leads slipping through the gaps, because there are no gaps.</p>
+                <h1 className="h1">Every lead answered, followed up, and booked, by <span className="accent on-dark">one team.</span></h1>
+                <p className="lede">Website, SEO, lead capture, CRM, and automated follow-up, engineered together as a single system by one team. No three vendors. No handoffs that break. No leads slipping through the gaps, because there are no gaps.</p>
                 <div className="btn-row">
                   <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                   <a className="btn btn-outline-light btn-lg" href="#engine">See how the Engine works</a>
@@ -393,7 +425,7 @@ export default function Home() {
                 <span className="step-tag">The whole engine</span>
                 <h3>Not sure where you're leaking?</h3>
                 <p>Book a free Growth Teardown and we'll show you exactly which part of the pipeline is costing you leads today.</p>
-                <span className="more">Book a teardown <span data-ic="arrow"><Icon name="arrow" /></span></span>
+                <span className="more">Book a free teardown <span data-ic="arrow"><Icon name="arrow" /></span></span>
               </Link>
             </div>
           </div>
@@ -494,7 +526,80 @@ export default function Home() {
                 <span className="eyebrow on-dark">Zero risk</span>
                 <h2 className="h2" style={{ margin: "14px 0 14px" }}>The 90-Day Momentum Guarantee.</h2>
                 <p className="lede" style={{ maxWidth: "640px" }}>Within 90 days of launch, you'll see measurable growth in organic visibility and inbound leads. If you don't, we keep working at no extra cost until you do. You carry zero risk, we don't get to coast on a retainer, we earn it by moving your numbers.</p>
+                <p style={{ maxWidth: "640px", margin: "14px 0 0", fontSize: "14.5px", color: "rgba(234,246,241,0.62)" }}>Measured in the open: your dashboard tracks rankings, organic traffic, and inbound leads, and we review the numbers with you on every monthly call.</p>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="section" style={{ background: "var(--bg-soft)" }}>
+          <div className="container">
+            <div className="section-head reveal">
+              <span className="eyebrow">Proof, not promises</span>
+              <h2 className="h2">Real systems, in production.</h2>
+              <p className="lede">The same team behind the Engine ships production AI systems for real businesses. Here&apos;s a sample of what&apos;s live right now.</p>
+            </div>
+
+            <div className="proof-grid">
+              <article className="proof-card reveal">
+                <div className="proof-top">
+                  <span className="proof-ic" data-ic="phone"><Icon name="phone" /></span>
+                  <span className="proof-index">01 / voice</span>
+                </div>
+                <h3>&quot;Aiesha&quot;, AI voice agent</h3>
+                <p className="proof-what">Inbound call-handling agent with real-time speech, answers, qualifies, and books with under 600ms response latency. The same system behind our AI receptionist.</p>
+                <div className="proof-foot">
+                  <span className="proof-status">In production</span>
+                </div>
+              </article>
+              <article className="proof-card reveal">
+                <div className="proof-top">
+                  <span className="proof-ic" data-ic="shield"><Icon name="shield" /></span>
+                  <span className="proof-index">02 / security</span>
+                </div>
+                <h3>Incident response + web rebuild</h3>
+                <p className="proof-what">Detected and fully remediated a live malware attack on a client&apos;s site, delivered a vulnerability report, and rebuilt the site clean.</p>
+                <div className="proof-foot">
+                  <span className="proof-status">Resolved &amp; rebuilt</span>
+                  <span className="proof-client">Client: <b>Vigilant Security Services</b></span>
+                </div>
+              </article>
+              <article className="proof-card reveal">
+                <div className="proof-top">
+                  <span className="proof-ic" data-ic="chart"><Icon name="chart" /></span>
+                  <span className="proof-index">03 / analytics</span>
+                </div>
+                <h3>AI analytics at scale</h3>
+                <p className="proof-what">AI evaluation of tutoring-session transcripts for a major MENA edtech platform, scoring teaching quality across thousands of sessions.</p>
+                <div className="proof-foot">
+                  <span className="proof-status">Running at scale</span>
+                </div>
+              </article>
+              <article className="proof-card reveal">
+                <div className="proof-top">
+                  <span className="proof-ic" data-ic="chat"><Icon name="chat" /></span>
+                  <span className="proof-index">04 / commerce</span>
+                </div>
+                <h3>WhatsApp commerce agents</h3>
+                <p className="proof-what">AI agents wired into Shopify, order status, product Q&amp;A, and cart recovery handled directly in chat for two live e-commerce brands.</p>
+                <div className="proof-foot">
+                  <span className="proof-status">Live · two brands</span>
+                </div>
+              </article>
+            </div>
+
+            <div className="btn-row reveal" style={{ justifyContent: "center", marginTop: "34px" }}>
+              <Link className="btn btn-ghost" href="/builds">See the full build log <span data-ic="arrow"><Icon name="arrow" /></span></Link>
+            </div>
+
+            <p className="reveal" style={{ textAlign: "center", margin: "44px 0 18px", fontFamily: "var(--mono)", fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--ink-3)" }}>Trusted by real businesses</p>
+            <div className="stack-strip reveal">
+              <span className="stack-logo"><img src="/logos/vigilant.jpg" alt="Vigilant Security Services" style={{ borderRadius: "999px" }} /><span>Vigilant Security</span></span>
+              <span className="stack-logo"><img src="/logos/noon.svg" alt="Noon" /><span>Noon</span></span>
+              <span className="stack-logo"><img src="/logos/livekit-color.svg" alt="LiveKit" /><span>LiveKit</span></span>
+              <span className="stack-logo"><img src="/logos/n8n-color.svg" alt="n8n" /><span>n8n</span></span>
+              <span className="stack-logo"><img src="/logos/Supabase%20Icon.png" alt="Supabase" /><span>Supabase</span></span>
+              <span className="stack-logo"><img src="/logos/Next.js.png" alt="Next.js" /><span>Next.js</span></span>
             </div>
           </div>
         </section>
@@ -504,7 +609,8 @@ export default function Home() {
             <div className="section-head reveal">
               <span className="eyebrow">Your investment</span>
               <h2 className="h2">One inclusive investment. No vendor stack to manage.</h2>
-              <p className="lede">A premium, all-inclusive growth engine, platform, tools, and execution included. We align our success with your ROI, so we earn the retainer by moving your numbers.</p>
+              <p className="lede">A premium, all-inclusive growth engine, platform, tools, and execution included. Engagements typically start from $1,500/month, and we align our success with your ROI, so we earn the retainer by moving your numbers.</p>
+              <p className="reveal" style={{ maxWidth: "620px", margin: "14px 0 0", fontSize: "15px", color: "var(--ink-2)" }}>What moves the number: how many locations you have, the size of the build, and your call volume. Either way it&apos;s one invoice, typically less than a web agency, an SEO retainer, and a receptionist salary stacked separately.</p>
             </div>
 
             <div className="price-cols">
@@ -522,7 +628,7 @@ export default function Home() {
               <div className="price-card reveal">
                 <span className="price-phase">Phase 2 · Scale</span>
                 <h3>Run it &amp; climb</h3>
-                <div className="price-amount"><span className="amt">Custom</span><span className="per">/ month, from month 4</span></div>
+                <div className="price-amount"><span className="amt">From $1,500</span><span className="per">/ month, from month 4</span></div>
                 <p className="price-note">High-impact management of your entire pipeline, SEO, content, website, CRM, automation, and reputation, kept tuned and converting.</p>
                 <ul className="feature-list" style={{ gap: "10px" }}>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">Ongoing SEO, content &amp; backlinks</span></li>
@@ -589,13 +695,37 @@ export default function Home() {
               <details className="faq-item">
                 <summary className="faq-question">What is the 90-Day Momentum Guarantee?</summary>
                 <div className="faq-answer">
-                  Within 90 days of launch, you should see measurable growth in organic visibility and inbound leads. If you don't, SolvoLab keeps working at no extra cost until you do.
+                  Within 90 days of launch, you should see measurable growth in organic visibility and inbound leads, tracked on your own dashboard (rankings, organic traffic, and inbound leads) and reviewed with you monthly. If you don't, SolvoLab keeps working at no extra cost until you do.
                 </div>
               </details>
               <details className="faq-item">
                 <summary className="faq-question">How much does SolvoLab cost?</summary>
                 <div className="faq-answer">
-                  Pricing is custom and shared on your teardown call. It's structured as one all-inclusive investment, a Phase 1 build (3-month launch sprint) and a Phase 2 monthly fee from month 4, with platform, tools, and execution all included so there's no separate vendor stack to pay for.
+                  Engagements typically start from $1,500/month, with the exact number scoped on your teardown call based on locations, build size, and call volume. It&apos;s structured as one all-inclusive investment, a Phase 1 build (3-month launch sprint) and a Phase 2 monthly fee from month 4, with platform, tools, and execution all included so there&apos;s no separate vendor stack to pay for.
+                </div>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-question">Who owns the website, CRM, and data?</summary>
+                <div className="faq-answer">
+                  You do, fully. The website, the CRM, and every lead and contact in it belong to your business from day one, and they stay yours if we ever part ways. We build on your accounts, not ours, so there&apos;s no hostage situation.
+                </div>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-question">What happens if I want to stop?</summary>
+                <div className="faq-answer">
+                  You keep everything, the site, the CRM, the automations, and all your data. We hand over cleanly with documentation. No lock-in contracts designed to trap you, we keep clients by moving their numbers, not by holding their assets.
+                </div>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-question">Do you rebuild my site or work with my existing one?</summary>
+                <div className="faq-answer">
+                  Whichever gets you results faster. On the teardown call we assess your current site honestly, if it&apos;s a solid foundation we build on it; if it&apos;s holding your rankings and conversions back, we&apos;ll show you exactly why and rebuild it as part of Phase 1.
+                </div>
+              </details>
+              <details className="faq-item">
+                <summary className="faq-question">Who will I actually work with?</summary>
+                <div className="faq-answer">
+                  The same small team that builds your engine runs it, no account managers relaying messages to a production team you never meet. You get a direct line to the people doing the work, and a monthly strategy call with the numbers on the table.
                 </div>
               </details>
               <details className="faq-item">

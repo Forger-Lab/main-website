@@ -98,7 +98,7 @@ export default function Seo() {
             <div className="crosslinks">
               <Link className="crosslink reveal" href="/web-development"><span className="cl-ic" data-ic="globe"><Icon name="globe" /></span><span className="cl-name">Web Design &amp; Development</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
               <Link className="crosslink reveal" href="/lead-capture"><span className="cl-ic" data-ic="headset"><Icon name="headset" /></span><span className="cl-name">Lead Capture &amp; AI Receptionist</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
-              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Centre</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
+              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Center</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
             </div>
           </div>
         </section>

@@ -66,7 +66,7 @@ export default function WebDevelopment() {
                 <span className="eyebrow">What's included</span>
                 <h2 className="h2" style={{ margin: "16px 0 20px" }}>Built to be the front of your pipeline.</h2>
                 <ul className="feature-list">
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Conversion-built, MNC-grade website</span><span className="ft-desc">Custom design, clear paths to enquiry, and copy that turns visitors into leads.</span></span></li>
+                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Conversion-built, enterprise-quality website</span><span className="ft-desc">Custom design, clear paths to enquiry, and copy that turns visitors into leads.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Fast &amp; mobile-first by default</span><span className="ft-desc">Engineered for speed and the phones most of your buyers search on.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Technical SEO baked into the build</span><span className="ft-desc">Schema, clean indexing, and Core Web Vitals, a foundation SEO can climb.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Lead capture wired in from day one</span><span className="ft-desc">Smart forms, live chat, and a call-back widget, all flowing into your CRM.</span></span></li>
@@ -106,7 +106,7 @@ export default function WebDevelopment() {
             <div className="crosslinks">
               <Link className="crosslink reveal" href="/seo"><span className="cl-ic" data-ic="search"><Icon name="search" /></span><span className="cl-name">SEO &amp; Local SEO</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
               <Link className="crosslink reveal" href="/lead-capture"><span className="cl-ic" data-ic="headset"><Icon name="headset" /></span><span className="cl-name">Lead Capture &amp; AI Receptionist</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
-              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Centre</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
+              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Center</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
             </div>
           </div>
         </section>

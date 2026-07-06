@@ -36,11 +36,33 @@ export default function LeadCapture() {
                   <a className="btn btn-outline-light btn-lg" href="#included">What's included</a>
                 </div>
               </div>
-              <div className="mock reveal" style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--forest-line)" }}>
-                <div className="mock-bar"><span className="dot"></span><span className="dot"></span><span className="dot"></span><span className="mock-title" style={{ color: "rgba(234,246,241,0.6)" }}>inbound · live</span></div>
-                <div className="mock-row" style={{ borderColor: "var(--forest-line)" }}><span className="mr-ic" data-ic="phone"><Icon name="phone" /></span><div className="mr-main"><div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>Call at 11:42pm answered</div><div style={{ color: "rgba(234,246,241,0.55)", fontSize: "12.5px", marginTop: "3px" }}>AI receptionist · qualified &amp; booked</div></div><span className="mr-tag">booked</span></div>
-                <div className="mock-row" style={{ borderColor: "var(--forest-line)" }}><span className="mr-ic" data-ic="chat"><Icon name="chat" /></span><div className="mr-main"><div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>Web chat replied in 3s</div><div style={{ color: "rgba(234,246,241,0.55)", fontSize: "12.5px", marginTop: "3px" }}>Pricing question → quote request</div></div><span className="mr-tag">live</span></div>
-                <div className="mock-row" style={{ borderColor: "var(--forest-line)" }}><span className="mr-ic" data-ic="refresh"><Icon name="refresh" /></span><div className="mr-main"><div style={{ color: "#fff", fontWeight: "600", fontSize: "14px" }}>Missed call → auto-text sent</div><div style={{ color: "rgba(234,246,241,0.55)", fontSize: "12.5px", marginTop: "3px" }}>"Sorry we missed you, how can we help?"</div></div><span className="mr-tag">&lt;10s</span></div>
+              <div>
+                <div className="calllog reveal" aria-hidden="true">
+                  <div className="calllog-head">
+                    <span className="cl-title">&quot;Aiesha&quot; · your AI receptionist</span>
+                    <span className="cl-live">on call</span>
+                  </div>
+                  <div className="cl-turns">
+                    <div className="cl-turn agent">
+                      <span className="cl-who">Agent</span>
+                      <span className="cl-text">Thanks for calling, this is Aiesha. Are you looking to book a survey, or is this about an existing job?</span>
+                    </div>
+                    <div className="cl-turn caller">
+                      <span className="cl-who">Caller</span>
+                      <span className="cl-text">A new one. I need someone out to quote a CCTV install this week.</span>
+                    </div>
+                    <div className="cl-turn agent">
+                      <span className="cl-who">Agent</span>
+                      <span className="cl-text">I can do that. I&apos;ve got Thursday 10am or Friday 2pm open, which suits? I&apos;ll text you the confirmation.</span>
+                    </div>
+                  </div>
+                  <div className="cl-foot">
+                    <span className="cl-metric"><b>&lt;600ms</b> response latency</span>
+                    <span className="cl-metric"><b>24/7</b> answered</span>
+                    <span className="cl-metric"><b>0</b> missed calls</span>
+                  </div>
+                </div>
+                <p className="reveal" style={{ margin: "14px 4px 0", fontSize: "13px", color: "rgba(234,246,241,0.6)" }}>A real production voice agent, the same class of system we build custom on <Link href="/builds" style={{ color: "#8FF0D8" }}>The Scale Build</Link>.</p>
               </div>
             </div>
           </div>
@@ -99,7 +121,7 @@ export default function LeadCapture() {
           <div className="container">
             <div className="section-head reveal" style={{ marginBottom: "28px" }}><span className="eyebrow">Connected systems</span><h2 className="h2">What it feeds</h2></div>
             <div className="crosslinks">
-              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Centre</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
+              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Center</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
               <Link className="crosslink reveal" href="/automation"><span className="cl-ic" data-ic="workflow"><Icon name="workflow" /></span><span className="cl-name">Automation &amp; Follow-Up</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
               <Link className="crosslink reveal" href="/web-development"><span className="cl-ic" data-ic="globe"><Icon name="globe" /></span><span className="cl-name">Web Design &amp; Development</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
             </div>

@@ -99,7 +99,7 @@ export default function Automation() {
           <div className="container">
             <div className="section-head reveal" style={{ marginBottom: "28px" }}><span className="eyebrow">Connected systems</span><h2 className="h2">What it works with</h2></div>
             <div className="crosslinks">
-              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Centre</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
+              <Link className="crosslink reveal" href="/crm"><span className="cl-ic" data-ic="database"><Icon name="database" /></span><span className="cl-name">CRM Command Center</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
               <Link className="crosslink reveal" href="/lead-capture"><span className="cl-ic" data-ic="headset"><Icon name="headset" /></span><span className="cl-name">Lead Capture &amp; AI Receptionist</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
               <Link className="crosslink reveal" href="/seo"><span className="cl-ic" data-ic="search"><Icon name="search" /></span><span className="cl-name">SEO &amp; Local SEO</span><span className="cl-arrow" data-ic="arrowUR"><Icon name="arrowUR" /></span></Link>
             </div>
