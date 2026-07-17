@@ -1,9 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import Script from "next/script";
 import Icon from "@/components/Icon";
 import { trackClick } from "@/lib/analytics";
+
+// Env var name kept from the reCAPTCHA setup; the value is a Turnstile site key.
+const TURNSTILE_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -18,6 +21,61 @@ export default function ContactForm() {
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [honeypot, setHoneypot] = useState("");
+
+  const mountedAtRef = useRef<number>(Date.now());
+  const widgetContainerRef = useRef<HTMLDivElement>(null);
+  const widgetIdRef = useRef<string | null>(null);
+  const tokenResolverRef = useRef<{ resolve: (t: string) => void; reject: (e: Error) => void } | null>(null);
+
+  const renderTurnstile = () => {
+    // @ts-ignore
+    const turnstile = typeof window !== "undefined" ? window.turnstile : undefined;
+    if (!turnstile || !widgetContainerRef.current || widgetIdRef.current !== null || !TURNSTILE_SITE_KEY) {
+      return;
+    }
+    widgetIdRef.current = turnstile.render(widgetContainerRef.current, {
+      sitekey: TURNSTILE_SITE_KEY,
+      action: "CONTACT_SUBMIT",
+      execution: "execute", // only runs when we call turnstile.execute() on submit
+      appearance: "interaction-only", // invisible unless Cloudflare needs a challenge
+      callback: (token: string) => {
+        tokenResolverRef.current?.resolve(token);
+        tokenResolverRef.current = null;
+      },
+      "error-callback": (code: string) => {
+        console.error("Turnstile error code:", code);
+        tokenResolverRef.current?.reject(new Error("Verification failed. Please refresh the page and try again."));
+        tokenResolverRef.current = null;
+        return true; // suppress Turnstile's own error rendering
+      },
+      "expired-callback": () => {
+        // @ts-ignore
+        window.turnstile?.reset(widgetIdRef.current);
+      },
+    });
+  };
+
+  const getTurnstileToken = (): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      // @ts-ignore
+      const turnstile = typeof window !== "undefined" ? window.turnstile : undefined;
+      if (!turnstile || widgetIdRef.current === null) {
+        reject(new Error("Spam protection is still loading, please wait a moment and try again."));
+        return;
+      }
+      const timeout = setTimeout(() => {
+        tokenResolverRef.current = null;
+        reject(new Error("Verification timed out. Please try again."));
+      }, 30000);
+      tokenResolverRef.current = {
+        resolve: (t) => { clearTimeout(timeout); resolve(t); },
+        reject: (e) => { clearTimeout(timeout); reject(e); },
+      };
+      turnstile.reset(widgetIdRef.current); // fresh token each attempt (tokens are single-use)
+      turnstile.execute(widgetIdRef.current);
+    });
+  };
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>
@@ -55,30 +113,13 @@ export default function ContactForm() {
     }
 
     try {
-      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-      if (!siteKey) {
-        throw new Error("ReCAPTCHA site key is not configured.");
+      if (!TURNSTILE_SITE_KEY) {
+        throw new Error("Spam protection is not configured.");
       }
 
-      let token = "";
-      // Check if grecaptcha is available on window
-      // @ts-ignore
-      if (typeof window !== "undefined" && window.grecaptcha?.enterprise) {
-        try {
-          // @ts-ignore
-          token = await window.grecaptcha.enterprise.execute(siteKey, {
-            action: "CONTACT_SUBMIT",
-          });
-        } catch (execErr) {
-          console.error("ReCAPTCHA execution error:", execErr);
-          throw new Error("reCAPTCHA validation failed to execute.");
-        }
-      } else {
-        throw new Error("reCAPTCHA is loading, please wait a moment and try again.");
-      }
-
+      const token = await getTurnstileToken();
       if (!token) {
-        throw new Error("Failed to generate reCAPTCHA token.");
+        throw new Error("Failed to verify you're human. Please try again.");
       }
 
       // Compile extra fields into the message body so backend receives it perfectly
@@ -101,7 +142,9 @@ ${formData.message || "None"}
           name: formData.name,
           email: formData.email,
           message: compiledMessage,
-          recaptchaToken: token,
+          turnstileToken: token,
+          honeypot,
+          elapsedMs: Date.now() - mountedAtRef.current,
         }),
       });
 
@@ -122,8 +165,9 @@ ${formData.message || "None"}
   return (
     <>
       <Script
-        src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+        src="https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit"
         strategy="afterInteractive"
+        onReady={renderTurnstile}
       />
 
       <header className="band-dark" id="book">
@@ -269,6 +313,19 @@ ${formData.message || "None"}
                         <option value="The whole pipeline, I'm not sure where it breaks">The whole pipeline, I&apos;m not sure where it breaks</option>
                       </select>
                     </div>
+                    {/* Honeypot — invisible to humans, bots auto-fill it */}
+                    <div aria-hidden="true" style={{ position: "absolute", left: "-9999px", top: "auto", width: "1px", height: "1px", overflow: "hidden" }}>
+                      <label htmlFor="contact_fax">Fax number</label>
+                      <input
+                        id="contact_fax"
+                        name="contact_fax"
+                        type="text"
+                        tabIndex={-1}
+                        autoComplete="off"
+                        value={honeypot}
+                        onChange={(e) => setHoneypot(e.target.value)}
+                      />
+                    </div>
                     <div className="field full">
                       <label htmlFor="message">
                         Anything else? <span style={{ color: "var(--ink-3)", fontWeight: "400" }}>(optional)</span>
@@ -287,6 +344,11 @@ ${formData.message || "None"}
                         {errorMsg}
                       </div>
                     )}
+
+                    {/* Turnstile renders here only if Cloudflare requires an interactive challenge */}
+                    <div className="field full" style={{ display: "flex", justifyContent: "center" }}>
+                      <div ref={widgetContainerRef}></div>
+                    </div>
 
                     <div className="field full">
                       <button

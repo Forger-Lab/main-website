@@ -129,9 +129,9 @@ export default function PrivacyPolicy() {
                   technologies.
                 </li>
                 <li>
-                  <strong>Anti-spam / security data.</strong> We use Google reCAPTCHA Enterprise to protect
-                  our forms. reCAPTCHA collects hardware and software information (such as device and
-                  application data) and sends it to Google for analysis to distinguish humans from bots.
+                  <strong>Anti-spam / security data.</strong> We use Cloudflare Turnstile to protect
+                  our forms. Turnstile collects limited browser and device signals and sends them to
+                  Cloudflare for analysis to distinguish humans from bots.
                 </li>
               </ul>
 
@@ -159,7 +159,7 @@ export default function PrivacyPolicy() {
               </p>
               <ul>
                 <li><strong>Email delivery</strong> (e.g., Resend) to send and receive contact-form messages and confirmations;</li>
-                <li><strong>Security</strong> (e.g., Google reCAPTCHA Enterprise) for spam and abuse prevention;</li>
+                <li><strong>Security</strong> (e.g., Cloudflare Turnstile) for spam and abuse prevention;</li>
                 <li><strong>Hosting &amp; infrastructure</strong> providers that run the Site;</li>
                 <li><strong>CRM and automation platforms</strong> (e.g., HubSpot, Salesforce, Pipedrive, Zoho, Monday) where you have asked us to route or store your information;</li>
                 <li><strong>Professional advisors and authorities</strong> where required by law or to protect our rights.</li>
@@ -179,10 +179,10 @@ export default function PrivacyPolicy() {
               <p>
                 The Site uses cookies and similar technologies for essential functionality, security, and to
                 understand usage. You can control cookies through your browser settings; disabling some cookies
-                may affect Site functionality. The reCAPTCHA service is subject to Google&apos;s{" "}
-                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Privacy Policy</a>{" "}
+                may affect Site functionality. The Turnstile service is subject to Cloudflare&apos;s{" "}
+                <a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>{" "}
                 and{" "}
-                <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Terms of Service</a>.
+                <a href="https://www.cloudflare.com/website-terms/" target="_blank" rel="noopener noreferrer">Terms of Use</a>.
               </p>
 
               <h2>7. Data retention</h2>

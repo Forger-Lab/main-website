@@ -3,67 +3,202 @@ import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+const KV_URL = process.env.KV_REST_API_URL;
+const KV_TOKEN = process.env.KV_REST_API_TOKEN;
+
+// Allowed hostnames for the Turnstile token (blocks tokens minted on other domains)
+const ALLOWED_HOSTNAMES = ["solvolab.com", "www.solvolab.com", "localhost"];
+
+function escapeHtml(str: string): string {
+  return str
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#39;");
+}
+
+function getClientIp(request: Request): string {
+  const headers = request.headers;
+  return (
+    headers.get("cf-connecting-ip") ||
+    headers.get("x-real-ip") ||
+    headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "unknown"
+  );
+}
+
+// In-memory fallback counters (per server instance). Used when KV is
+// unavailable so rate limiting never silently disappears.
+const memoryCounters = new Map<string, { count: number; resetAt: number }>();
+
+function memoryCount(key: string, ttlSeconds: number): number {
+  const now = Date.now();
+  // Opportunistic cleanup so the map doesn't grow unbounded
+  if (memoryCounters.size > 10000) {
+    for (const [k, v] of memoryCounters) {
+      if (v.resetAt < now) memoryCounters.delete(k);
+    }
+  }
+  const entry = memoryCounters.get(key);
+  if (!entry || entry.resetAt < now) {
+    memoryCounters.set(key, { count: 1, resetAt: now + ttlSeconds * 1000 });
+    return 1;
+  }
+  entry.count += 1;
+  return entry.count;
+}
+
+// Increment a counter with a TTL, return the new count. Tries Upstash KV
+// (shared across instances); falls back to the in-memory counter if KV is
+// missing or unreachable.
+async function rateLimitCount(key: string, ttlSeconds: number): Promise<number> {
+  if (KV_URL && KV_TOKEN) {
+    try {
+      const res = await fetch(`${KV_URL}/pipeline`, {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${KV_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify([
+          ["INCR", key],
+          ["EXPIRE", key, String(ttlSeconds), "NX"],
+        ]),
+        cache: "no-store",
+      });
+      if (res.ok) {
+        const data = await res.json();
+        const count = Number(data?.[0]?.result);
+        if (count > 0) return count;
+      }
+      console.warn(`[contact] KV rate-limit call failed (status ${res.status}), using in-memory fallback`);
+    } catch (err) {
+      console.warn("[contact] KV unreachable, using in-memory rate-limit fallback:", (err as Error)?.message);
+    }
+  }
+  return memoryCount(key, ttlSeconds);
+}
+
+async function verifyTurnstile(token: string, ip: string) {
+  // Env var names kept from the reCAPTCHA setup; values are Turnstile keys.
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) {
+    throw new Error("Turnstile secret key is not configured.");
+  }
+
+  const res = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      secret,
+      response: token,
+      remoteip: ip === "unknown" ? undefined : ip,
+    }),
+  });
+  return res.json();
+}
+
+// Silent rejection: looks like success to the caller so bots can't learn
+// which defense caught them, but nothing is sent.
+function fakeSuccess() {
+  return NextResponse.json({ success: true });
+}
+
 export async function POST(request: Request) {
   try {
-    const { name, email, message, recaptchaToken } = await request.json();
+    const body = await request.json();
+    const { name, email, message, turnstileToken, honeypot, elapsedMs } = body;
 
-    if (!name || !email || !message || !recaptchaToken) {
+    if (!name || !email || !message || !turnstileToken) {
       return NextResponse.json(
-        { error: "Name, email, message, and reCAPTCHA token are required." },
+        { error: "Name, email, message, and verification token are required." },
         { status: 400 }
       );
     }
 
-    // Verify reCAPTCHA Enterprise token (Requires Google Cloud API Key)
-    // To generate the API Key, go to Google Cloud Platform -> APIs & Services -> Credentials -> Create API Key.
-    const apiKey = process.env.GCP_API_KEY || process.env.RECAPTCHA_SECRET_KEY; // The API Key (Starts with AIza...)
-    const projectId = process.env.GCP_PROJECT_ID || "cs-poc-5g1m4mkqvtquseo0zgmtytj"; // Using the Project ID you provided
-    const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-    
-    const verifyUrl = `https://recaptchaenterprise.googleapis.com/v1/projects/${projectId}/assessments?key=${apiKey}`;
+    // Basic input sanity
+    if (
+      typeof name !== "string" || name.length > 200 ||
+      typeof email !== "string" || email.length > 254 ||
+      typeof message !== "string" || message.length > 5000
+    ) {
+      return NextResponse.json({ error: "Invalid input." }, { status: 400 });
+    }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email)) {
+      return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
+    }
 
-    const assessmentRequest = {
-      event: {
-        token: recaptchaToken,
-        expectedAction: "CONTACT_SUBMIT",
-        siteKey: siteKey,
-      }
-    };
+    const ip = getClientIp(request);
 
-    const recaptchaRes = await fetch(verifyUrl, { 
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(assessmentRequest)
-    });
-    const recaptchaData = await recaptchaRes.json();
-    console.log("Enterprise Assessment result: ", JSON.stringify(recaptchaData, null, 2));
+    // --- Layer 1: honeypot (hidden field real users never fill) ---
+    if (honeypot) {
+      console.warn(`[contact] Honeypot triggered from ${ip}`);
+      return fakeSuccess();
+    }
 
-    if (!recaptchaData.tokenProperties?.valid) {
+    // --- Layer 2: minimum fill time (bots submit instantly) ---
+    if (typeof elapsedMs !== "number" || elapsedMs < 4000) {
+      console.warn(`[contact] Fill-time check failed (${elapsedMs}ms) from ${ip}`);
+      return fakeSuccess();
+    }
+
+    // --- Layer 3: content heuristics ---
+    const linkCount = (message.match(/https?:\/\//gi) || []).length;
+    if (linkCount > 2) {
+      console.warn(`[contact] Too many links (${linkCount}) from ${ip}`);
+      return fakeSuccess();
+    }
+
+    // --- Layer 4: rate limiting (per IP and per email) ---
+    const [ipHourCount, emailDayCount] = await Promise.all([
+      rateLimitCount(`contact:ip:${ip}`, 3600), // per hour
+      rateLimitCount(`contact:email:${email.toLowerCase()}`, 86400), // per day
+    ]);
+    if (ipHourCount > 3 || emailDayCount > 2) {
+      console.warn(`[contact] Rate limited ip=${ip} (${ipHourCount}/h) email=${email} (${emailDayCount}/d)`);
       return NextResponse.json(
-        { error: `Enterprise Validation failed: ${recaptchaData.tokenProperties?.invalidReason || 'Unknown error'}` },
-        { status: 400 }
+        { error: "Too many submissions. Please try again later or email us directly." },
+        { status: 429 }
       );
     }
 
-    // Optional: block low-risk scores. Scale is 0.0 (likely bot) to 1.0 (likely valid)
-    if (recaptchaData.riskAnalysis && recaptchaData.riskAnalysis.score < 0.5) {
+    // --- Layer 5: Turnstile verification (tokens are single-use) ---
+    const outcome = await verifyTurnstile(turnstileToken, ip);
+    console.log("Turnstile verification result:", JSON.stringify(outcome));
+
+    if (!outcome.success) {
       return NextResponse.json(
-        { error: "Submission rejected by spam detection filter." },
+        { error: `Verification failed: ${outcome["error-codes"]?.join(", ") || "unknown error"}. Please refresh and try again.` },
         { status: 400 }
       );
     }
+    if (outcome.action && outcome.action !== "CONTACT_SUBMIT") {
+      console.warn(`[contact] Unexpected Turnstile action "${outcome.action}" from ${ip}`);
+      return fakeSuccess();
+    }
+    if (outcome.hostname && !ALLOWED_HOSTNAMES.includes(outcome.hostname)) {
+      console.warn(`[contact] Unexpected Turnstile hostname "${outcome.hostname}" from ${ip}`);
+      return fakeSuccess();
+    }
+
+    const safeName = escapeHtml(name);
+    const safeEmail = escapeHtml(email);
+    const safeMessage = escapeHtml(message).replace(/\n/g, "<br/>");
 
     // 1. Send notification email to SolvoLab
     await resend.emails.send({
       from: "SolvoLab Contact Form <noreply@contact.solvolab.com>",
       to: "saboor@solvolab.com",
       subject: `New Contact Form Submission from ${name}`,
+      replyTo: email,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Name:</strong> ${safeName}</p>
+        <p><strong>Email:</strong> ${safeEmail}</p>
+        <p><strong>IP:</strong> ${escapeHtml(ip)}</p>
         <p><strong>Message:</strong></p>
-        <p>${message}</p>
+        <p>${safeMessage}</p>
       `,
     });
 
@@ -95,7 +230,7 @@ export async function POST(request: Request) {
         <!-- Main Content -->
         <tr>
             <td style="padding: 30px 24px; color: #45605a; font-size: 15px; line-height: 1.6;">
-                <p style="margin: 0 0 16px;">Hey ${name}!</p>
+                <p style="margin: 0 0 16px;">Hey ${safeName}!</p>
                 <p>Thanks for reaching out to us! We've received your message and wanted to let you know that our team is already on it.</p>
                 <p>We'll get back to you shortly with a thoughtful response. In the meantime, here's a quick look at what we can do for you, from intelligent automation to AI-driven workflows, we help businesses like yours eliminate manual bottlenecks and scale faster.</p>
                 <p>Ready to dive deeper? Book a quick 15-minute discovery call and let's explore how SolvoLab can transform your operations.</p>
