@@ -34,6 +34,10 @@ try {
     pageIds.set(route, await page.locator('[id]').evaluateAll(nodes => nodes.map(node => node.id)));
     for (const width of [1440, 768, 320]) {
       await page.setViewportSize({ width, height: 1000 });
+      await page.evaluate(() => scrollTo(0, 600));
+      await page.waitForFunction(() => Math.abs(scrollY - Math.min(600, document.documentElement.scrollHeight - innerHeight)) < 2);
+      assert.equal(await page.locator('header.home-nav').evaluate(el => Math.round(el.getBoundingClientRect().top)), 0, route + ': navbar must stay visible on scroll');
+      await page.evaluate(() => scrollTo({ top: 0, behavior: 'instant' }));
       const clipped = await page.locator('.site-shell').evaluateAll(shells => shells.flatMap(shell => [...shell.querySelectorAll('*')]).filter(el => {
         const rect = el.getBoundingClientRect();
         return rect.width && rect.height && (rect.right > innerWidth + 1 || rect.left < -1);
