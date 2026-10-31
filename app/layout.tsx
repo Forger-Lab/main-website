@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { Hanken_Grotesk, Schibsted_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Hanken_Grotesk, Schibsted_Grotesk, IBM_Plex_Mono, Inter } from "next/font/google";
 import Script from "next/script";
 import ClientReveal from "@/components/ClientReveal";
 import "./global.css";
+import "./home.css";
+
+const inter = Inter({ subsets: ["latin"], display: "swap", variable: "--home-inter" });
 
 const GA_MEASUREMENT_ID = "G-TF9M22BP03";
 
@@ -101,7 +104,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${schibsted.variable} ${hanken.variable} ${ibmPlexMono.variable}`}>
+      <body className={`${schibsted.variable} ${hanken.variable} ${ibmPlexMono.variable} ${inter.variable}`}>
         {children}
         <ClientReveal />
 

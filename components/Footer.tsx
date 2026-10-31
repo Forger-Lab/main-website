@@ -1,48 +1,45 @@
-"use client";
-
-import React from "react";
 import Link from "next/link";
-
-const LOGO = "/brandlogo/SolvoLabLogo-Cut.png";
+import { serviceLinks } from "@/lib/navigation";
 
 export default function Footer() {
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="foot-grid">
+    <footer className="site-shell home-footer">
+      <div className="home-container">
+        <div className="home-footer-grid">
+          <div className="home-footer-brand">
+            <Link href="/" aria-label="SolvoLab home"><img src="/home/46ec6.png" alt="SolvoLab" width="240" height="98" /></Link>
+            <p>Software, automation and AI connected to the way your business works.</p>
+          </div>
           <div>
-            <Link href="/" className="foot-brand">
-              <img src={LOGO} alt="SolvoLab" />
-              <span>Solvo<span style={{ color: "rgba(234,246,241,0.55)" }}>Lab</span></span>
-            </Link>
-            <p className="foot-blurb">The 24/7 Client Engine, one team that builds and runs your entire growth pipeline, so nothing breaks in the gaps.</p>
+            <h3>Services</h3>
+            <Link href="/#services">Services Overview</Link>
+            <Link href="/#engine">24/7 Client Engine</Link>
+            {serviceLinks.map(([label, href]) => <Link href={href} key={href}>{label}</Link>)}
           </div>
-          <div className="foot-col">
-            <h5>The Engine</h5>
-            <Link href="/web-development">Web Design &amp; Development</Link>
-            <Link href="/seo">SEO &amp; Local SEO</Link>
-            <Link href="/lead-capture">Lead Capture &amp; AI Receptionist</Link>
-            <Link href="/crm">CRM Command Center</Link>
-            <Link href="/automation">Automation &amp; Follow-Up</Link>
+          <div>
+            <h3>Explore</h3>
+            <Link href="/">Home</Link>
+            <Link href="/#client-work">Client Stories</Link>
+            <Link href="/builds#builds">Selected Builds</Link>
+            <Link href="/#approach">Our Approach</Link>
+            <Link href="/#architecture">Architecture</Link>
+            <Link href="/#security">Security</Link>
+            <Link href="/#insights">Tools &amp; Integrations</Link>
+            <Link href="/#faq">FAQs</Link>
           </div>
-          <div className="foot-col">
-            <h5>Company</h5>
-            <Link href="/about">Why us</Link>
-            <Link href="/builds">The Scale Build</Link>
-            <Link href="/#pricing">Pricing</Link>
-            <Link href="/#engine">How it works</Link>
-            <Link href="/contact">Book a free Growth Teardown</Link>
-          </div>
-          <div className="foot-col">
-            <h5>Contact</h5>
-            <Link href="mailto:saboor@solvolab.com">saboor@solvolab.com</Link>
-            <Link href="/contact">Book a call</Link>
-            <a href="https://www.linkedin.com/company/110093159" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <div>
+            <h3>Company &amp; Contact</h3>
+            <Link href="/about">About Us</Link>
+            <Link href="/#studio">Our Studio</Link>
+            <Link href="/contact">Contact Us</Link>
+            <Link href="/contact">Discuss pricing</Link>
+            <a href="mailto:saboor@solvolab.com">saboor@solvolab.com</a>
+            <a href="https://www.linkedin.com/company/110093159" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
           </div>
         </div>
-        <div className="foot-bottom">
-          <div>© {new Date().getFullYear()} SolvoLab, one team, one pipeline, no gaps.</div>
-          <div className="mono">solvolab.com · <Link href="/privacy">/privacy</Link> · <Link href="/terms">/terms</Link></div>
+        <div className="home-footer-bottom">
+          <span>© {new Date().getFullYear()} SolvoLab</span>
+          <div><Link href="/privacy">Privacy Policy</Link><Link href="/terms">Terms of Service</Link></div>
         </div>
       </div>
     </footer>

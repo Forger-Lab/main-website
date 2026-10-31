@@ -1,157 +1,97 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import Icon from "./Icon";
 import { trackClick } from "@/lib/analytics";
+import { serviceLinks } from "@/lib/navigation";
+import Icon from "./Icon";
 
-const LOGO = "/brandlogo/SolvoLabLogo-Cut.png";
+const groups = [
+  { label: "Services", links: [
+    ["Services Overview", "/#services"],
+    ["24/7 Client Engine", "/#engine"],
+    ...serviceLinks,
+  ] },
+  { label: "Client Work", links: [
+    ["Client Stories", "/#client-work"],
+    ["Selected Builds", "/builds#builds"],
+  ] },
+  { label: "About Us", links: [
+    ["About SolvoLab", "/about"],
+    ["Our Approach", "/#approach"],
+    ["Architecture", "/#architecture"],
+    ["Security", "/#security"],
+    ["Our Studio", "/#studio"],
+  ] },
+];
 
 export default function Nav() {
-  const [mobileOpen, setMobileOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const header = useRef<HTMLElement>(null);
   const pathname = usePathname();
-  const dropdownRef = useRef<HTMLDivElement>(null);
 
-  // Close menus on path changes
   useEffect(() => {
-    setMobileOpen(false);
-    setDropdownOpen(false);
-    document.body.style.overflow = "";
-  }, [pathname]);
-
-  // Click outside to close dropdown
-  useEffect(() => {
-    function handleClickOutside(e: MouseEvent) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target as Node)) {
-        setDropdownOpen(false);
-      }
+    function closeOutside(event: Event) {
+      header.current?.querySelectorAll<HTMLDetailsElement>("details[open]").forEach(menu => {
+        if (!menu.contains(event.target as Node)) menu.open = false;
+      });
     }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
+    document.addEventListener("pointerdown", closeOutside);
+    document.addEventListener("focusin", closeOutside);
+    return () => {
+      document.removeEventListener("pointerdown", closeOutside);
+      document.removeEventListener("focusin", closeOutside);
+    };
   }, []);
 
-  const handleMobileToggle = () => {
-    const nextState = !mobileOpen;
-    setMobileOpen(nextState);
-    document.body.style.overflow = nextState ? "hidden" : "";
-  };
+  const links = groups.map(group => (
+    <details className="home-nav-group" key={group.label} onPointerEnter={event => {
+      if (event.pointerType !== "mouse" || !window.matchMedia("(min-width: 1001px) and (hover: hover)").matches) return;
+      const menu = event.currentTarget;
+      menu.parentElement?.querySelectorAll<HTMLDetailsElement>("details").forEach(other => { other.open = other === menu; });
+    }} onPointerLeave={event => {
+      if (event.pointerType === "mouse" && window.matchMedia("(min-width: 1001px) and (hover: hover)").matches && !event.currentTarget.querySelector(".home-nav-panel")?.contains(document.activeElement)) {
+        event.currentTarget.open = false;
+      }
+    }}>
+      <summary onClick={event => {
+        // Hover already opens desktop menus; a mouse click should keep them open.
+        if (event.detail > 0 && window.matchMedia("(min-width: 1001px) and (hover: hover)").matches) {
+          event.preventDefault();
+          (event.currentTarget.parentElement as HTMLDetailsElement).open = true;
+        }
+      }}>{group.label}<Icon name="chevron" className="home-nav-chevron" /></summary>
+      <div className="home-nav-panel">
+        {group.links.map(([label, href]) => (
+          <Link key={href} href={href} aria-current={pathname === href ? "page" : undefined} onClick={() => trackClick(`nav_${href.replace(/[^a-z0-9]+/gi, "_")}`)}><span>{label}</span><Icon name="arrow" className="home-nav-card-arrow" /></Link>
+        ))}
+      </div>
+    </details>
+  ));
 
   return (
-    <>
-      <nav className="nav">
-        <div className="container nav-inner">
-          <Link href="/" className="brand">
-            <img src={LOGO} alt="SolvoLab" />
-            <span>Solvo<span className="tld">Lab</span></span>
-          </Link>
-
-          <div className="nav-menu">
-            <div className={`has-dropdown ${dropdownOpen ? "open" : ""}`} ref={dropdownRef}>
-              <button
-                className="nav-link"
-                aria-haspopup="true"
-                aria-expanded={dropdownOpen}
-                onClick={(e) => {
-                  e.preventDefault();
-                  setDropdownOpen(!dropdownOpen);
-                }}
-              >
-                The Engine <span className="chev" data-ic="chevron"><Icon name="chevron" /></span>
-              </button>
-              <div className="dropdown-panel">
-                <div className="dropdown-grid">
-                  <Link className="dd-item" href="/web-development" onClick={() => trackClick("nav_web_dev")}>
-                    <span className="dd-ic" data-ic="globe"><Icon name="globe" /></span>
-                    <span>
-                      <span className="dd-title">Web Design &amp; Development</span>
-                      <span className="dd-sub">A fast, conversion-built site</span>
-                    </span>
-                  </Link>
-                  <Link className="dd-item" href="/seo" onClick={() => trackClick("nav_seo")}>
-                    <span className="dd-ic" data-ic="search"><Icon name="search" /></span>
-                    <span>
-                      <span className="dd-title">SEO &amp; Local SEO</span>
-                      <span className="dd-sub">Get found on Google &amp; AI search</span>
-                    </span>
-                  </Link>
-                  <Link className="dd-item" href="/lead-capture" onClick={() => trackClick("nav_lead_capture")}>
-                    <span className="dd-ic" data-ic="headset"><Icon name="headset" /></span>
-                    <span>
-                      <span className="dd-title">Lead Capture &amp; AI Receptionist</span>
-                      <span className="dd-sub">Answer every lead in seconds</span>
-                    </span>
-                  </Link>
-                  <Link className="dd-item" href="/crm" onClick={() => trackClick("nav_crm")}>
-                    <span className="dd-ic" data-ic="database"><Icon name="database" /></span>
-                    <span>
-                      <span className="dd-title">CRM Command Center</span>
-                      <span className="dd-sub">Every lead in one place</span>
-                    </span>
-                  </Link>
-                  <Link className="dd-item" href="/automation" onClick={() => trackClick("nav_automation")}>
-                    <span className="dd-ic" data-ic="workflow"><Icon name="workflow" /></span>
-                    <span>
-                      <span className="dd-title">Automation &amp; Follow-Up</span>
-                      <span className="dd-sub">Nurture on autopilot</span>
-                    </span>
-                  </Link>
-                  <Link className="dd-item" href="/#engine" onClick={() => trackClick("nav_engine_full")}>
-                    <span className="dd-ic" data-ic="layers"><Icon name="layers" /></span>
-                    <span>
-                      <span className="dd-title">The full Engine</span>
-                      <span className="dd-sub">How the five connect</span>
-                    </span>
-                  </Link>
-                </div>
-                <div className="dd-foot">
-                  <span className="label">One team · one invoice · no gaps</span>
-                  <Link className="btn btn-primary btn-sm" href="/contact" onClick={() => trackClick("nav_dropdown_cta")}>
-                    Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span>
-                  </Link>
-                </div>
-              </div>
-            </div>
-
-            <Link className="nav-link" href="/builds" aria-current={pathname === "/builds" ? "page" : undefined}>The Scale Build</Link>
-            <Link className="nav-link" href="/#pricing" aria-current={pathname === "/#pricing" ? "page" : undefined}>Pricing</Link>
-            <Link className="nav-link" href="/about" aria-current={pathname === "/about" ? "page" : undefined}>Why us</Link>
-          </div>
-
-          <div className="nav-actions">
-            <Link className="btn btn-primary btn-sm btn-desktop" href="/contact" onClick={() => trackClick("nav_header_cta")}>
-              Book a free Growth Teardown
-            </Link>
-            <button
-              className="nav-toggle"
-              aria-label="Open menu"
-              aria-expanded={mobileOpen}
-              onClick={handleMobileToggle}
-            >
-              <span data-ic={mobileOpen ? "close" : "menu"}>
-                <Icon name={mobileOpen ? "close" : "menu"} />
-              </span>
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* Mobile Drawer menu */}
-      <div className={`mobile-menu ${mobileOpen ? "open" : ""}`}>
-        <div className="m-section-title">The Engine</div>
-        <Link className="m-sub" href="/web-development">Web Design &amp; Development</Link>
-        <Link className="m-sub" href="/seo">SEO &amp; Local SEO</Link>
-        <Link className="m-sub" href="/lead-capture">Lead Capture &amp; AI Receptionist</Link>
-        <Link className="m-sub" href="/crm">CRM Command Center</Link>
-        <Link className="m-sub" href="/automation">Automation &amp; Follow-Up</Link>
-        <Link href="/builds">The Scale Build</Link>
-        <Link href="/#pricing">Pricing</Link>
-        <Link href="/about">Why us</Link>
-        <Link className="btn btn-primary" href="/contact" onClick={() => trackClick("nav_mobile_cta")}>
-          Book a free Growth Teardown
-        </Link>
+    <header className="site-shell home-nav" ref={header} onClick={event => {
+      if ((event.target as HTMLElement).closest("a")) {
+        header.current?.querySelectorAll<HTMLDetailsElement>("details[open]").forEach(menu => { menu.open = false; });
+      }
+    }} onKeyDown={event => {
+      if (event.key !== "Escape") return;
+      const menu = (event.target as HTMLElement).closest<HTMLDetailsElement>("details[open]");
+      if (menu) {
+        event.preventDefault();
+        menu.open = false;
+        menu.querySelector("summary")?.focus();
+      }
+    }}>
+      <div className="home-container home-nav-inner">
+        <Link href="/" aria-label="SolvoLab home"><img src="/home/b616b.png" alt="SolvoLab" width="180" height="74" /></Link>
+        <nav aria-label="Main navigation" className="home-desktop-links">{links}</nav>
+        <Link className="home-button home-nav-cta" href="/contact" onClick={() => trackClick("nav_header_cta")}>Tell us about your project<img src="/home/81057.svg" alt="" /></Link>
+        <details className="home-mobile-nav">
+          <summary aria-label="Toggle navigation"><Icon name="menu" className="home-menu-icon" /><Icon name="close" className="home-close-icon" /></summary>
+          <nav aria-label="Mobile navigation">{links}<Link href="/contact" onClick={() => trackClick("nav_mobile_cta")}>Tell us about your project <Icon name="arrow" className="home-nav-card-arrow" /></Link></nav>
+        </details>
       </div>
-    </>
+    </header>
   );
 }

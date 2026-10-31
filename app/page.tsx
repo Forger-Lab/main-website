@@ -1,782 +1,119 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Image from "next/image";
 import Nav from "@/components/Nav";
 import Footer from "@/components/Footer";
-import Icon from "@/components/Icon";
+import HomeCaseStudies from "@/components/HomeCaseStudies";
+import { serviceLinks } from "@/lib/navigation";
 
+const title = "SolvoLab | Your Business Growth Partner";
+const description = "We diagnose operational bottlenecks, then design, connect, and scale custom software, automation, and AI systems to create room for your business to grow.";
 export const metadata: Metadata = {
-  title: "SolvoLab, The 24/7 Client Engine",
-  description:
-    "SolvoLab replaces your web designer, SEO agency, and CRM consultant with one team that builds and runs your entire growth pipeline, with no gaps.",
-  alternates: {
-    canonical: "/",
-  },
-  openGraph: {
-    title: "SolvoLab, The 24/7 Client Engine",
-    description:
-      "SolvoLab replaces your web designer, SEO agency, and CRM consultant with one team that builds and runs your entire growth pipeline, with no gaps.",
-  },
-  twitter: {
-    title: "SolvoLab, The 24/7 Client Engine",
-    description:
-      "SolvoLab replaces your web designer, SEO agency, and CRM consultant with one team that builds and runs your entire growth pipeline, with no gaps.",
-  },
+  title: { absolute: title }, description,
+  alternates: { canonical: "/" },
+  openGraph: { title, description, url: "/", images: [{ url: "/brandlogo/SolvoLabLogo.png", alt: "SolvoLab" }] },
+  twitter: { title, description, images: ["/brandlogo/SolvoLabLogo.png"] },
 };
 
-const schemaJson = {
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://www.solvolab.com/#organization",
-      "name": "SolvoLab",
-      "url": "https://www.solvolab.com",
-      "logo": {
-        "@type": "ImageObject",
-        "@id": "https://www.solvolab.com/#logo",
-        "url": "https://www.solvolab.com/brandlogo/SolvoLabLogo.png",
-        "caption": "SolvoLab Logo"
-      },
-      "image": {
-        "@id": "https://www.solvolab.com/#logo"
-      },
-      "email": "saboor@solvolab.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "30 N Gould St, STE R",
-        "addressLocality": "Sheridan",
-        "addressRegion": "WY",
-        "postalCode": "82801",
-        "addressCountry": "USA"
-      },
-      "sameAs": [
-        "https://www.linkedin.com/company/110093159"
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://www.solvolab.com/#website",
-      "url": "https://www.solvolab.com",
-      "name": "SolvoLab",
-      "publisher": {
-        "@id": "https://www.solvolab.com/#organization"
-      }
-    },
-    {
-      "@type": "WebPage",
-      "@id": "https://www.solvolab.com/#webpage",
-      "url": "https://www.solvolab.com",
-      "name": "SolvoLab, The 24/7 Client Engine",
-      "about": {
-        "@id": "https://www.solvolab.com/#organization"
-      },
-      "isPartOf": {
-        "@id": "https://www.solvolab.com/#website"
-      }
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.solvolab.com/#webdev-service",
-      "name": "Web Design & Development",
-      "provider": {
-        "@id": "https://www.solvolab.com/#organization"
-      },
-      "url": "https://www.solvolab.com/web-development",
-      "description": "A custom, fast, mobile-first site engineered to turn visitors into inquiries, not just look pretty."
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.solvolab.com/#seo-service",
-      "name": "SEO & Local SEO",
-      "provider": {
-        "@id": "https://www.solvolab.com/#organization"
-      },
-      "url": "https://www.solvolab.com/seo",
-      "description": "Technical foundation, on-page optimization, and Google Business Profile so you rank where buying intent is highest."
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.solvolab.com/#lead-capture-service",
-      "name": "Lead Capture & AI Receptionist",
-      "provider": {
-        "@id": "https://www.solvolab.com/#organization"
-      },
-      "url": "https://www.solvolab.com/lead-capture",
-      "description": "Smart forms, live chat, call-back widget, and a 24/7 AI voice agent that answers, qualifies, and books."
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.solvolab.com/#crm-service",
-      "name": "CRM Command Center",
-      "provider": {
-        "@id": "https://www.solvolab.com/#organization"
-      },
-      "url": "https://www.solvolab.com/crm",
-      "description": "Every lead, call, and deal in one place, with a unified dashboard for rankings, traffic, and conversions."
-    },
-    {
-      "@type": "Service",
-      "@id": "https://www.solvolab.com/#automation-service",
-      "name": "Automation & Follow-Up",
-      "provider": {
-        "@id": "https://www.solvolab.com/#organization"
-      },
-      "url": "https://www.solvolab.com/automation",
-      "description": "Missed-call text-back, email + SMS nurture, and a reputation engine that chases every lead until they book."
-    },
-    {
-      "@type": "FAQPage",
-      "@id": "https://www.solvolab.com/#faq",
-      "isPartOf": {
-        "@id": "https://www.solvolab.com/#webpage"
-      },
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "What is SolvoLab?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "SolvoLab is a single team that builds and runs your entire growth pipeline, website, SEO, lead capture, CRM, and automated follow-up, as one connected system. Instead of hiring a separate web designer, SEO agency, and CRM consultant, you get all five working together with no vendor handoffs."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What's included in The Engine?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Five connected systems: (1) Web Design & Development, (2) SEO & Local SEO, (3) Lead Capture & AI Receptionist, (4) CRM Command Center, and (5) Automation & Follow-Up. The same team builds and owns all five so each hands off cleanly to the next."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who is SolvoLab for?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Small and multi-location businesses in home services, dental, real estate, auto shops, security companies, and professional services, especially those losing leads either because they don't rank on Google or AI search, or because their traffic isn't converting and follow-up is too slow."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the AI receptionist?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A 24/7 AI voice agent that answers inbound calls, qualifies the caller, and books the appointment, so calls don't go unanswered after hours. It works alongside smart forms, live chat, a call-back widget, and missed-call text-back."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is missed-call text-back?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "If a call is missed, the caller is automatically texted back within seconds so the lead doesn't go cold before someone can follow up."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How fast can I go live?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The build phase runs as a focused launch sprint over roughly the first three months (Phase 1). There's no drawn-out discovery stall, the team maps your funnel and launches fast."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How does the engagement work over time?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Phase 1 (Months 1 to 3) builds and launches your full engine. Phase 2 (Month 4 onward) is ongoing management: continued SEO, content and backlinks, managed website and hosting, tuned CRM and automation, plus a monthly report and strategy call."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is the 90-Day Momentum Guarantee?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Within 90 days of launch, you should see measurable growth in organic visibility and inbound leads, tracked on your own dashboard (rankings, organic traffic, and inbound leads) and reviewed with you monthly. If you don't, SolvoLab keeps working at no extra cost until you do."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How much does SolvoLab cost?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Engagements typically start from $1,500/month, with the exact number scoped on your teardown call based on locations, build size, and call volume. It's structured as one all-inclusive investment, a Phase 1 build (3-month launch sprint) and a Phase 2 monthly fee from month 4, with platform, tools, and execution all included so there's no separate vendor stack to pay for."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who owns the website, CRM, and data?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You do, fully. The website, the CRM, and every lead and contact in it belong to your business from day one, and they stay yours if we ever part ways. SolvoLab builds on your accounts, not its own."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What happens if I want to stop?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "You keep everything, the site, the CRM, the automations, and all your data. SolvoLab hands over cleanly with documentation. There are no lock-in contracts designed to trap you."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do you rebuild my site or work with my existing one?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Whichever gets you results faster. On the teardown call SolvoLab assesses your current site honestly: if it's a solid foundation the team builds on it; if it's holding your rankings and conversions back, they'll show you exactly why and rebuild it as part of Phase 1."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Who will I actually work with?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "The same small team that builds your engine runs it, no account managers relaying messages to a production team you never meet. You get a direct line to the people doing the work, and a monthly strategy call."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What is a Growth Teardown?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A free consultation where SolvoLab shows you exactly where you're losing leads today and what your engine would look like once built. If it's not a fit, you keep the competitor teardown anyway."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Do I need to hire extra staff?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. The system handles answering, capturing, tracking, and following up with leads automatically, so you can go live without adding new headcount."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "What do I get for free?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "A competitor teardown showing how your top 3 competitors beat you online, a done-for-you 6-month content calendar, and priority speed-to-lead so new leads hit your phone within 60 seconds."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Will I be able to track results?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Yes. A unified analytics dashboard puts rankings, traffic, leads, and conversions on one screen, plus you get a monthly report and strategy call during the management phase."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "How do I get started?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Book a free Growth Teardown through the contact page at solvolab.com or email saboor@solvolab.com."
-          }
-        }
-      ]
-    }
-  ]
-};
+const bottlenecks = [
+  ["60e09.svg", "Processes run too slowly", "Name the action, who does it, and where people spend 10+ hours a week repeating manual steps instead of closing deals.", "Scaled payroll on administrative low-value tasks."],
+  ["7d1b7.svg", "Tools do not talk to each other", "Follow an inquiry across your stack: spreadsheets, email, and CRM. Note where someone has to retype, copy-paste, or chase updates.", "Data silos and delayed handoffs lead to errors."],
+  ["1f5eb.svg", "Inquiries and leads get dropped", "Prospective buyers request quotes but wait hours or days to receive qualification, routing, or a booked calendar consultation.", "Lost revenue to faster-responding competitors."],
+];
+const turnkey = [
+  ["9bfa6.svg", "The Custom Software Build", "Bespoke web applications, client portals, and workflow dashboards built to replace rigid SaaS tools and match your exact operations.", "React, Node.js, Claude API, PostgreSQL", "/builds"],
+  ["53f58.svg", "The Operations Integration", "Cross-tool synchronisation connecting your spreadsheets, CRM, and accounting to eliminate manual data entry and handoff errors.", "n8n, Make, Zapier, Webhooks, REST APIs", "/automation"],
+  ["1065a.svg", "The Enterprise Intelligence Engine", "Secure centralised knowledge retrieval across internal documents, SOPs, and company data for instant and accurate answers.", "Claude, Vector DB (pgvector), Hybrid RAG"],
+];
+const modular = [
+  ["fa6e1.svg", "Back Office Agents", "Automated document parsing, invoice matching, and internal ticket triage that removes administrative backlogs.", "Make, n8n, Claude"],
+  ["598e1.svg", "Content Creation System", "Structured topical authority platforms and automated search updates to expand organic business visibility.", "Claude, Headless CMS, n8n, Search Console API"],
+  ["fbe40.svg", "Custom Integrations", "Reliable bidirectional middleware that connects legacy databases to modern cloud CRMs and third-party platforms.", "REST APIs, Webhooks, n8n, Python", "/automation"],
+  ["3e961.svg", "Voice and Chat Agents", "Natural conversational systems answering inbound phone calls, qualifying prospective clients, and scheduling appointments 24/7.", "Vapi, Retell AI, Claude, Twilio", "/lead-capture"],
+  ["602fd.svg", "Signal-Based Outbound & Cold Email", "Enriched prospect identification that triggers timely, personalised outreach based on real business hiring and technology signals.", "Clay, Instantly, Smartlead, LinkedIn API"],
+];
+const approach = [
+  ["Consultation", "We learn about your business, workflows, challenges, and goals.", "Initial alignment on bottlenecks, business scope, and technical feasibility."],
+  ["Research & Discovery", "We study your processes, existing tools, and opportunities for improvement.", "Workflow audit, tech stack integration map, and ROI opportunity score."],
+  ["Solution Blueprint", "We show you exactly what we recommend and how it will work.", "Architecture recommendation, exact implementation timeline, and quantified success metrics."],
+  ["Pilot & Validate", "Once you're satisfied with the plan, we launch a focused pilot.", "A live pilot that validates performance in the real world with measurable user proof."],
+  ["Scale Together", "If the pilot delivers the expected results, we expand into a partnership.", "Long-term technical arrangement, continuous maintenance, and ongoing scale."],
+];
+const safeguards = [
+  ["13b65.svg", "API Key Encryption & Vaults", "Secrets and private keys live in isolated vault environments, never exposed in client-side code or shared repositories."],
+  ["c161f.svg", "Role-Based Access Control", "Strict least-privilege access is applied across databases, webhooks, and third-party SaaS connector tokens."],
+  ["a2845.svg", "Human Approval Gates", "Critical outbound communications, financial syncs, and large database updates require human-in-the-loop sign-off."],
+  ["dda28.svg", "Zero Data Retention Policies", "Customer prompts and sensitive records are configured to enable zero data retention on foundation model APIs."],
+];
+const integrations = [
+  ["5aea1.svg", "n8n", "Self-Hosted Workflow Automation", "Complex multi-step pipelines & on-premises execution"],
+  ["7fd42.svg", "Make", "Visual iPaaS Integration", "Connect applications and automate cross-tool workflows."],
+  ["6ace8.svg", "Zapier", "Standard Integration", "Connect everyday business tools with event-driven workflows."],
+  ["2dac7.svg", "Clay", "Data Enrichment & Waterfall", "Enrich prospect records and identify relevant outreach signals."],
+  ["71a45.svg", "HubSpot", "CRM Architecture", "Capture, qualify, and route inquiries into your customer pipeline."],
+  ["7f08f.svg", "Instantly & Smartlead", "Cold Outreach Infrastructure", "Coordinate personalised outbound campaigns and follow-up workflows."],
+  ["42776.svg", "Claude 3.5 Sonnet", "Frontier LLM Reasoning", "Parse documents, retrieve knowledge, and support multi-step decisions."],
+  ["e33cc.svg", "Vapi & Retell AI", "Voice Telephony Agents", "Answer inbound calls, qualify inquiries, and schedule appointments."],
+];
+const faqs = [
+  ["Can we start with one workflow?", "Yes. The modular services cover focused improvements. Describe the task or integration, then agree what the engagement includes."],
+  ["Do we need to know which service we need?", "No. Start with the problem you want to solve. During the consultation, we review your workflows and recommend the right service or combination of systems."],
+  ["How much does the Client Engine cost?", "The scope depends on your workflows, integrations, and requirements. Contact us to discuss your project and agree the deliverables and pricing before work begins."],
+  ["What happens after we contact you?", "We start with a consultation to understand your business, then move through research, a solution blueprint, and a focused pilot before scaling."],
+  ["What do you need for an AI dataset?", "Tell us the task, the data sources you can provide, and the intended outcome. We agree access, privacy requirements, and a representative sample before assessing the dataset."],
+];
+
+function Action({ children = "Tell us about your project" }: { children?: React.ReactNode }) {
+  return <Link className="home-button" href="/contact">{children}<img src="/home/81057.svg" alt="" /></Link>;
+}
+function Heading({ eyebrow, children, intro }: { eyebrow?: string; children: React.ReactNode; intro?: string }) {
+  return <div className="home-section-heading">{eyebrow && <p className="home-eyebrow">{eyebrow}</p>}<h2>{children}</h2>{intro && <p>{intro}</p>}</div>;
+}
+function ServiceCard({ service }: { service: string[] }) {
+  const [icon, name, copy, stack, href] = service;
+  return <article className="home-service-card"><div className="home-card-title"><span className="home-icon"><img src={`/home/${icon}`} alt="" /></span><h3>{name}</h3></div><div className="home-service-copy"><p>{copy}</p><small>Tools: {stack}</small></div><Link className="home-text-link" href={href ?? "/contact"}>{href ? "Explore this service" : "Discuss my growth goals"}<img src="/home/74ac1.svg" alt="" /></Link></article>;
+}
 
 export default function Home() {
-  return (
-    <>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJson) }}
-      />
-      <Nav />
-      <main>
-        <header className="band-dark">
-          <div className="grid-tex"></div>
-          <div className="container hero">
-            <div className="hero-grid">
-              <div>
-                <span className="eyebrow on-dark">The 24/7 Client Engine</span>
-                <h1 className="h1">Every lead answered, followed up, and booked, by <span className="accent on-dark">one team.</span></h1>
-                <p className="lede">Website, SEO, lead capture, CRM, and automated follow-up, engineered together as a single system by one team. No three vendors. No handoffs that break. No leads slipping through the gaps, because there are no gaps.</p>
-                <div className="btn-row">
-                  <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-                  <a className="btn btn-outline-light btn-lg" href="#engine">See how the Engine works</a>
-                </div>
-                <div className="hero-trust">
-                  <div><div className="ht-num">1 team</div><div className="ht-label">owns site → SEO → CRM → follow-up</div></div>
-                  <div><div className="ht-num">90 days</div><div className="ht-label">Momentum Guarantee, or we keep working free</div></div>
-                  <div><div className="ht-num">0 gaps</div><div className="ht-label">no vendor handoffs to break</div></div>
-                </div>
-              </div>
-
-              {/* pipeline visual */}
-              <div className="pipeline reveal">
-                <div className="pipeline-head">
-                  <span className="pl-title">Your pipeline · one system</span>
-                  <span className="pl-live">running</span>
-                </div>
-                <div className="pl-flow">
-                  <div className="pl-node">
-                    <span className="pl-ic" data-ic="search"><Icon name="search" /></span>
-                    <span><span className="pl-name">Found on Google &amp; AI search</span><span className="pl-meta">Website + technical &amp; local SEO</span></span>
-                    <span className="pl-step">visit</span>
-                  </div>
-                  <div className="pl-connector"></div>
-                  <div className="pl-node">
-                    <span className="pl-ic" data-ic="headset"><Icon name="headset" /></span>
-                    <span><span className="pl-name">Captured in seconds</span><span className="pl-meta">Chat, forms, call-back, AI receptionist</span></span>
-                    <span className="pl-step">capture</span>
-                  </div>
-                  <div className="pl-connector"></div>
-                  <div className="pl-node">
-                    <span className="pl-ic" data-ic="database"><Icon name="database" /></span>
-                    <span><span className="pl-name">Logged in your CRM</span><span className="pl-meta">Every lead, call &amp; deal in one place</span></span>
-                    <span className="pl-step">track</span>
-                  </div>
-                  <div className="pl-connector"></div>
-                  <div className="pl-node">
-                    <span className="pl-ic" data-ic="calendar"><Icon name="calendar" /></span>
-                    <span><span className="pl-name">Followed up until booked</span><span className="pl-meta">Email + SMS sequences, on autopilot</span></span>
-                    <span className="pl-step">close</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        <section className="section">
-          <div className="container">
-            <div className="section-head reveal">
-              <span className="eyebrow">The problem you're living with</span>
-              <h2 className="h2">Right now, you're leaking revenue every single day.</h2>
-              <p className="lede">For most multi-location businesses online, one of two things is true, and both quietly cost you customers.</p>
-            </div>
-
-            <div className="split" style={{ alignItems: "stretch" }}>
-              <div className="card reveal" style={{ padding: "34px", display: "flex", flexDirection: "column", gap: "14px" }}>
-                <span className="eyebrow">Scenario A</span>
-                <h3 className="h3">Your competitors show up. You don't.</h3>
-                <p style={{ color: "var(--ink-2)", fontSize: "16px", lineHeight: "1.6", margin: "0" }}>The customers who should be calling you are calling them, because when buyers search Google or ask an AI for a recommendation, your competitors show up first and you aren't even in the conversation.</p>
-              </div>
-              <div className="card reveal" style={{ padding: "34px", display: "flex", flexDirection: "column", gap: "14px" }}>
-                <span className="eyebrow">Scenario B</span>
-                <h3 className="h3">You get traffic. It doesn't convert.</h3>
-                <p style={{ color: "var(--ink-2)", fontSize: "16px", lineHeight: "1.6", margin: "0" }}>Visitors land, but your site doesn't turn them into inquiries. Follow-up is slow or manual, after-hours leads go unanswered, and prospects quietly slip through the cracks before anyone calls them back.</p>
-              </div>
-            </div>
-
-            <div className="callout reveal" style={{ marginTop: "24px", background: "var(--bg-soft)", borderColor: "transparent" }}>
-              <span className="co-badge" data-ic="plug" style={{ fontSize: "30px" }}><Icon name="plug" /></span>
-              <div className="co-text">
-                <strong>And the usual fix makes it worse.</strong>
-                <p>A web designer who doesn't talk to your SEO person, who doesn't talk to whoever set up your CRM. Three vendors, three invoices, and every handoff between them breaks. We replace all of it.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="engine" style={{ background: "var(--bg-soft)" }}>
-          <div className="container">
-            <div className="section-head center reveal">
-              <span className="eyebrow">The 24/7 Client Engine</span>
-              <h2 className="h2">Five systems. One pipeline. No gaps.</h2>
-              <p className="lede">One team owns your entire growth pipeline end-to-end. Each piece is built to hand off cleanly to the next, because the same people build all of them.</p>
-            </div>
-
-            <div className="pillar-grid">
-              <Link className="pillar card reveal" href="/web-development">
-                <span className="pillar-ic" data-ic="globe"><Icon name="globe" /></span>
-                <span className="step-tag">01 · Get found &amp; convert</span>
-                <h3>Web Design &amp; Development</h3>
-                <p>A custom, fast, mobile-first site engineered to turn visitors into inquiries, not just look pretty.</p>
-                <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
-              </Link>
-              <Link className="pillar card reveal" href="/seo">
-                <span className="pillar-ic" data-ic="search"><Icon name="search" /></span>
-                <span className="step-tag">02 · Get found &amp; convert</span>
-                <h3>SEO &amp; Local SEO</h3>
-                <p>Technical foundation, on-page optimization, and Google Business Profile so you rank where buying intent is highest.</p>
-                <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
-              </Link>
-              <Link className="pillar card reveal" href="/lead-capture">
-                <span className="pillar-ic" data-ic="headset"><Icon name="headset" /></span>
-                <span className="step-tag">03 · Capture every lead</span>
-                <h3>Lead Capture &amp; AI Receptionist</h3>
-                <p>Smart forms, live chat, call-back widget, and a 24/7 AI voice agent that answers, qualifies, and books.</p>
-                <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
-              </Link>
-              <Link className="pillar card reveal" href="/crm">
-                <span className="pillar-ic" data-ic="database"><Icon name="database" /></span>
-                <span className="step-tag">04 · Never lose a lead</span>
-                <h3>CRM Command Center</h3>
-                <p>Every lead, call, and deal in one place, with a unified dashboard for rankings, traffic, and conversions.</p>
-                <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
-              </Link>
-              <Link className="pillar card reveal" href="/automation">
-                <span className="pillar-ic" data-ic="workflow"><Icon name="workflow" /></span>
-                <span className="step-tag">05 · Convert on autopilot</span>
-                <h3>Automation &amp; Follow-Up</h3>
-                <p>Missed-call text-back, email + SMS nurture, and a reputation engine that chases every lead until they book.</p>
-                <span className="more">Explore <span data-ic="arrow"><Icon name="arrow" /></span></span>
-              </Link>
-              <Link className="pillar card reveal" href="/contact" style={{ background: "linear-gradient(165deg,var(--teal-softer),var(--surface))", borderColor: "var(--teal-300)" }}>
-                <span className="pillar-ic" data-ic="layers" style={{ background: "linear-gradient(135deg,var(--teal-600),var(--teal))", color: "#fff" }}><Icon name="layers" /></span>
-                <span className="step-tag">The whole engine</span>
-                <h3>Not sure where you're leaking?</h3>
-                <p>Book a free Growth Teardown and we'll show you exactly which part of the pipeline is costing you leads today.</p>
-                <span className="more">Book a free teardown <span data-ic="arrow"><Icon name="arrow" /></span></span>
-              </Link>
-            </div>
-          </div>
-        </section>
-
-        <section className="section">
-          <div className="container">
-            <div className="section-head reveal">
-              <span className="eyebrow">How it works</span>
-              <h2 className="h2">We build your engine, then we run it and climb.</h2>
-              <p className="lede">No three-month &ldquo;discovery&rdquo; stall. We map your full funnel and launch fast, then manage the whole pipeline so it keeps converting.</p>
-            </div>
-
-            <div className="phase-grid">
-              <div className="phase featured reveal">
-                <div className="phase-tag">Phase 1 <span className="badge">Months 1–3</span></div>
-                <h3>We build your engine</h3>
-                <p className="phase-sub">A comprehensive launch sprint to deploy your complete technical foundation.</p>
-                <ul className="feature-list">
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Conversion-built website + technical SEO</span><span className="ft-desc">Custom, fast, mobile-first, engineered to rank and convert.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Lead capture + AI receptionist wired in</span><span className="ft-desc">Forms, chat, call-back, and 24/7 inbound voice agent.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM command center + automations live</span><span className="ft-desc">Every lead tracked; follow-up running on autopilot.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Onboarding &amp; strategy sprint</span><span className="ft-desc">We map your full funnel and launch fast.</span></span></li>
-                </ul>
-              </div>
-              <div className="phase reveal">
-                <div className="phase-tag">Phase 2 <span className="badge" style={{ background: "var(--violet)" }}>Month 4 →</span></div>
-                <h3>We run it &amp; climb</h3>
-                <p className="phase-sub">High-impact management of your entire pipeline for continuous growth.</p>
-                <ul className="feature-list">
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Ongoing SEO, content &amp; backlinks</span><span className="ft-desc">Your steady climb up the rankings.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Website + hosting, security &amp; speed</span><span className="ft-desc">Fully managed, always current.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM, automation &amp; reputation, tuned</span><span className="ft-desc">Kept converting; reviews built quietly.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Monthly report + strategy call</span><span className="ft-desc">You see the numbers and the plan.</span></span></li>
-                </ul>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" style={{ background: "var(--bg-soft)" }}>
-          <div className="container">
-            <div className="section-head reveal">
-              <span className="eyebrow">What you get</span>
-              <h2 className="h2">Everything your pipeline needs, under one roof.</h2>
-              <p className="lede">The complete system we deploy in your build phase, each component owned and connected by the same team.</p>
-            </div>
-
-            <div className="incl-grid">
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="globe"><Icon name="globe" /></span><div><h4>Conversion-built website</h4><p>Custom, fast, mobile-first, engineered to turn visitors into inquiries.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="gauge"><Icon name="gauge" /></span><div><h4>Technical SEO foundation</h4><p>Speed, schema, indexing, Core Web Vitals, the groundwork Google rewards.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="target"><Icon name="target" /></span><div><h4>On-page SEO + keyword mapping</h4><p>Every page optimized to rank for what your buyers actually type.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="map"><Icon name="map" /></span><div><h4>Google Business Profile + local SEO</h4><p>Show up in the map pack and &ldquo;near me&rdquo; searches where intent is highest.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="database"><Icon name="database" /></span><div><h4>CRM command center</h4><p>Every lead, call, and deal in one place, you never lose track of a prospect.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="headset"><Icon name="headset" /></span><div><h4>Lead-capture suite</h4><p>Smart forms, live chat, and a call-back widget that catch leads while they're hot.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="phone"><Icon name="phone" /></span><div><h4>AI receptionist (inbound voice)</h4><p>Answers calls 24/7, qualifies the caller, and books the appointment.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="chat"><Icon name="chat" /></span><div><h4>Missed-call text-back</h4><p>Every missed call auto-texted back in seconds, so no lead goes cold.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="mail"><Icon name="mail" /></span><div><h4>Automated follow-up (email + SMS)</h4><p>Nurture sequences that chase every lead on autopilot until they book.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="star"><Icon name="star" /></span><div><h4>Reputation engine</h4><p>Automated review requests that quietly build your 5-star reputation.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="chart"><Icon name="chart" /></span><div><h4>Unified analytics dashboard</h4><p>Rankings, traffic, leads, and conversions on one screen.</p></div></div>
-              <div className="incl-item reveal"><span className="incl-ic" data-ic="rocket"><Icon name="rocket" /></span><div><h4>Onboarding &amp; strategy sprint</h4><p>We map your full funnel and launch fast, no three-month stall.</p></div></div>
-              <div className="incl-item reveal">
-                <span className="incl-ic" data-ic="eye" style={{ background: "var(--violet-soft)", color: "var(--violet)" }}><Icon name="eye" /></span>
-                <div>
-                  <h4>Competitor Teardown <span style={{ display: "inline-block", fontSize: "11px", fontFamily: "var(--mono)", background: "var(--violet-soft)", color: "var(--violet)", padding: "3px 8px", borderRadius: "99px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.04em", marginLeft: "8px", verticalAlign: "middle" }}>On the house</span></h4>
-                  <p>Before we touch anything, a full breakdown of exactly where your top 3 competitors beat you online, and how we'll overtake them.</p>
-                </div>
-              </div>
-              <div className="incl-item reveal">
-                <span className="incl-ic" data-ic="clipboard" style={{ background: "var(--violet-soft)", color: "var(--violet)" }}><Icon name="clipboard" /></span>
-                <div>
-                  <h4>6-Month Content Calendar <span style={{ display: "inline-block", fontSize: "11px", fontFamily: "var(--mono)", background: "var(--violet-soft)", color: "var(--violet)", padding: "3px 8px", borderRadius: "99px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.04em", marginLeft: "8px", verticalAlign: "middle" }}>On the house</span></h4>
-                  <p>Done-for-you. You'll always know what's being published, when, and why it's pulling in traffic.</p>
-                </div>
-              </div>
-              <div className="incl-item reveal">
-                <span className="incl-ic" data-ic="bolt" style={{ background: "var(--violet-soft)", color: "var(--violet)" }}><Icon name="bolt" /></span>
-                <div>
-                  <h4>Priority Speed-to-Lead <span style={{ display: "inline-block", fontSize: "11px", fontFamily: "var(--mono)", background: "var(--violet-soft)", color: "var(--violet)", padding: "3px 8px", borderRadius: "99px", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.04em", marginLeft: "8px", verticalAlign: "middle" }}>On the house</span></h4>
-                  <p>New leads hit your phone within 60 seconds, so you call back while they're still holding their card.</p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section-sm band-dark">
-          <div className="grid-tex"></div>
-          <div className="container">
-            <div className="guarantee reveal">
-              <div className="seal">
-                <div>
-                  <div className="seal-num">90</div>
-                  <div className="seal-unit">Day guarantee</div>
-                </div>
-              </div>
-              <div>
-                <span className="eyebrow on-dark">Zero risk</span>
-                <h2 className="h2" style={{ margin: "14px 0 14px" }}>The 90-Day Momentum Guarantee.</h2>
-                <p className="lede" style={{ maxWidth: "640px" }}>Within 90 days of launch, you'll see measurable growth in your organic visibility and inbound leads. If you don't, we keep working at no extra cost until you do. You carry zero risk, we don't get to coast on a retainer, we earn it by moving your numbers.</p>
-                <p style={{ maxWidth: "640px", margin: "14px 0 0", fontSize: "14.5px", color: "rgba(234,246,241,0.62)" }}>Measured in the open: your dashboard tracks rankings, organic traffic, and inbound leads, and we review the numbers with you on every monthly call.</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" style={{ background: "var(--bg-soft)" }}>
-          <div className="container">
-            <div className="section-head reveal">
-              <span className="eyebrow">Proof, not promises</span>
-              <h2 className="h2">Real systems, in production.</h2>
-              <p className="lede">The same team behind the Engine ships production AI systems for real businesses. Here's a sample of what's live right now.</p>
-            </div>
-
-            <div className="proof-grid">
-              <article className="proof-card reveal">
-                <div className="proof-top">
-                  <span className="proof-ic" data-ic="phone"><Icon name="phone" /></span>
-                  <span className="proof-index">01 / voice</span>
-                </div>
-                <h3>&quot;Aiesha&quot;, AI voice agent</h3>
-                <p className="proof-what">Inbound call-handling agent with real-time speech, answers, qualifies, and books with under 600ms response latency. The same system behind our AI receptionist.</p>
-                <div className="proof-foot">
-                  <span className="proof-status">In production</span>
-                </div>
-              </article>
-              <article className="proof-card reveal">
-                <div className="proof-top">
-                  <span className="proof-ic" data-ic="shield"><Icon name="shield" /></span>
-                  <span className="proof-index">02 / security</span>
-                </div>
-                <h3>Incident response + web rebuild</h3>
-                <p className="proof-what">Detected and fully remediated a live malware attack on a client&apos;s site, delivered a vulnerability report, and rebuilt the site clean.</p>
-                <div className="proof-foot">
-                  <span className="proof-status">Resolved &amp; rebuilt</span>
-                  <span className="proof-client">Client: <b>Vigilant Security Services</b></span>
-                </div>
-              </article>
-              <article className="proof-card reveal">
-                <div className="proof-top">
-                  <span className="proof-ic" data-ic="chart"><Icon name="chart" /></span>
-                  <span className="proof-index">03 / analytics</span>
-                </div>
-                <h3>AI analytics at scale</h3>
-                <p className="proof-what">AI evaluation of tutoring-session transcripts for a major MENA edtech platform, scoring teaching quality across thousands of sessions.</p>
-                <div className="proof-foot">
-                  <span className="proof-status">Running at scale</span>
-                </div>
-              </article>
-              <article className="proof-card reveal">
-                <div className="proof-top">
-                  <span className="proof-ic" data-ic="chat"><Icon name="chat" /></span>
-                  <span className="proof-index">04 / commerce</span>
-                </div>
-                <h3>WhatsApp commerce agents</h3>
-                <p className="proof-what">AI agents wired into Shopify, order status, product Q&amp;A, and cart recovery handled directly in chat for two live e-commerce brands.</p>
-                <div className="proof-foot">
-                  <span className="proof-status">Live · two brands</span>
-                </div>
-              </article>
-            </div>
-
-            <div className="btn-row reveal" style={{ justifyContent: "center", marginTop: "34px" }}>
-              <Link className="btn btn-ghost" href="/builds">See the full build log <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-            </div>
-
-            <p className="reveal" style={{ textAlign: "center", margin: "44px 0 18px", fontFamily: "var(--mono)", fontSize: "12px", letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--ink-3)" }}>Trusted by real businesses</p>
-            <div className="stack-strip reveal">
-              <span className="stack-logo"><img src="/logos/vigilant.jpg" alt="Vigilant Security Services" style={{ borderRadius: "999px" }} /><span>Vigilant Security</span></span>
-              <span className="stack-logo"><img src="/logos/noon.svg" alt="Noon" /><span>Noon</span></span>
-              <span className="stack-logo"><img src="/logos/livekit-color.svg" alt="LiveKit" /><span>LiveKit</span></span>
-              <span className="stack-logo"><img src="/logos/n8n-color.svg" alt="n8n" /><span>n8n</span></span>
-              <span className="stack-logo"><img src="/logos/Supabase%20Icon.png" alt="Supabase" /><span>Supabase</span></span>
-              <span className="stack-logo"><img src="/logos/Next.js.png" alt="Next.js" /><span>Next.js</span></span>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="pricing">
-          <div className="container">
-            <div className="section-head reveal">
-              <span className="eyebrow">Your investment</span>
-              <h2 className="h2">One inclusive investment. No vendor stack to manage.</h2>
-              <p className="lede">A premium, all-inclusive growth engine, platform, tools, and execution included. Engagements typically start from $1,500/month, and we align our success with your ROI, so we earn the retainer by moving your numbers.</p>
-              <p className="reveal" style={{ maxWidth: "620px", margin: "14px 0 0", fontSize: "15px", color: "var(--ink-2)" }}>What moves the number: how many locations you have, the size of the build, and your call volume. Either way it's one invoice, typically less than a web agency, an SEO retainer, and a receptionist salary stacked separately.</p>
-            </div>
-
-            <div className="price-cols">
-              <div className="price-card dark reveal">
-                <span className="price-phase">Phase 1 · Build</span>
-                <h3>The 3-month launch sprint</h3>
-                <div className="price-amount"><span className="amt">Custom</span><span className="per">/ shared on your teardown call</span></div>
-                <p className="price-note">A comprehensive sprint to deploy your complete technical foundation, website, SEO, lead capture, CRM, and automation, fully wired and live.</p>
-                <ul className="feature-list" style={{ gap: "10px" }}>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">Full engine built &amp; launched</span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">All platform &amp; tooling included</span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">Onboarding &amp; strategy sprint</span></li>
-                </ul>
-              </div>
-              <div className="price-card reveal">
-                <span className="price-phase">Phase 2 · Scale</span>
-                <h3>Run it &amp; climb</h3>
-                <div className="price-amount"><span className="amt">From ~$1,500</span><span className="per">/ month, from month 4</span></div>
-                <p className="price-note">High-impact management of your entire pipeline, SEO, content, website, CRM, automation, and reputation, kept tuned and converting.</p>
-                <ul className="feature-list" style={{ gap: "10px" }}>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">Ongoing SEO, content &amp; backlinks</span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">Website, CRM &amp; automation managed</span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span className="ft-title">Monthly report + strategy call</span></li>
-                </ul>
-                <Link className="btn btn-primary" href="/contact" style={{ marginTop: "auto" }}>Get your numbers on a call <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section className="section" id="faq">
-          <div className="container">
-            <div className="section-head center reveal">
-              <span className="eyebrow">FAQ</span>
-              <h2 className="h2">Frequently Asked Questions</h2>
-              <p className="lede">Everything you need to know about the 24/7 Client Engine, SolvoLab, and how we help your business scale.</p>
-            </div>
-            
-            <div className="faq-grid reveal">
-              <details className="faq-item">
-                <summary className="faq-question">What is SolvoLab?</summary>
-                <div className="faq-answer">
-                  SolvoLab is a single team that builds and runs your entire growth pipeline, website, SEO, lead capture, CRM, and automated follow-up, as one connected system. Instead of hiring a separate web designer, SEO agency, and CRM consultant, you get all five working together with no vendor handoffs.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What's included in The Engine?</summary>
-                <div className="faq-answer">
-                  Five connected systems: (1) Web Design &amp; Development, (2) SEO &amp; Local SEO, (3) Lead Capture &amp; AI Receptionist, (4) CRM Command Center, and (5) Automation &amp; Follow-Up. The same team builds and owns all five so each hands off cleanly to the next.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">Who is SolvoLab for?</summary>
-                <div className="faq-answer">
-                  Small and multi-location businesses in home services, dental, real estate, auto shops, security companies, and professional services, especially those losing leads either because they don't rank on Google or AI search, or because their traffic isn't converting and follow-up is too slow.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What is the AI receptionist?</summary>
-                <div className="faq-answer">
-                  A 24/7 AI voice agent that answers inbound calls, qualifies the caller, and books the appointment, so calls don't go unanswered after hours. It works alongside smart forms, live chat, a call-back widget, and missed-call text-back.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What is missed-call text-back?</summary>
-                <div className="faq-answer">
-                  If a call is missed, the caller is automatically texted back within seconds so the lead doesn't go cold before someone can follow up.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">How fast can I go live?</summary>
-                <div className="faq-answer">
-                  The build phase runs as a focused launch sprint over roughly the first three months (Phase 1). There's no drawn-out discovery stall, the team maps your funnel and launches fast.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">How does the engagement work over time?</summary>
-                <div className="faq-answer">
-                  Phase 1 (Months 1 to 3) builds and launches your full engine. Phase 2 (Month 4 onward) is ongoing management: continued SEO, content and backlinks, managed website and hosting, tuned CRM and automation, plus a monthly report and strategy call.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What is the 90-Day Momentum Guarantee?</summary>
-                <div className="faq-answer">
-                  Within 90 days of launch, you should see measurable growth in organic visibility and inbound leads, tracked on your own dashboard (rankings, organic traffic, and inbound leads) and reviewed with you monthly. If you don't, SolvoLab keeps working at no extra cost until you do.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">How much does SolvoLab cost?</summary>
-                <div className="faq-answer">
-                  Engagements typically start from $1,500/month, with the exact number scoped on your teardown call based on locations, build size, and call volume. It's structured as one all-inclusive investment, a Phase 1 build (3-month launch sprint) and a Phase 2 monthly fee from month 4, with platform, tools, and execution all included so there's no separate vendor stack to pay for.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">Who owns the website, CRM, and data?</summary>
-                <div className="faq-answer">
-                  You do, fully. The website, the CRM, and every lead and contact in it belong to your business from day one, and they stay yours if we ever part ways. We build on your accounts, not ours, so there's no hostage situation.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What happens if I want to stop?</summary>
-                <div className="faq-answer">
-                  You keep everything, the site, the CRM, the automations, and all your data. We hand over cleanly with documentation. No lock-in contracts designed to trap you, we keep clients by moving their numbers, not by holding their assets.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">Do you rebuild my site or work with my existing one?</summary>
-                <div className="faq-answer">
-                  Whichever gets you results faster. On the teardown call we assess your current site honestly, if it's a solid foundation we build on it; if it's holding your rankings and conversions back, we'll show you exactly why and rebuild it as part of Phase 1.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">Who will I actually work with?</summary>
-                <div className="faq-answer">
-                  The same small team that builds your engine runs it, no account managers relaying messages to a production team you never meet. You get a direct line to the people doing the work, and a monthly strategy call with the numbers on the table.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What is a Growth Teardown?</summary>
-                <div className="faq-answer">
-                  A free consultation where SolvoLab shows you exactly where you're losing leads today and what your engine would look like once built. If it's not a fit, you keep the competitor teardown anyway.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">Do I need to hire extra staff?</summary>
-                <div className="faq-answer">
-                  No. The system handles answering, capturing, tracking, and following up with leads automatically, so you can go live without adding new headcount.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">What do I get for free?</summary>
-                <div className="faq-answer">
-                  A competitor teardown showing how your top 3 competitors beat you online, a done-for-you 6-month content calendar, and priority speed-to-lead so new leads hit your phone within 60 seconds.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">Will I be able to track results?</summary>
-                <div className="faq-answer">
-                  Yes. A unified analytics dashboard puts rankings, traffic, leads, and conversions on one screen, plus you get a monthly report and strategy call during the management phase.
-                </div>
-              </details>
-              <details className="faq-item">
-                <summary className="faq-question">How do I get started?</summary>
-                <div className="faq-answer">
-                  Book a free Growth Teardown through the contact page at solvolab.com or email saboor@solvolab.com.
-                </div>
-              </details>
-            </div>
-          </div>
-        </section>
-
-        <section className="section band-dark">
-          <div className="grid-tex"></div>
-          <div className="container">
-            <div className="cta-band reveal">
-              <span className="eyebrow on-dark">Your next step</span>
-              <h2 className="h2" style={{ marginTop: "16px" }}>Book a free Growth Teardown.</h2>
-              <p className="lede">We'll show you exactly where you're losing leads today and what your engine would look like built. No pressure, and if it's not a fit, you keep the competitor teardown anyway.</p>
-              <div className="btn-row">
-                <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-                <Link className="btn btn-outline-light btn-lg" href="/about">Why one team wins</Link>
-              </div>
-            </div>
-          </div>
-        </section>
-      </main>
-      <Footer />
-    </>
-  );
+  return <div className="home-page">
+    <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
+      "@context": "https://schema.org", "@graph": [
+        { "@type": "Organization", "@id": "https://www.solvolab.com/#organization", name: "SolvoLab", url: "https://www.solvolab.com", logo: "https://www.solvolab.com/brandlogo/SolvoLabLogo.png", email: "saboor@solvolab.com", sameAs: ["https://www.linkedin.com/company/110093159"] },
+        { "@type": "WebSite", "@id": "https://www.solvolab.com/#website", name: "SolvoLab", url: "https://www.solvolab.com", publisher: { "@id": "https://www.solvolab.com/#organization" } },
+        { "@type": "WebPage", "@id": "https://www.solvolab.com/#webpage", name: title, description, url: "https://www.solvolab.com", isPartOf: { "@id": "https://www.solvolab.com/#website" } },
+        { "@type": "FAQPage", "@id": "https://www.solvolab.com/#faq", mainEntity: faqs.map(([question, answer]) => ({ "@type": "Question", name: question, acceptedAnswer: { "@type": "Answer", text: answer } })) },
+      ],
+    }) }} />
+    <a className="home-skip" href="#main-content">Skip to content</a>
+    <Nav />
+    <main id="main-content">
+      <section className="home-hero">
+        <div className="home-container home-hero-grid">
+          <div><p className="home-kicker">Your Business Growth Partner</p><h1>Solving <span>Business Growth</span> Problems with Solvolab Workflow</h1><p className="home-hero-copy">Solvolab is a business growth consultancy and technical partner that diagnoses operational bottlenecks, then designs, connects, and scales custom software and workflow systems to unblock revenue and create room to grow.</p><div className="home-actions"><Action /><a className="home-button home-button-outline" href="#services">Explore the services</a></div></div>
+          <div className="home-workflow"><img src="/home/b42c8.svg" alt="Disconnected workflows joining one central system and routing to connected business tools" /></div>
+        </div>
+      </section>
+      <div className="home-clients"><div className="home-container home-clients-inner"><p>Clients we’ve<br />worked with</p><div className="home-client-logos">{[["063cc.png", "ArchiTech", 74, 70], ["7fe82.png", "Allied", 74, 70], ["03176.png", "Noon", 152, 69], ["ddb7e.png", "Disegno", 160, 69], ["78182.png", "Vigilant", 151, 45]].map(([file, name, width, height]) => <div key={file}><Image src={`/home/${file}`} alt={String(name)} width={Number(width)} height={Number(height)} /></div>)}</div></div></div>
+      <section className="home-section"><div className="home-container"><Heading eyebrow="OPERATIONAL BOTTLENECKS" intro="Most businesses stall not because of a lack of market demand, but because internal friction drains team bandwidth and leaks pipeline revenue.">Where business growth gets stuck</Heading><div className="home-bottlenecks">{bottlenecks.map(([art, name, copy, impact]) => <article key={name}><div className="home-bottleneck-art"><img src={`/home/${art}`} alt="" /></div><h3>{name}</h3><p>{copy}</p><div className="home-impact"><strong>Impact:</strong> {impact}</div></article>)}</div></div></section>
+      <section className="home-section home-sand" id="services"><div className="home-container"><Heading eyebrow="TURNKEY & MODULAR SYSTEMS" intro="Every engagement specifies the exact problem, toolchain, deliverables, and measurable outcome before writing a single line of code.">Services built to eliminate bottlenecks</Heading><h3 className="home-group-title">Turnkey Solutions</h3><div className="home-turnkey" id="engine"><article className="home-flagship"><span className="home-icon"><img src="/home/a0eb5.svg" alt="" /></span><span className="home-tag">Flagship</span><h3>The 24/7<br />Client Engine</h3><p>Captures and qualifies inbound inquiries around the clock, routing vetted clients directly to your team&apos;s calendar and CRM.</p><div className="home-engine-links" aria-label="Client Engine services">{serviceLinks.slice(0, 5).map(([label, href]) => <Link key={href} href={href}>{label}</Link>)}</div><Action /><small>Tools: HubSpot, Make, n8n, Vapi</small></article>{turnkey.map(service => <ServiceCard key={service[1]} service={service} />)}</div><h3 className="home-group-title home-modular-title">Modular Systems</h3><div className="home-modular">{modular.slice(0, 4).map(service => <ServiceCard key={service[1]} service={service} />)}<div className="home-modular-art"><Image src="/home/65362.png" alt="A network of connected modular systems" fill sizes="(max-width: 700px) 90vw, 368px" /></div><ServiceCard service={modular[4]} /></div></div></section>
+      <section className="home-statement"><div className="home-container"><div><h2>We do not sell technology for technology&apos;s sake.</h2><p>We help businesses understand what holds them back, then use strategy, technology, AI, and execution to build a better system.</p><p>Because reliable systems create room to grow.</p></div><div className="home-statement-shape" aria-hidden="true"><span /></div></div></section>
+      <section className="home-section home-sand" id="client-work"><div className="home-container"><Heading eyebrow="VERIFIED PROOF & CASE STUDIES" intro="Four client stories showing what we built and the problems we helped solve.">Who we have built for and<br />what we solved</Heading><HomeCaseStudies /><Link className="home-text-link home-section-link" href="/builds#builds">Explore more builds →</Link></div></section>
+      <section className="home-section" id="about"><div className="home-container home-founder"><div><h2>Work directly with the people <span>building it</span></h2><h3>Abdul Saboor</h3><p>Founder</p><Action>Schedule a technical discussion</Action><Link className="home-text-link home-section-link" href="/about">About SolvoLab →</Link></div><div className="home-founder-points"><article><h3>Zero agency layers or junior middlemen</h3><p>Traditional agencies assign your account to junior coordinators who translate requirements through multiple layers. At Solvolab, you discuss the problem directly with the engineer shaping the build.</p></article><article><h3>Production systems engineering behind the advice</h3><p>Led by Abdul Saboor, whose background includes building high-scale production systems, data analytics architectures, and the automated tutor evaluation pipeline for Noon across the MENA region.</p></article><article><h3>One unified, accountable technical team</h3><p>We architect the website, SEO, customer capture, automated agents, and CRM infrastructure as a single cohesive system rather than handing them off between disconnected vendors.</p></article></div></div></section>
+      <section className="home-section home-sand" id="approach"><div className="home-container"><Heading eyebrow="ENGAGEMENT MODEL" intro="We don’t start with a tool and try to force it into your business. We first understand how you operate, where the problems are, and what outcome you want, then design the right solution using tailored systems, connected workflows, and custom technology.">Technology Customised to your<br />business</Heading><div className="home-process">{approach.map(([name, copy, output], index) => <article key={name}><h3><span>{index + 1}</span>{name}</h3><p>{copy}</p><div><small>{index === 2 ? "KEY OUTPUT" : "OUTPUT"}</small><p>{output}</p></div></article>)}</div><div className="home-consultation" id="pricing"><div><h3>Start with Step 1: Free Consultation</h3><p>Discuss your workflows and uncover bottlenecks directly with founder Abdul Saboor.</p></div><Action>Book a free consultation</Action></div></div></section>
+      <section className="home-section" id="architecture"><div className="home-container"><Heading eyebrow="SOLVOLAB ARCHITECTURE FRAMEWORK" intro="Unlike agencies that force a single chatbot, Solvolab architects systems around three distinct stakeholders and calibrated autonomy levels to guarantee reliability and security.">The Node Model &amp; 3 Autonomy Levels</Heading><div className="home-nodes">{[
+        ["70b34.svg", "Human Node", "Handles executive judgment, high-touch client relationships, subjective approvals, and strategic direction where human context is irreplaceable.", "Human-in-the-loop review queues, Slack approvals"],
+        ["9bfa6.svg", "Automated Node", "Executes predictable, logic-based workflows: webhooks, API Synchronizations, database transforms, and instant notifications with 100% reliability.", "n8n, Make, Zapier, PostgreSQL, Workspace"],
+        ["1c05d.svg", "Agentic Node", "Employs frontier language models (Claude) with tool-calling capabilities to parse unstructured text, qualify voice intent, and navigate multi-step decisions.", "Claude 3.5 Sonnet, Vapi, Vector RAG, Tool Calling"],
+      ].map(([icon, name, copy, stack]) => <article key={name}><span className="home-icon"><img src={`/home/${icon}`} alt="" /></span><h3>{name}</h3><p>{copy}</p><div><small>UNDERLYING STACK:</small><strong>{stack}</strong></div></article>)}</div><div className="home-autonomy"><h3>Calibrated Autonomy Levels</h3><p>How we control system authority to prevent rogue behaviors and guarantee human oversight.</p><div>{[
+        ["Copilot Assistance", "The system drafts answers, summarises records, or scores leads, but a human approves every single outbound action."],
+        ["Supervised Autonomy", "The system automatically executes 80-90% of routine actions. Complex edge cases or high-value risks trigger a human approval queue."],
+        ["Autonomous Guardrails", "End-to-end autonomous loops running within strict API constraints, token limits, and compliance safety frameworks."],
+      ].map(([name, copy], index) => <article key={name}><small>Level {index + 1}</small><h3>{name}</h3><p>{copy}</p></article>)}</div></div></div></section>
+      <section className="home-section home-sand" id="studio"><div className="home-container"><Heading intro="Our wider studio family.">Within SolvoLab</Heading><div className="home-studio"><div className="home-studio-logo"><Image src="/home/d09eb.png" alt="KoalityContent" width={291} height={63} /></div><div><p className="home-studio-label">A SolvoLab studio</p><h3>KoalityContent</h3><p>A platform that reads every page of a website, maps its topics, brings in Search Console data and gives each page one clear verdict, with the numbers behind it.</p><div className="home-studio-tags">{["merge", "fix", "differentiate", "prune", "refresh", "keep & link"].map(tag => <span key={tag}>{tag}</span>)}</div><div className="home-actions"><Action>Book a free consultation</Action><Link href="/contact" className="home-studio-enquiry">Enquire about our studios</Link></div></div></div></div></section>
+      <section className="home-section" id="security"><div className="home-container home-security"><div><p className="home-eyebrow">ENTERPRISE GOVERNANCE</p><span className="home-icon"><img src="/home/9f963.svg" alt="" /></span><h2>Security, access control<br />&amp; data privacy</h2><p>We architect systems to meet stringent security standards. We never use your proprietary business data to train public models.</p></div><div>{safeguards.map(([icon, name, copy]) => <article key={name}><img src={`/home/${icon}`} alt="" /><div><h3>{name}</h3><p>{copy}</p></div></article>)}</div></div></section>
+      <section className="home-section home-sand" id="insights"><div className="home-container"><Heading intro="Production technologies configured and maintained across our client implementations.">Tools &amp; Integrations Matrix</Heading><div className="home-integrations">{integrations.map(([icon, name, caption, details], index) => <details key={name} open={index === 0}><summary><span className="home-tool-icon"><img src={`/home/${icon}`} alt="" /></span><span><strong>{name}</strong><small>{caption}</small></span><img className="home-toggle" src="/home/704ce.svg" alt="" /></summary><div className="home-tool-detail"><strong>Role in Client Systems</strong><p>{details}</p></div></details>)}</div></div></section>
+      <section className="home-section" id="faq"><div className="home-container home-faq"><h2>A few things<br />you may be wondering</h2><div>{faqs.map(([question, answer], index) => <details key={question} open={index === 0}><summary>{question}</summary><p>{answer}</p></details>)}</div></div></section>
+    </main>
+    <Footer />
+  </div>;
 }

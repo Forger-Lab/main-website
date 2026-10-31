@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "Automation & Follow-Up, SolvoLab",
   description:
     "Nurture leads on autopilot. SolvoLab builds and runs automated email & SMS sequences, missed-call text-back, and reputation engines that turn enquiries into booked jobs.",
+  openGraph: { title: "Automation & Follow-Up, SolvoLab", description: "Nurture leads on autopilot. SolvoLab builds and runs automated email & SMS sequences, missed-call text-back, and reputation engines that turn enquiries into booked jobs.", url: "/automation", images: ["/brandlogo/SolvoLabLogo.png"] },
+  twitter: { title: "Automation & Follow-Up, SolvoLab", description: "Nurture leads on autopilot. SolvoLab builds and runs automated email & SMS sequences, missed-call text-back, and reputation engines that turn enquiries into booked jobs.", images: ["/brandlogo/SolvoLabLogo.png"] },
   alternates: {
     canonical: "/automation",
   },
@@ -30,10 +32,10 @@ export default function Automation() {
                 </div>
                 <span className="eyebrow on-dark">Automation &amp; Follow-Up</span>
                 <h1 className="h1">Nurture every lead on autopilot, until they book.</h1>
-                <p className="lede">Most leads don't buy on the first touch, they buy from whoever follows up. We build email and SMS sequences that chase every lead with the right message at the right time, text back every missed call, and quietly build your 5-star reputation while you work.</p>
+                <p className="lede">Most leads don&apos;t buy on the first touch, they buy from whoever follows up. We build email and SMS sequences that chase every lead with the right message at the right time, text back every missed call, and quietly build your 5-star reputation while you work.</p>
                 <div className="btn-row">
                   <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-                  <a className="btn btn-outline-light btn-lg" href="#included">What's included</a>
+                  <a className="btn btn-outline-light btn-lg" href="#included">What&apos;s included</a>
                 </div>
               </div>
               <div className="mock reveal" style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--forest-line)" }}>
@@ -70,8 +72,8 @@ export default function Automation() {
                 <div className="mock-row"><span className="mr-ic" data-ic="star"><Icon name="star" /></span><div className="mr-main"><div className="mr-l1" style={{ width: "52%" }}></div><div className="mr-l2" style={{ width: "34%" }}></div></div><span className="mr-tag">reviews</span></div>
               </div>
               <div className="reveal">
-                <span className="eyebrow">What's included</span>
-                <h2 className="h2" style={{ margin: "16px 0 20px" }}>Follow-up that doesn't quit.</h2>
+                <span className="eyebrow">What&apos;s included</span>
+                <h2 className="h2" style={{ margin: "16px 0 20px" }}>Follow-up that doesn&apos;t quit.</h2>
                 <ul className="feature-list">
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Automated follow-up (email + SMS)</span><span className="ft-desc">Nurture sequences that chase every lead for you, on autopilot, until they book.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Missed-call text-back</span><span className="ft-desc">Every missed call auto-texted back in seconds, so no lead ever goes cold.</span></span></li>
@@ -112,7 +114,7 @@ export default function Automation() {
             <div className="cta-band reveal">
               <span className="eyebrow on-dark">Your next step</span>
               <h2 className="h2" style={{ marginTop: "16px" }}>Turn the leads you already have into bookings.</h2>
-              <p className="lede">Book a free Growth Teardown and we'll show you the follow-up you're missing today, and the revenue sitting in leads that simply went quiet.</p>
+              <p className="lede">Book a free Growth Teardown and we&apos;ll show you the follow-up you&apos;re missing today, and the revenue sitting in leads that simply went quiet.</p>
               <div className="btn-row">
                 <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                 <Link className="btn btn-outline-light btn-lg" href="/#engine">Explore the full Engine</Link>

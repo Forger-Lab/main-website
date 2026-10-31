@@ -1583,6 +1583,13 @@ section {
 }
 
 /* ---------- form ---------- */
+#book .page-hero-grid > *,
+#teardown-form .field {
+  min-width: 0;
+}
+#teardown-form .btn {
+  white-space: normal;
+}
 .form-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;

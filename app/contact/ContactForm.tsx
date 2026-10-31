@@ -23,13 +23,12 @@ export default function ContactForm() {
   const [errorMsg, setErrorMsg] = useState("");
   const [honeypot, setHoneypot] = useState("");
 
-  const mountedAtRef = useRef<number>(Date.now());
   const widgetContainerRef = useRef<HTMLDivElement>(null);
   const widgetIdRef = useRef<string | null>(null);
   const tokenResolverRef = useRef<{ resolve: (t: string) => void; reject: (e: Error) => void } | null>(null);
 
   const renderTurnstile = () => {
-    // @ts-ignore
+    // @ts-expect-error Turnstile is provided by the external Cloudflare script.
     const turnstile = typeof window !== "undefined" ? window.turnstile : undefined;
     if (!turnstile || !widgetContainerRef.current || widgetIdRef.current !== null || !TURNSTILE_SITE_KEY) {
       return;
@@ -50,7 +49,7 @@ export default function ContactForm() {
         return true; // suppress Turnstile's own error rendering
       },
       "expired-callback": () => {
-        // @ts-ignore
+        // @ts-expect-error Turnstile is provided by the external Cloudflare script.
         window.turnstile?.reset(widgetIdRef.current);
       },
     });
@@ -58,7 +57,7 @@ export default function ContactForm() {
 
   const getTurnstileToken = (): Promise<string> => {
     return new Promise((resolve, reject) => {
-      // @ts-ignore
+      // @ts-expect-error Turnstile is provided by the external Cloudflare script.
       const turnstile = typeof window !== "undefined" ? window.turnstile : undefined;
       if (!turnstile || widgetIdRef.current === null) {
         reject(new Error("Spam protection is still loading, please wait a moment and try again."));
@@ -144,7 +143,6 @@ ${formData.message || "None"}
           message: compiledMessage,
           turnstileToken: token,
           honeypot,
-          elapsedMs: Date.now() - mountedAtRef.current,
         }),
       });
 
@@ -154,9 +152,9 @@ ${formData.message || "None"}
       }
 
       setSuccess(true);
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error("Form submit error:", err);
-      setErrorMsg(err.message || "An unexpected error occurred. Please try again.");
+      setErrorMsg(err instanceof Error ? err.message : "An unexpected error occurred. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -178,7 +176,7 @@ ${formData.message || "None"}
               <span className="eyebrow on-dark">Your next step</span>
               <h1 className="h1">Book a free Growth Teardown.</h1>
               <p className="lede">
-                We'll show you exactly where you're losing leads today and what your engine would look like built. Your free Growth Teardown includes the competitor teardown, how your top 3 competitors beat you online, yours to keep either way. No pressure.
+                We&apos;ll show you exactly where you&apos;re losing leads today and what your engine would look like built. Your free Growth Teardown includes the competitor teardown, how your top 3 competitors beat you online, yours to keep either way. No pressure.
               </p>
 
               <ul className="feature-list" style={{ marginTop: "32px", maxWidth: "520px" }}>
@@ -187,7 +185,7 @@ ${formData.message || "None"}
                     <Icon name="check" />
                   </span>
                   <span>
-                    <span className="ft-title">Where you're leaking leads</span>
+                    <span className="ft-title">Where you&apos;re leaking leads</span>
                     <span className="ft-desc">A live walk-through of the gaps in your current funnel.</span>
                   </span>
                 </li>

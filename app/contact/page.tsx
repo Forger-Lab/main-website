@@ -7,6 +7,8 @@ export const metadata: Metadata = {
   title: "Book a free Growth Teardown, SolvoLab",
   description:
     "Get a free walk-through of the leaks in your funnel and a competitor teardown.",
+  openGraph: { title: "Book a free Growth Teardown, SolvoLab", description: "Get a free walk-through of the leaks in your funnel and a competitor teardown.", url: "/contact", images: ["/brandlogo/SolvoLabLogo.png"] },
+  twitter: { title: "Book a free Growth Teardown, SolvoLab", description: "Get a free walk-through of the leaks in your funnel and a competitor teardown.", images: ["/brandlogo/SolvoLabLogo.png"] },
   alternates: {
     canonical: "/contact",
   },
@@ -24,7 +26,7 @@ export default function Contact() {
             <div className="stat-row reveal">
               <div className="stat">
                 <div className="stat-num">Free</div>
-                <div className="stat-label">The teardown costs nothing and there's no obligation to proceed.</div>
+                <div className="stat-label">The teardown costs nothing and there&apos;s no obligation to proceed.</div>
               </div>
               <div className="stat">
                 <div className="stat-num">90-day</div>

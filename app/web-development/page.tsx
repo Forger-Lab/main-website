@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "Web Design & Development, SolvoLab",
   description:
     "Fast, clean, conversion-built websites. SolvoLab designs and builds custom sites engineered specifically to turn search visitors into paying customers.",
+  openGraph: { title: "Web Design & Development, SolvoLab", description: "Fast, clean, conversion-built websites. SolvoLab designs and builds custom sites engineered specifically to turn search visitors into paying customers.", url: "/web-development", images: ["/brandlogo/SolvoLabLogo.png"] },
+  twitter: { title: "Web Design & Development, SolvoLab", description: "Fast, clean, conversion-built websites. SolvoLab designs and builds custom sites engineered specifically to turn search visitors into paying customers.", images: ["/brandlogo/SolvoLabLogo.png"] },
   alternates: {
     canonical: "/web-development",
   },
@@ -33,7 +35,7 @@ export default function WebDevelopment() {
                 <p className="lede">Your website is the front door of your entire pipeline. We build a custom, fast, mobile-first site that turns the traffic Google sends you into enquiries, with SEO, lead capture, and your CRM wired in from day one.</p>
                 <div className="btn-row">
                   <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-                  <a className="btn btn-outline-light btn-lg" href="#included">What's included</a>
+                  <a className="btn btn-outline-light btn-lg" href="#included">What&apos;s included</a>
                 </div>
               </div>
               <div className="mock reveal" style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--forest-line)" }}>
@@ -52,7 +54,7 @@ export default function WebDevelopment() {
               <span className="pillar-ic" data-ic="layers" style={{ flexShrink: "0" }}><Icon name="layers" /></span>
               <div style={{ flex: "1", minWidth: "240px" }}>
                 <h3 className="h3" style={{ marginBottom: "6px" }}>Where it fits in the Engine</h3>
-                <p style={{ margin: "0", color: "var(--ink-2)", fontSize: "15.5px", lineHeight: "1.55" }}>Your site is step one, the place every visitor lands. Because the same team builds your SEO, capture, and CRM, the website isn't a dead end: every enquiry flows straight into the rest of the pipeline.</p>
+                <p style={{ margin: "0", color: "var(--ink-2)", fontSize: "15.5px", lineHeight: "1.55" }}>Your site is step one, the place every visitor lands. Because the same team builds your SEO, capture, and CRM, the website isn&apos;t a dead end: every enquiry flows straight into the rest of the pipeline.</p>
               </div>
               <Link className="btn btn-ghost" href="/#engine">See the full Engine <span data-ic="arrow"><Icon name="arrow" /></span></Link>
             </div>
@@ -63,7 +65,7 @@ export default function WebDevelopment() {
           <div className="container">
             <div className="split">
               <div className="reveal">
-                <span className="eyebrow">What's included</span>
+                <span className="eyebrow">What&apos;s included</span>
                 <h2 className="h2" style={{ margin: "16px 0 20px" }}>Built to be the front of your pipeline.</h2>
                 <ul className="feature-list">
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Conversion-built, enterprise-quality website</span><span className="ft-desc">Custom design, clear paths to enquiry, and copy that turns visitors into leads.</span></span></li>
@@ -89,7 +91,7 @@ export default function WebDevelopment() {
             <div className="section-head reveal">
               <span className="eyebrow">How we build it</span>
               <h2 className="h2">A site that earns its keep, fast.</h2>
-              <p className="lede">No drawn-out discovery. We move quickly because growth can't wait for a six-month rebuild.</p>
+              <p className="lede">No drawn-out discovery. We move quickly because growth can&apos;t wait for a six-month rebuild.</p>
             </div>
             <div className="steps">
               <div className="step reveal"><div className="step-n">/ 01</div><h4>Map &amp; plan</h4><p>We learn your buyers, your offer, and the pages that need to rank, then plan the structure around enquiries.</p></div>
@@ -117,7 +119,7 @@ export default function WebDevelopment() {
             <div className="cta-band reveal">
               <span className="eyebrow on-dark">Your next step</span>
               <h2 className="h2" style={{ marginTop: "16px" }}>See what your site could be doing.</h2>
-              <p className="lede">Book a free Growth Teardown and we'll show you exactly where your current site is losing enquiries, and what a conversion-built one would look like.</p>
+              <p className="lede">Book a free Growth Teardown and we&apos;ll show you exactly where your current site is losing enquiries, and what a conversion-built one would look like.</p>
               <div className="btn-row">
                 <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                 <Link className="btn btn-outline-light btn-lg" href="/#engine">Explore the full Engine</Link>

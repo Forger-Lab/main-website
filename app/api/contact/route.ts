@@ -108,7 +108,10 @@ function fakeSuccess() {
 export async function POST(request: Request) {
   try {
     const body = await request.json();
-    const { name, email, message, turnstileToken, honeypot, elapsedMs } = body;
+    if (!body || typeof body !== "object" || Array.isArray(body)) {
+      return NextResponse.json({ error: "Invalid input." }, { status: 400 });
+    }
+    const { name, email, message, turnstileToken, honeypot } = body;
 
     if (!name || !email || !message || !turnstileToken) {
       return NextResponse.json(
@@ -119,9 +122,10 @@ export async function POST(request: Request) {
 
     // Basic input sanity
     if (
-      typeof name !== "string" || name.length > 200 ||
+      typeof name !== "string" || !name.trim() || name.length > 200 ||
       typeof email !== "string" || email.length > 254 ||
-      typeof message !== "string" || message.length > 5000
+      typeof message !== "string" || !message.trim() || message.length > 5000 ||
+      typeof turnstileToken !== "string" || turnstileToken.length > 2048
     ) {
       return NextResponse.json({ error: "Invalid input." }, { status: 400 });
     }
@@ -131,26 +135,31 @@ export async function POST(request: Request) {
 
     const ip = getClientIp(request);
 
-    // --- Layer 1: honeypot (hidden field real users never fill) ---
+    // Honeypot (hidden field real users never fill)
     if (honeypot) {
       console.warn(`[contact] Honeypot triggered from ${ip}`);
       return fakeSuccess();
     }
 
-    // --- Layer 2: minimum fill time (bots submit instantly) ---
-    if (typeof elapsedMs !== "number" || elapsedMs < 4000) {
-      console.warn(`[contact] Fill-time check failed (${elapsedMs}ms) from ${ip}`);
+    // Turnstile tokens are single-use.
+    const outcome = await verifyTurnstile(turnstileToken, ip);
+
+    if (!outcome.success) {
+      return NextResponse.json(
+        { error: `Verification failed: ${outcome["error-codes"]?.join(", ") || "unknown error"}. Please refresh and try again.` },
+        { status: 400 }
+      );
+    }
+    if (outcome.action !== "CONTACT_SUBMIT") {
+      console.warn(`[contact] Unexpected Turnstile action "${outcome.action}" from ${ip}`);
+      return fakeSuccess();
+    }
+    if (!ALLOWED_HOSTNAMES.includes(outcome.hostname)) {
+      console.warn(`[contact] Unexpected Turnstile hostname "${outcome.hostname}" from ${ip}`);
       return fakeSuccess();
     }
 
-    // --- Layer 3: content heuristics ---
-    const linkCount = (message.match(/https?:\/\//gi) || []).length;
-    if (linkCount > 2) {
-      console.warn(`[contact] Too many links (${linkCount}) from ${ip}`);
-      return fakeSuccess();
-    }
-
-    // --- Layer 4: rate limiting (per IP and per email) ---
+    // Rate limit verified submissions per IP and email.
     const [ipHourCount, emailDayCount] = await Promise.all([
       rateLimitCount(`contact:ip:${ip}`, 3600), // per hour
       rateLimitCount(`contact:email:${email.toLowerCase()}`, 86400), // per day
@@ -163,31 +172,12 @@ export async function POST(request: Request) {
       );
     }
 
-    // --- Layer 5: Turnstile verification (tokens are single-use) ---
-    const outcome = await verifyTurnstile(turnstileToken, ip);
-    console.log("Turnstile verification result:", JSON.stringify(outcome));
-
-    if (!outcome.success) {
-      return NextResponse.json(
-        { error: `Verification failed: ${outcome["error-codes"]?.join(", ") || "unknown error"}. Please refresh and try again.` },
-        { status: 400 }
-      );
-    }
-    if (outcome.action && outcome.action !== "CONTACT_SUBMIT") {
-      console.warn(`[contact] Unexpected Turnstile action "${outcome.action}" from ${ip}`);
-      return fakeSuccess();
-    }
-    if (outcome.hostname && !ALLOWED_HOSTNAMES.includes(outcome.hostname)) {
-      console.warn(`[contact] Unexpected Turnstile hostname "${outcome.hostname}" from ${ip}`);
-      return fakeSuccess();
-    }
-
     const safeName = escapeHtml(name);
     const safeEmail = escapeHtml(email);
     const safeMessage = escapeHtml(message).replace(/\n/g, "<br/>");
 
     // 1. Send notification email to SolvoLab
-    await resend.emails.send({
+    const notification = await resend.emails.send({
       from: "SolvoLab Contact Form <noreply@contact.solvolab.com>",
       to: "saboor@solvolab.com",
       subject: `New Contact Form Submission from ${name}`,
@@ -202,60 +192,68 @@ export async function POST(request: Request) {
       `,
     });
 
-    // 2. Send confirmation email to the user
-    await resend.emails.send({
-      from: "SolvoLab <noreply@contact.solvolab.com>",
-      to: email,
-      subject: "We've got your message — SolvoLab",
-      html: `<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SolvoLab</title>
-</head>
-<body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #eaf2ee;">
-    <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
-        <!-- Header -->
-        <tr>
-            <td align="center" style="padding: 34px 20px 30px; text-align: center; background-color: #06322b; background: linear-gradient(135deg, #06322b 0%, #0a463b 55%, #0e8c73 100%);">
-                <!-- logo in a clean white rounded badge -->
-                <div style="display: inline-block; background: #ffffff; border-radius: 20px; padding: 14px 18px; box-shadow: 0 6px 18px rgba(6,50,43,0.28);">
-                    <img src="https://www.solvolab.com/brandlogo/SolvoLabLogo-Cut.png" alt="SolvoLab Logo" style="display:block; width:78px; height:78px; margin:0 auto;" />
-                </div>
-                <h3 style="color:#ffffff; margin: 16px 0 0; font-size: 20px; letter-spacing: 0.2px;">SolvoLab</h3>
-            </td>
-        </tr>
+    if (notification.error) throw new Error(notification.error.message);
 
-        <!-- Main Content -->
-        <tr>
-            <td style="padding: 30px 24px; color: #45605a; font-size: 15px; line-height: 1.6;">
-                <p style="margin: 0 0 16px;">Hey ${safeName}!</p>
-                <p>Thanks for reaching out to us! We've received your message and wanted to let you know that our team is already on it.</p>
-                <p>We'll get back to you shortly with a thoughtful response. In the meantime, here's a quick look at what we can do for you, from intelligent automation to AI-driven workflows, we help businesses like yours eliminate manual bottlenecks and scale faster.</p>
-                <p>Ready to dive deeper? Book a quick 15-minute discovery call and let's explore how SolvoLab can transform your operations.</p>
-                <p>Cheers to smoother operations,</p>
-                <p>The SolvoLab Team</p>
+    // Confirmation failure must not ask visitors to resend an accepted lead.
+    try {
+      const confirmation = await resend.emails.send({
+        from: "SolvoLab <noreply@contact.solvolab.com>",
+        to: email,
+        subject: "We've got your message — SolvoLab",
+        html: `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>SolvoLab</title>
+  </head>
+  <body style="margin: 0; padding: 0; font-family: Arial, Helvetica, sans-serif; background-color: #eaf2ee;">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: 0 auto; background-color: #ffffff;">
+          <!-- Header -->
+          <tr>
+              <td align="center" style="padding: 34px 20px 30px; text-align: center; background-color: #06322b; background: linear-gradient(135deg, #06322b 0%, #0a463b 55%, #0e8c73 100%);">
+                  <!-- logo in a clean white rounded badge -->
+                  <div style="display: inline-block; background: #ffffff; border-radius: 20px; padding: 14px 18px; box-shadow: 0 6px 18px rgba(6,50,43,0.28);">
+                      <img src="https://www.solvolab.com/brandlogo/SolvoLabLogo-Cut.png" alt="SolvoLab Logo" style="display:block; width:78px; height:78px; margin:0 auto;" />
+                  </div>
+                  <h3 style="color:#ffffff; margin: 16px 0 0; font-size: 20px; letter-spacing: 0.2px;">SolvoLab</h3>
+              </td>
+          </tr>
 
-                <div style="text-align: center; margin: 30px 0;">
-                    <a href="https://calendly.com/saboor-forgerlab/30min" style="display: inline-block; padding: 12px 25px; background-color: #0e8c73; background: linear-gradient(135deg, #0b6f5c, #0e8c73); color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold;">Schedule a Call</a>
-                </div>
-            </td>
-        </tr>
+          <!-- Main Content -->
+          <tr>
+              <td style="padding: 30px 24px; color: #45605a; font-size: 15px; line-height: 1.6;">
+                  <p style="margin: 0 0 16px;">Hey ${safeName}!</p>
+                  <p>Thanks for reaching out to us! We've received your message and wanted to let you know that our team is already on it.</p>
+                  <p>We'll get back to you shortly with a thoughtful response. In the meantime, here's a quick look at what we can do for you, from intelligent automation to AI-driven workflows, we help businesses like yours eliminate manual bottlenecks and scale faster.</p>
+                  <p>Ready to dive deeper? Book a quick 15-minute discovery call and let's explore how SolvoLab can transform your operations.</p>
+                  <p>Cheers to smoother operations,</p>
+                  <p>The SolvoLab Team</p>
 
-        <!-- Footer -->
-        <tr>
-            <td style="padding: 20px; text-align: center; background-color: #eaf2ee; color: #7a938c; font-size: 14px;">
-                <p style="margin: 0 0 10px;">&copy; ${new Date().getFullYear()} SolvoLab. All rights reserved.</p>
-                <p style="margin: 0;">
-                    <a href="https://solvolab.com" style="color: #0b6f5c; text-decoration: none;">Visit our website</a>
-                </p>
-            </td>
-        </tr>
-    </table>
-</body>
-</html>`,
-    });
+                  <div style="text-align: center; margin: 30px 0;">
+                      <a href="https://calendly.com/saboor-forgerlab/30min" style="display: inline-block; padding: 12px 25px; background-color: #0e8c73; background: linear-gradient(135deg, #0b6f5c, #0e8c73); color: #ffffff; text-decoration: none; border-radius: 6px; font-weight: bold;">Schedule a Call</a>
+                  </div>
+              </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+              <td style="padding: 20px; text-align: center; background-color: #eaf2ee; color: #7a938c; font-size: 14px;">
+                  <p style="margin: 0 0 10px;">&copy; ${new Date().getFullYear()} SolvoLab. All rights reserved.</p>
+                  <p style="margin: 0;">
+                      <a href="https://solvolab.com" style="color: #0b6f5c; text-decoration: none;">Visit our website</a>
+                  </p>
+              </td>
+          </tr>
+      </table>
+  </body>
+  </html>`,
+      });
+
+      if (confirmation.error) console.error("Confirmation email failed:", confirmation.error);
+    } catch (error) {
+      console.error("Confirmation email failed:", error);
+    }
 
     return NextResponse.json({ success: true });
   } catch (error) {

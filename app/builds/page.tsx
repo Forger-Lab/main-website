@@ -368,7 +368,7 @@ export default function Builds() {
           <div className="container container-narrow">
             <div className="card reveal about-card" style={{ padding: "40px" }}>
               <div className="about-mono">
-                <div className="tk">// SolvoLab</div>
+                <div className="tk">{"// SolvoLab"}</div>
                 agency work<br />
                 production AI systems<br />
                 data &amp; analytics

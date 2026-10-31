@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: "CRM Command Center, SolvoLab",
   description:
     "Every lead, call, and deal in one place. SolvoLab sets up and runs your CRM command center, wired directly into your website, chat, and follow-up sequences.",
+  openGraph: { title: "CRM Command Center, SolvoLab", description: "Every lead, call, and deal in one place. SolvoLab sets up and runs your CRM command center, wired directly into your website, chat, and follow-up sequences.", url: "/crm", images: ["/brandlogo/SolvoLabLogo.png"] },
+  twitter: { title: "CRM Command Center, SolvoLab", description: "Every lead, call, and deal in one place. SolvoLab sets up and runs your CRM command center, wired directly into your website, chat, and follow-up sequences.", images: ["/brandlogo/SolvoLabLogo.png"] },
   alternates: {
     canonical: "/crm",
   },
@@ -30,10 +32,10 @@ export default function Crm() {
                 </div>
                 <span className="eyebrow on-dark">CRM Command Center</span>
                 <h1 className="h1">Every lead, call, and deal in one place.</h1>
-                <p className="lede">Leads scattered across an inbox, a notepad, and three people's phones is how prospects get forgotten. Your command center puts every contact, conversation, and opportunity in one system, with a single dashboard that shows rankings, traffic, leads, and conversions at a glance.</p>
+                <p className="lede">Leads scattered across an inbox, a notepad, and three people&apos;s phones is how prospects get forgotten. Your command center puts every contact, conversation, and opportunity in one system, with a single dashboard that shows rankings, traffic, leads, and conversions at a glance.</p>
                 <div className="btn-row">
                   <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
-                  <a className="btn btn-outline-light btn-lg" href="#included">What's included</a>
+                  <a className="btn btn-outline-light btn-lg" href="#included">What&apos;s included</a>
                 </div>
               </div>
               <div className="mock reveal" style={{ background: "rgba(255,255,255,0.05)", borderColor: "var(--forest-line)" }}>
@@ -63,11 +65,11 @@ export default function Crm() {
           <div className="container">
             <div className="split">
               <div className="reveal">
-                <span className="eyebrow">What's included</span>
+                <span className="eyebrow">What&apos;s included</span>
                 <h2 className="h2" style={{ margin: "16px 0 20px" }}>One source of truth for your whole pipeline.</h2>
                 <ul className="feature-list">
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">CRM command center</span><span className="ft-desc">Every lead, call, and deal in one place, you never lose track of a prospect again.</span></span></li>
-                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Unified analytics dashboard</span><span className="ft-desc">Rankings, traffic, leads, and conversions on one screen, you always know what's working.</span></span></li>
+                  <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Unified analytics dashboard</span><span className="ft-desc">Rankings, traffic, leads, and conversions on one screen, you always know what&apos;s working.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Clean pipeline &amp; lead routing</span><span className="ft-desc">Every enquiry lands in the right stage and the right hands, automatically.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Connected to the tools you use</span><span className="ft-desc">Calendar, phone, email, and billing wired in, no copy-paste between systems.</span></span></li>
                   <li><span className="ck" data-ic="check"><Icon name="check" /></span><span><span className="ft-title">Kept tuned in Phase 2</span><span className="ft-desc">We manage the CRM and automations so they keep converting as you grow.</span></span></li>
@@ -89,7 +91,7 @@ export default function Crm() {
             <div className="section-head reveal">
               <span className="eyebrow">How we set it up</span>
               <h2 className="h2">Built around how you actually sell.</h2>
-              <p className="lede">No bloated CRM you'll never use. We configure the minimum that captures everything and shows you what matters.</p>
+              <p className="lede">No bloated CRM you&apos;ll never use. We configure the minimum that captures everything and shows you what matters.</p>
             </div>
             <div className="steps">
               <div className="step reveal"><div className="step-n">/ 01</div><h4>Map your pipeline</h4><p>We model your real sales stages, from first enquiry to closed deal, not a generic template.</p></div>
@@ -117,7 +119,7 @@ export default function Crm() {
             <div className="cta-band reveal">
               <span className="eyebrow on-dark">Your next step</span>
               <h2 className="h2" style={{ marginTop: "16px" }}>Stop losing leads in the gaps.</h2>
-              <p className="lede">Book a free Growth Teardown and we'll show you where prospects are falling out of view today, and what one command center would catch.</p>
+              <p className="lede">Book a free Growth Teardown and we&apos;ll show you where prospects are falling out of view today, and what one command center would catch.</p>
               <div className="btn-row">
                 <Link className="btn btn-light btn-lg" href="/contact">Book a free Growth Teardown <span data-ic="arrow"><Icon name="arrow" /></span></Link>
                 <Link className="btn btn-outline-light btn-lg" href="/#engine">Explore the full Engine</Link>
